@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="CS 4400">
+  <title>Database Concepts</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/gt.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Database Concepts</h1>
+  <h2 class="author">CS 4400</h2>
+</section>
+
+<section id="database-concepts" class="slide level1">
+<h1>Database Concepts</h1>
+<ul>
+<li>Data models, schemas, instances</li>
+<li>Three-schema architecture and data independence</li>
+<li>Database languages and interfaces</li>
+<li>Database systems</li>
+<li>DBMS Architectures</li>
+<li>Classification of DBMSes</li>
+</ul>
+</section>
+<section id="data-models" class="slide level1">
+<h1>Data Models</h1>
+<ul>
+<li><p>Abstraction: selective ignorance</p>
+<ul>
+<li>Essential attributes of an entity for a particular application</li>
+</ul></li>
+<li><p>Data model: collection of concepts describing a database</p>
+<ul>
+<li>Structure of database: entities, attributes, data types, relationships</li>
+<li>Operations on the data: updates and retrievals</li>
+</ul></li>
+</ul>
+</section>
+<section id="categories-of-data-models" class="slide level1">
+<h1>Categories of Data Models</h1>
+<ul>
+<li><p>High level conceptual models</p>
+<ul>
+<li>The end users' conception of their data</li>
+<li>A tool for understanding user data in enough detail to derive an implementaion model from it (think ER models)</li>
+</ul></li>
+<li><p>Representational (implementation) models</p>
+<ul>
+<li>Understandable by end users</li>
+<li>Rigorous, mechanically translatable to physical model (think SQL)</li>
+</ul></li>
+<li><p>Low-level physical models</p>
+<ul>
+<li>How data are stored on disk (the code inside a DBMS)</li>
+</ul></li>
+</ul>
+</section>
+<section id="conceptual-data-model-entity-relationship" class="slide level1">
+<h1>Conceptual Data Model: Entity-Relationship</h1>
+<ul>
+<li><p>Entity: a real world object or concept that will be modeled in the database</p></li>
+<li><p>Attribute: a property of interest of some entity</p></li>
+<li><p>Relationship: an association between two or more entities</p></li>
+</ul>
+</section>
+<section id="representational-implementation-models" class="slide level1">
+<h1>Representational (Implementation) Models</h1>
+<ul>
+<li><p>Most common: relational data model (focus of this class)</p></li>
+<li><p>Others:</p>
+<ul>
+<li>Legacy: network, hierarchical</li>
+<li>Object data models: never gained widespread adoption</li>
+<li>Self-describing: XML, JSON (e.g., MongoDB) - a.k.a. NOSQL (Not Only SQL)</li>
+</ul></li>
+<li><p>Graph models: major emphasis today, e.g., social networks</p></li>
+</ul>
+</section>
+<section id="schemas-and-databases" class="slide level1">
+<h1>Schemas and Databases</h1>
+<ul>
+<li><p>A schema is a description of the data in a database (metadata), typically depicted in a schema diagram</p>
+<ul>
+<li>Constructs, e.g., STUDENT, COURSE, that specify elemets of the data model</li>
+<li>Constraints, e.g., STUDENT.GTID must be unique</li>
+</ul></li>
+<li><p>Database state is set of instances of entities specified in the schema</p></li>
+<li><p>As data loaded into databse, DBMS ensures valid states by ensuring data instances conform to schema and meet constraints</p></li>
+<li><p>Sometimes schema called <em>intension</em>, staet called <em>extension</em></p></li>
+</ul>
+</section>
+<section id="three-schema-architecure" class="slide level1">
+<h1>Three-Schema Architecure</h1>
+<ul>
+<li><p>Internal level: internal schema -- physical storage structures</p></li>
+<li><p>Conceptual level: conceptual schema</p>
+<ul>
+<li>Conceptual schema corresponds to represeantational (implementation) model, not conceptual model</li>
+</ul></li>
+<li><p>External level: external schemas</p>
+<ul>
+<li>An external schema also implements a representational model, but is tailored to a particular (class of) user(s)</li>
+</ul></li>
+<li><p>Transformations of data between levels is called mapping. Mappings may be computationally expensive</p></li>
+</ul>
+</section>
+<section id="data-independence" class="slide level1">
+<h1>Data Independence</h1>
+<ul>
+<li><p>Goal of Three-Schema Architecure is data independence: isolation of changes at one level from levels above</p>
+<ul>
+<li><p>Logical data independence: changes to the conceptual schema don't requre changes to external schemas</p>
+<ul>
+<li>Mappings, e.g., view definitions, may need to change</li>
+</ul></li>
+<li><p>Physical data independence: changes to internal schema don't require changes to conceptual schema</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="database-languages-and-interfaces" class="slide level1">
+<h1>Database Languages and Interfaces</h1>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

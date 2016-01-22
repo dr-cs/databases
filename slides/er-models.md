@@ -99,21 +99,6 @@ Entities have attributes, i.e., properties of entities
 <!---------------------------------- Slide ---------------------------------->
 # Attributes (4)
 
-- Stored, e.g.,
-
-<center>
-<img src="" />
-</center>
-
-- Derived, e.g.,
-
-<center>
-<img src="" />
-</center>
-
-<!---------------------------------- Slide ---------------------------------->
-# Attributes (4)
-
 - Complex attributes
 
 <center>
@@ -204,9 +189,9 @@ A.K.A. Relationship sets
 <!---------------------------------- Slide ---------------------------------->
 # Participation Constraints
 
-- Total (existence)
+- Total (existence): every entity in an entity set participates in a relationship
 
-- Partial
+- Partial: some of the entities in an antity set participate in a relationship
 
 <!---------------------------------- Slide ---------------------------------->
 # Attributes of Relationship Types
@@ -214,6 +199,10 @@ A.K.A. Relationship sets
 
 <!---------------------------------- Slide ---------------------------------->
 # Weak Entity Types
+
+<center>
+<img src="bro-primary-key.png" />
+</center>
 
 <!---------------------------------- Slide ---------------------------------->
 # Composite Partial Keys

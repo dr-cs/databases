@@ -1,0 +1,5 @@
+    node [shape=box, peripheries=1]; WORKER;
+    node [shape=ellipse, peripheries=1]; SSN [label=<<u>SSN</u>>]; Name; Phone;
+    WORKER -- SSN;
+    WORKER -- Name;
+    WORKER -- Phone;

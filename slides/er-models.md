@@ -14,7 +14,7 @@
 <img src="https://i.chzbgr.com/maxW500/6474992896/h503A45A5/" />
 </center>
 
-High-level but concrete view of data understandable by clients and database developers
+High-level but concrete view of data understandable by end users and database developers
 
 <!---------------------------------- Slide ---------------------------------->
 # Database Design Process
@@ -24,15 +24,15 @@ High-level but concrete view of data understandable by clients and database deve
 </center>
 
 <!---------------------------------- Slide ---------------------------------->
-# Company Data Specification
+# Pet Shelter Data Specification
 
--
+- A pet shelter has
 
 <!---------------------------------- Slide ---------------------------------->
-# Company ER Model
+# Pet Shelter ER Model
 
 <center>
-<img src="" />
+<img src="pet-shelter-er.svg" />
 </center>
 
 <!---------------------------------- Slide ---------------------------------->
@@ -52,7 +52,7 @@ In ER models we often say "entity" when we mean "entity type."
 Entities have attributes, i.e., properties of entities
 
 <!---------------------------------- Slide ---------------------------------->
-# Attributes (1)
+# Atomic and Composite Attributes
 
 - Atomic attributes, e.g., `Birthdate`
 

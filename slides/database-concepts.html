@@ -107,7 +107,7 @@
 </ul></li>
 <li><p>Database state is set of instances of entities specified in the schema</p></li>
 <li><p>As data loaded into databse, DBMS ensures valid states by ensuring data instances conform to schema and meet constraints</p></li>
-<li><p>Sometimes schema called <em>intension</em>, staet called <em>extension</em></p></li>
+<li><p>Sometimes schema called <em>intension</em>, state called <em>extension</em></p></li>
 </ul>
 </section>
 <section id="three-schema-architecure" class="slide level1">
@@ -120,15 +120,15 @@
 </ul></li>
 <li><p>External level: external schemas</p>
 <ul>
-<li>An external schema also implements a representational model, but is tailored to a particular (class of) user(s)</li>
+<li>An external schema also representational, but tailored to particular (class of) user(s)</li>
 </ul></li>
-<li><p>Transformations of data between levels is called mapping. Mappings may be computationally expensive</p></li>
+<li><p>Transformations of data between levels is called mapping; may be computationally expensive</p></li>
 </ul>
 </section>
 <section id="data-independence" class="slide level1">
 <h1>Data Independence</h1>
 <ul>
-<li><p>Goal of Three-Schema Architecure is data independence: isolation of changes at one level from levels above</p>
+<li><p>Goal of Three-Schema Architecure is separate user applications from physical database. We call this <em>data independence</em>: isolation of changes at one level from levels above</p>
 <ul>
 <li><p>Logical data independence: changes to the conceptual schema don't requre changes to external schemas</p>
 <ul>
@@ -138,8 +138,43 @@
 </ul></li>
 </ul>
 </section>
-<section id="database-languages-and-interfaces" class="slide level1">
-<h1>Database Languages and Interfaces</h1>
+<section id="database-languages" class="slide level1">
+<h1>Database Languages</h1>
+<ul>
+<li><p>Data definition language (DDL) specifies conceptual and internal schemas</p>
+<ul>
+<li>Some systems have a seaprate storage definition language (SDL) to specify internal schemas</li>
+</ul></li>
+<li>View definition language (VDL) specifies user views (external schema)</li>
+<li><p>Data manipulation language (DML) used to insert, retrieve, update, and delete data from database</p></li>
+</ul>
+<p>Modern DBMS systems don't have distinct languages. For example, SQL has DDL, VDL, and DML</p>
+</section>
+<section id="database-system-architectures" class="slide level1">
+<h1>Database System Architectures</h1>
+<ul>
+<li>Centralized</li>
+<li>Client/Server</li>
+<li>Three-tier and n-tier</li>
+</ul>
+</section>
+<section id="dbms-classification-criteria" class="slide level1">
+<h1>DBMS Classification Criteria</h1>
+<ul>
+<li><p>Type of data model supported</p>
+<ul>
+<li>relational, key-value, document-based, graph-based</li>
+</ul></li>
+<li><p>Number of users supported -- single user vs. multi-user</p></li>
+<li><p>Number of sites</p>
+<ul>
+<li>Centralized vs. distributed</li>
+<li>Homogeneous, heterogeneous</li>
+<li>middleware</li>
+<li>federated multi-database systems</li>
+</ul></li>
+<li><p>Cost</p></li>
+</ul>
 </section>
     </div>
   </div>

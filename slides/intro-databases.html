@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="CS 4400">
+  <title>Introduction to Database Systems</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="reveal.js/css/theme/gt.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Introduction to Database Systems</h1>
+  <h2 class="author">CS 4400</h2>
+</section>
+
+<section id="a-database-is-..." class="slide level1">
+<h1>A database is ...</h1>
+<ul>
+<li>a logically coherent collection of data,</li>
+<li>representing some aspect of the world known as a <em>miniworld</em> or <em>universe of discourse</em>, which</li>
+<li>is created for a specific purpose and group of users.</li>
+</ul>
+<p>A database management system (DBMS) allows us to create and maintain databases on a computer.</p>
+</section>
+<section id="data" class="slide level1">
+<h1>Data</h1>
+</section>
+<section id="the-database-approach" class="slide level1">
+<h1>The Database Approach</h1>
+<ul>
+<li>Self-describing data - metadata stored with data</li>
+<li>Insulation between data and programs, and data abstraction</li>
+<li>Multiple views of the data</li>
+<li>Shared data and multiuser transaction processing</li>
+</ul>
+</section>
+<section id="database-users" class="slide level1">
+<h1>Database Users</h1>
+<ul>
+<li>Database administrators</li>
+<li>Database designers</li>
+<li>End users</li>
+<li>System analysts and programmers</li>
+</ul>
+</section>
+<section id="capabilities-of-a-dbms" class="slide level1">
+<h1>Capabilities of a DBMS</h1>
+<ul>
+<li>Controlling Redundancy</li>
+<li>Restricting unauthorized access</li>
+<li>Providing persistent storage for data objects</li>
+<li>Providing efficient query processing</li>
+<li>Providing backup and recovery</li>
+<li>Providing multiple user interfaces</li>
+<li>Reperesenting relationships among data</li>
+<li>Enforcing integrity constraints</li>
+<li>Permitting inference and action through rules and triggers</li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display a presentation progress bar
+        progress: true,
+        // Display the page number of the current slide
+        slideNumber: true,
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>

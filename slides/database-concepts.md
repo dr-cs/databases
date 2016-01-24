@@ -68,7 +68,7 @@
 
 - As data loaded into databse, DBMS ensures valid states by ensuring data instances conform to schema and meet constraints
 
-- Sometimes schema called *intension*, staet called *extension*
+- Sometimes schema called *intension*, state called *extension*
 
 # Three-Schema Architecure
 
@@ -80,9 +80,9 @@
 
 - External level: external schemas
 
-    - An external schema also implements a representational model, but is tailored to a particular (class of) user(s)
+    - An external schema also representational, but tailored to particular (class of) user(s)
 
-- Transformations of data between levels is called mapping. Mappings may be computationally expensive
+- Transformations of data between levels is called mapping; may be computationally expensive
 
 # Data Independence
 
@@ -94,4 +94,36 @@
 
     - Physical data independence: changes to internal schema don't require changes to conceptual schema
 
-# Database Languages and Interfaces
+# Database Languages
+
+- Data definition language (DDL) specifies conceptual and internal schemas
+
+    - Some systems have a seaprate storage definition language (SDL) to specify internal schemas
+
+- View definition language (VDL) specifies user views (external schema)
+- Data manipulation language (DML) used to insert, retrieve, update, and delete data from database
+
+Modern DBMS systems don't have distinct languages. For example, SQL has DDL, VDL, and DML
+
+# Database System Architectures
+
+- Centralized
+- Client/Server
+- Three-tier and n-tier
+
+# DBMS Classification Criteria
+
+- Type of data model supported
+
+    - relational, key-value, document-based, graph-based
+
+- Number of users supported -- single user vs. multi-user
+
+- Number of sites
+
+    - Centralized vs. distributed
+    - Homogeneous, heterogeneous
+    - middleware
+    - federated multi-database systems
+
+- Cost

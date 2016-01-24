@@ -1,0 +1,12 @@
+    node [shape=box]; PET_SHELTER;
+    node [shape=ellipse]; SID [label=<<u>SID</u>>]; Address; Number; Street; City; State; Zip;
+    node [shape=ellipse, peripheries=2]; DaysOpen, Phones;
+    PET_SHELTER -- SID;
+    PET_SHELTER -- Address;
+    Address -- Number;
+    Address -- Street;
+    Address -- City;
+    Address -- State;
+    Address -- Zip;
+    PET_SHELTER -- Phones;
+    PET_SHELTER -- DaysOpen;

@@ -1,4 +1,5 @@
 graph humane_society {
+  rankdir=TB
   node [shape=box]; SHELTER;
   node [shape=ellipse]; SID [label=<<u>SID</u>>]; Address; Number; Street; City; State; Zip;
   node [shape=ellipse, peripheries=2]; DaysOpen, Phones;
@@ -33,7 +34,7 @@ graph humane_society {
   sub_worker -- EMPLOYEE [dir=back, arrowhead=normal];
   EMPLOYEE -- MANAGER [dir=back, arrowhead=normal];
 
-
+  rankdir=LR
   node [shape=diamond]; WORKS_FOR;
   WORKS_FOR -- SHELTER [label="1", color="black:invis:black"];
   WORKER -- WORKS_FOR [label="N", color="black:invis:black"];
@@ -42,6 +43,10 @@ graph humane_society {
   MANAGER -- MANAGES [label = "1", color="black:invis:black"];
   MANAGES -- SHELTER [label="1", color="black:invis:black"];
 
+  {rank=same; MANAGER; SHELTER}
+
+
+  rankdir=TB
   node [shape=box, peripheries=2]; PET;
   node [shape=ellipse, peripheries=1]; PID [label=<<u>PID</u>>]; PetName [label="Name"]; Species; BirthDate;
   node [shape=ellipse, peripheries=1, style=dotted] Age;

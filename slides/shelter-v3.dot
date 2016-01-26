@@ -1,0 +1,15 @@
+graph shelter {
+  node [shape=box]; SHELTER;
+  node [shape=ellipse]; SID [label=<<u>SID</u>>]; Address; Number; Street; City; State; Zip;
+  node [shape=ellipse, peripheries=2]; DaysOpen, Phones;
+  SHELTER -- SID;
+  SHELTER -- Address;
+  Address -- Number;
+  Address -- Street;
+  Address -- City;
+  Address -- State;
+  Address -- Zip;
+  SHELTER -- Phones;
+  SHELTER -- DaysOpen;
+
+}

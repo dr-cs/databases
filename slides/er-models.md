@@ -80,11 +80,33 @@ What if we want to find all the shelters in Atlanta?
 <!---------------------------------- Slide ---------------------------------->
 # Shelter, v2 - Composite Address
 
-Initial design of the shelter entity type based on initial spec from customer:
+A composite attribue is composed of other attributes:
 
 <center>
 <img src="shelter-v2.svg" />
 </center>
+
+Can refer to address as a whole, or any (sub)attribute of address.
+
+What if shelter has multiple phone numbers?
+
+<!---------------------------------- Slide ---------------------------------->
+# Shelter, v3 - Multi-valued Phones
+
+An attribute can have a set of values instead of a single value:
+
+<center>
+<img src="shelter-v3.svg" />
+</center>
+
+Note that we changed `DaysOpen` to multi-valued as well.
+
+Now a shelter instance would look like:
+
+A shelter instance would look like:
+
+`<1001, Address("981 Howell Mill Rd NW", "Atlanta", "GA", "30318",`
+`{M, W, F}, {"404-875-5331", "404-875-5332"} >`
 
 
 <!---------------------------------- Slide ---------------------------------->

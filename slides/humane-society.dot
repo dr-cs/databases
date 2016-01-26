@@ -1,0 +1,58 @@
+graph humane_society {
+  node [shape=box]; SHELTER;
+  node [shape=ellipse]; SID [label=<<u>SID</u>>]; Address; Number; Street; City; State; Zip;
+  node [shape=ellipse, peripheries=2]; DaysOpen, Phones;
+  SHELTER -- SID;
+  SHELTER -- Address;
+  Address -- Number;
+  Address -- Street;
+  Address -- City;
+  Address -- State;
+  Address -- Zip;
+  SHELTER -- Phones;
+  SHELTER -- DaysOpen;
+
+  node [shape=box, peripheries=1]; WORKER;
+  node [shape=ellipse, peripheries=1]; SSN [label=<<u>SSN</u>>]; Name; Phone;
+  SSN -- WORKER;
+  Name -- WORKER;
+  Phone -- WORKER;
+
+  node [shape=box, peripheries=1]; VOLUNTEER;
+
+  node [shape=box, peripheries=1]; EMPLOYEE;
+  node [shape=ellipse, peripheries=1] PayRate;
+  EMPLOYEE -- PayRate;
+
+  node [shape=box, peripheries=1]; MANAGER;
+
+  node [shape=circle, peripheries=1]; sub_worker [label="d"];
+
+  WORKER -- sub_worker [color="black:invis:black"];
+  sub_worker -- VOLUNTEER [dir=back, arrowhead=normal];
+  sub_worker -- EMPLOYEE [dir=back, arrowhead=normal];
+  EMPLOYEE -- MANAGER [dir=back, arrowhead=normal];
+
+
+  node [shape=diamond]; WORKS_FOR;
+  WORKS_FOR -- SHELTER [label="1", color="black:invis:black"];
+  WORKER -- WORKS_FOR [label="N", color="black:invis:black"];
+
+  node [shape=diamond]; MANAGES;
+  MANAGER -- MANAGES [label = "1", color="black:invis:black"];
+  MANAGES -- SHELTER [label="1", color="black:invis:black"];
+
+  node [shape=box, peripheries=2]; PET;
+  node [shape=ellipse, peripheries=1]; PID [label=<<u>PID</u>>]; PetName [label="Name"]; Species; BirthDate;
+  node [shape=ellipse, peripheries=1, style=dotted] Age;
+
+  PET -- PID;
+  PET -- PetName;
+  PET -- Species;
+  PET -- BirthDate;
+  PET -- Age [style=dotted];
+
+  node [shape=diamond, peripheries=2, style=solid]; HOUSED_AT;
+  SHELTER -- HOUSED_AT [label="1"];
+  HOUSED_AT -- PET [label="N", color="black:invis:black"];
+}

@@ -9,11 +9,18 @@
 
 A database management system (DBMS) allows us to create and maintain databases on a computer.
 
-# Data
+# Data and Metadata
 
-- Records
-- Data elements
-- Data types
+- Data
+
+    - Records
+    - Data elements
+
+- Metadata -- "data about data"
+
+    - Types of data elements
+    - Structure of records
+    - Constraints
 
 # Database Development
 

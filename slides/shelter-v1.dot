@@ -1,0 +1,8 @@
+graph shelter {
+  node [shape=box] SHELTER;
+  node [shape=ellipse] SID [label=<<u>SID</u>>]; Address,  DaysOpen, Phone;
+  SHELTER -- SID;
+  SHELTER -- Address;
+  SHELTER -- Phone;
+  SHELTER -- DaysOpen;
+}

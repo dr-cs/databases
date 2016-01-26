@@ -12,9 +12,9 @@
 
 # Data Models
 
-- Abstraction: selective ignorance
+- Abstraction: suppression of details
 
-    - Essential attributes of an entity for a particular application
+    - Essential attributes of an entity for a particular application ("selective ignorance")
 
 - Data model: collection of concepts describing a database
 
@@ -72,17 +72,19 @@
 
 # Three-Schema Architecure
 
-- Internal level: internal schema -- physical storage structures
+Three layers of abstraction:
+
+- External level: external schemas, a.k.a. "views"
+
+    - An external schema also representational, but tailored to particular (class of) user(s)
 
 - Conceptual level: conceptual schema
 
     - Conceptual schema corresponds to represeantational (implementation) model, not conceptual model
 
-- External level: external schemas
+- Internal level: internal schema -- physical storage structures
 
-    - An external schema also representational, but tailored to particular (class of) user(s)
-
-- Transformations of data between levels is called mapping; may be computationally expensive
+Transformations of data between levels is called *mapping*; may be computationally expensive
 
 # Data Independence
 
@@ -103,7 +105,8 @@
 - View definition language (VDL) specifies user views (external schema)
 - Data manipulation language (DML) used to insert, retrieve, update, and delete data from database
 
-Modern DBMS systems don't have distinct languages. For example, SQL has DDL, VDL, and DML
+Modern DBMS systems don't have distinct languages.
+- SQL combines DDL, VDL, and DML
 
 # Database System Architectures
 

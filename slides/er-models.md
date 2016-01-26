@@ -78,7 +78,7 @@ A shelter instance would look like:
 What if we want to find all the shelters in Atlanta?
 
 <!---------------------------------- Slide ---------------------------------->
-# Shelter, v2 - Composite Address
+# Shelter, v2
 
 A composite attribue is composed of other attributes:
 
@@ -91,7 +91,7 @@ Can refer to address as a whole, or any (sub)attribute of address.
 What if shelter has multiple phone numbers?
 
 <!---------------------------------- Slide ---------------------------------->
-# Shelter, v3 - Multi-valued Phones
+# Shelter, v3
 
 An attribute can have a set of values instead of a single value:
 
@@ -105,9 +105,48 @@ Now a shelter instance would look like:
 
 A shelter instance would look like:
 
-`<1001, Address("981 Howell Mill Rd NW", "Atlanta", "GA", "30318",`
+`<1001, Address("981 Howell Mill Rd NW", "Atlanta", "GA", "30318"),`
 `{M, W, F}, {"404-875-5331", "404-875-5332"} >`
 
+<!---------------------------------- Slide ---------------------------------->
+# Pet, v1
+
+Initial design of Pet entity type
+
+<center>
+<img src="pet-v1.svg" />
+</center>
+
+Age is a derived attribute (not stored). BirthDate is stored, Age is calculated from BirthDate.
+
+PID is unique only within a shelter. How do we unitquely identify a pet?
+
+<!---------------------------------- Slide ---------------------------------->
+# Weak Entity Types
+
+<center>
+<img src="bro-weak-entity.jpg" />
+</center>
+
+
+<!---------------------------------- Slide ---------------------------------->
+# Weak Entity Types
+
+- Don't have key(s)
+- Has partial key(s)
+- Must have total participation with identifying entity type
+- Identifiable by a composite key: identifying entity's key + weak entity's partial key
+
+<!---------------------------------- Slide ---------------------------------->
+# Pet, v2
+
+PID (pet ID) is a partial key, and PET is a weak entity.
+
+<center>
+<img src="pet-v2.svg" />
+</center>
+
+We have a partial key, but we still need an identifying relationship.
 
 <!---------------------------------- Slide ---------------------------------->
 # Atomic and Composite Attributes

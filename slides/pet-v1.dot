@@ -1,6 +1,6 @@
 graph pet {
-  node [shape=box, peripheries=2]; PET;
-  node [shape=ellipse, peripheries=1]; PID [label=<<u>PID</u>>, decorate="true"]; PetName [label="Name"]; Species, BirthDate;
+  node [shape=box, peripheries=1]; PET;
+  node [shape=ellipse, peripheries=1]; PID; PetName [label="Name"]; Species, BirthDate;
   node [shape=ellipse, peripheries=1, style=dotted] Age;
   PET -- PID;
   PET -- PetName;

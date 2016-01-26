@@ -30,9 +30,9 @@ graph humane_society {
   node [shape=circle, peripheries=1]; sub_worker [label="d"];
 
   WORKER -- sub_worker [color="black:invis:black"];
-  sub_worker -- VOLUNTEER [dir=back, arrowhead=normal];
-  sub_worker -- EMPLOYEE [dir=back, arrowhead=normal];
-  EMPLOYEE -- MANAGER [dir=back, arrowhead=normal];
+  sub_worker -- VOLUNTEER [headlabel=<&#x222a;>, labeldistance=5, labelangle=0];
+  sub_worker -- EMPLOYEE [headlabel=<&#x222a;>, labeldistance=4, labelangle=0];
+  EMPLOYEE -- MANAGER [headlabel=<&#x222a;>, labeldistance=2, labelangle=0];
 
   rankdir=LR
   node [shape=diamond]; WORKS_FOR;
@@ -44,7 +44,6 @@ graph humane_society {
   MANAGES -- SHELTER [label="1", color="black:invis:black"];
 
   {rank=same; MANAGER; SHELTER}
-
 
   rankdir=TB
   node [shape=box, peripheries=2]; PET;

@@ -47,7 +47,7 @@ graph humane_society {
 
   rankdir=TB
   node [shape=box, peripheries=2]; PET;
-  node [shape=ellipse, peripheries=1]; PID [label=<<u>PID</u>>]; PetName [label="Name"]; Species; BirthDate;
+  node [shape=ellipse, peripheries=1]; PID [label=<<font style="text-decoration-line: underline; text-decoration-style: dashed">PID</font>>]; PetName [label="Name"]; Species; BirthDate;
   node [shape=ellipse, peripheries=1, style=dotted] Age;
 
   PET -- PID;

@@ -1,4 +1,4 @@
-% Relational Algebra
+% Relational Algebra, Part 1
 % CS 4400
 
 
@@ -72,8 +72,6 @@ $\sigma_{breed='mix'}(pet)$ returns:
 <center>
 $\pi_{<attribute list>}(R)$
 </center>
-
-Where
 
 - $R$ is the name of a relation
 - $<attribute list>$ is a subset of the attributes of relation $R$
@@ -188,7 +186,15 @@ Operands must be *union compatible*, or *type compatible*. For $R$ and $S$ to be
 
 $R \times S$ Creates "super-tuples" by concatenating every tuple in $R$ with every tuple in $S$.
 
-$R(A_1, ..., A_n) \times S(B_1, ..., B_m)$ is a relation $Q(A_1, ..., A_n, B_1, ..., B_m)$
+$R(A_1, ..., A_n) \times S(B_1, ..., B_m) =  Q(A_1, ..., A_n, B_1, ..., B_m)$
+
+Notice that
+
+- $Q$ has degree $n + m$
+- $|q(Q)| = |r(R)| \times |s(S)|$
+
+Note that the book abusses notation a bit and writes that last bullet as
+$|Q| = |R| \times |S|$
 
 # Cartesian Product Example
 
@@ -244,13 +250,13 @@ pet
 +-----+---------+------------+-----+--------+-----------+
 ```
 
-Note that we've also done a `RENAME` to disambiguate:
+Note that we've also done a `RENAME` to disambiguate `name`s and `id`s:
 
 $\rho_{(sid, sname, shelter\_id, pid, pname, breed)}(shelter \times pet)$
 
 # Cross Product and Select
 
-Cross product useful when combined with `SELECT`.
+Cross product meaningful when combined with `SELECT`.
 
 $\sigma_{sid = shelter\_id}(\rho_{(sid, sname, shelter\_id, pid, pname, breed)}(shelter \times pet))$
 
@@ -272,15 +278,3 @@ $CROSSED \leftarrow shelter \times pet$
 $RENAMED \leftarrow \rho_{(sid, sname, shelter\_id, pid, pname, breed)}(CROSSED)$
 
 $RESULT \leftarrow \sigma_{sid = shelter\_id}(RENAMED)$
-
-# Join
-
-# Equijoin
-
-# Natural Join
-
-# Division
-
-# Complete Set of Relational Operations
-
-# Query Trees

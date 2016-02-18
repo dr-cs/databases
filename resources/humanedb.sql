@@ -4,7 +4,7 @@ use humanedb;
 
 drop table if exists shelter;
 create table shelter (
-  id int primary key,
+  shelter_id int primary key,
   name varchar(10)
 );
 
@@ -16,7 +16,7 @@ create table worker (
   shelter_id int not null,
 
   foreign key (supervisor_id) references worker(id),
-  foreign key (shelter_id) references shelter(id)
+  foreign key (shelter_id) references shelter(shelter_id)
 );
 
 
@@ -28,7 +28,7 @@ create table pet (
   breed varchar(10),
 
   primary key (shelter_id, id),
-  foreign key (shelter_id) references shelter(id)
+  foreign key (shelter_id) references shelter(shelter_id)
 );
 
 insert into shelter values (1, "Howell");

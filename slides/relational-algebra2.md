@@ -64,9 +64,34 @@ shelter
 </tr>
 </table>
 
-How would we find all the workers who work at Mansell?
 
 # Join Example
+
+$worker \Join_{shelter\_id = sid} \rho_{(sid, sname)}(shelter)$
+
+```
++----+--------+---------------+------------+-----+---------+
+| id | name   | supervisor_id | shelter_id | sid | sname   |
++----+--------+---------------+------------+-----+---------+
+|  1 | Tom    |          NULL |          1 |   1 | Howell  |
+|  2 | Jie    |             1 |          1 |   1 | Howell  |
+|  3 | Ravi   |             2 |          1 |   1 | Howell  |
+|  4 | Alice  |             2 |          1 |   1 | Howell  |
+|  5 | Aparna |          NULL |          2 |   2 | Mansell |
+|  6 | Bob    |             5 |          2 |   2 | Mansell |
+|  7 | Xaoxi  |             6 |          2 |   2 | Mansell |
+|  8 | Rohan  |             6 |          2 |   2 | Mansell |
++----+--------+---------------+------------+-----+---------+
+
+```
+
+Notice that we had to use renaming of attributes in $shelter$.
+
+A join operation in which the comparison operator $\theta$ is $=$ is called an *equijoin*.
+
+# Another Join Example
+
+How would we find all the workers who work at Mansell?
 
 $worker \Join_{shelter\_id = sid \land sname = 'Mansell'} \rho_{(sid, sname)}(shelter)$
 
@@ -81,35 +106,42 @@ $worker \Join_{shelter\_id = sid \land sname = 'Mansell'} \rho_{(sid, sname)}(sh
 +----+--------+---------------+------------+-----+---------+
 ```
 
-Notice that we had to use renaming of attributes in $shelter$.
-
-A join operation in which the comparison operator $\theta$ is $=$ is called an *equijoin*.
-
-
 # Natural Join
 
-Notice that the $shelter_id$ attribute was repeated in the previous equijoin result. A `NATURAL JOIN` is a equijoin in which the redundant attribute has been removed.
+Notice that the `shelter_id` attribute was repeated in the previous equijoin result. A `NATURAL JOIN` is a equijoin in which the redundant attribute has been removed.
 
-# Another Join Example
+<center>
+$R * S$
+</center>
 
-How would we find all the workers who work at Mansell?
+Where
 
-$worker \Join_{shelter\_id = sid \land sname = 'Mansell'} \rho_{(sid, sname)}(shelter)$
+- $R$ and $S$ have an attribute with the same name and same domain which is automatically chosen as the equijoin attribute
+
+# Natural Join Example
+
+Recall the first join example. If we rename the `id` attribute to `shelter_id` we can use a natural join:
+
+$\rho_{(shelter_id, sname)}(shelter) * worker$
 
 ```
-+----+--------+---------------+------------+---------+
-| id | name   | supervisor_id | shelter_id | sname   |
-+----+--------+---------------+------------+---------+
-|  5 | Aparna |          NULL |          2 | Mansell |
-|  6 | Bob    |             5 |          2 | Mansell |
-|  7 | Xaoxi  |             6 |          2 | Mansell |
-|  8 | Rohan  |             6 |          2 | Mansell |
-+----+--------+---------------+------------+---------+
++------------+---------+----+--------+---------------+
+| shelter_id | sname   | id | name   | supervisor_id |
++------------+---------+----+--------+---------------+
+|          1 | Howell  |  1 | Tom    |          NULL |
+|          1 | Howell  |  2 | Jie    |             1 |
+|          1 | Howell  |  3 | Ravi   |             2 |
+|          1 | Howell  |  4 | Alice  |             2 |
+|          2 | Mansell |  5 | Aparna |          NULL |
+|          2 | Mansell |  6 | Bob    |             5 |
+|          2 | Mansell |  7 | Xaoxi  |             6 |
+|          2 | Mansell |  8 | Rohan  |             6 |
++------------+---------+----+--------+---------------+
 ```
+
 
 
 # Division
 
-# Complete Set of Relational Operations
 
 # Outer Join

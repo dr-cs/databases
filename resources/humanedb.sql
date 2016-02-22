@@ -5,13 +5,13 @@ use humanedb;
 drop table if exists shelter;
 create table shelter (
   shelter_id int primary key,
-  name varchar(10)
+  name varchar(10) not null
 );
 
 drop table if exists worker;
 create table worker (
   id int primary key,
-  name varchar(10),
+  name varchar(10) not null,
   supervisor_id int,
   shelter_id int not null,
 
@@ -24,8 +24,8 @@ drop table if exists pet;
 create table pet (
   shelter_id int not null,
   id int not null,
-  name varchar(10),
-  breed varchar(10),
+  name varchar(10) not null,
+  breed varchar(10) not null,
 
   primary key (shelter_id, id),
   foreign key (shelter_id) references shelter(shelter_id)

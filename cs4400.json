@@ -1,0 +1,83 @@
+{
+    "intro-cs4400": {
+        "topic": "<a href=\"slides/intro-cs4400.html\">Intro to CS 4400</a>",
+        "reading": ["<a href=\"syllabus.html\">Syllabus</a>",
+                    "<a href=\"project.html\">Project</a>"],
+        "resources": [""]
+    },
+    "intro-databases": {
+        "topic": "<a href=\"slides/intro-databases.html\">Intro to Databases</a>",
+        "reading": ["FoDS 1"],
+        "resources": [""]
+    },
+    "database-concepts": {
+        "topic": "<a href=\"slides/database-concepts.html\">Database Concepts</a>",
+        "reading": ["FoDS 2"],
+        "resources": [""]
+    }
+    "er-models": {
+        "topic": "<a href=\"slides/er-models.html\">ER Models</a>",
+        "reading": ["FoDS 3"],
+        "resources": [""]
+    },
+    "eer-models": {
+        "topic": "<a href=\"slides/eer-models.html\">EER Models</a>",
+        "reading": ["FoDS 4"],
+        "resources": [""]
+    },
+    "relational-model": {
+        "topic": "<a href=\"slides/relational-model.html\">Relational Model</a>",
+        "reading": ["FoDS 5"],
+        "resources": [""]
+    },
+    "relational-algebra": {
+        "topic": "<a href=\"slides/relational-algebra.html\">Relational Algebra</a>",
+        "reading": ["FoDS 8.1 - 8.3.4, 8.4.4"],
+        "resources": [""]
+    },
+    "relational-calculus": {
+        "topic": "<a href=\"slides/relational-calculus.html\">Relational Calculus</a>",
+        "reading": ["FoDS 8.5"],
+        "resources": [""]
+    },
+    "basic-sql": {
+        "topic": "<a href=\"slides/basic-sql.html\">Basic SQL</a>",
+        "reading": ["FoDS 6"],
+        "resources": [""]
+    },
+    "advanced-sql": {
+        "topic": "<a href=\"slides/advanced-sql.html\">Advanced SQL</a>",
+        "reading": ["FoDS 7"],
+        "resources": [""]
+    },
+    "er-relational-mapping": {
+        "topic": "<a href=\"slides/er-relational-mapping.html\">ER - Relational Mapping</a>",
+        "reading": ["FoDS 9"],
+        "resources": [""]
+    },
+    "normal-forms": {
+        "topic": "<a href=\"slides/normal-forms.html\">Normal Forms</a>",
+        "reading": ["FoDS 14"],
+        "resources": [""]
+    },
+    "relational-design": {
+        "topic": "<a href=\"slides/relational-design.html\">Relational Design</a>",
+        "reading": ["FoDS 15"],
+        "resources": [""]
+    },
+    "storage-structures": {
+        "topic": "<a href=\"slides/storage-structures.html\">Storage Structures</a>",
+        "reading": ["FoDS 16"],
+        "resources": [""]
+    },
+    "file-structures": {
+        "topic": "<a href=\"slides/file-structures.html\">File Structures</a>",
+        "reading": ["FoDS 16"],
+        "resources": [""]
+    },
+    "indexing-structures": {
+        "topic": "<a href=\"slides/indexing-structures.html\">Indexing Structures</a>",
+        "reading": ["FoDS 17"],
+        "resources": [""]
+    },
+}

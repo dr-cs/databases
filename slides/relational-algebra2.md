@@ -416,7 +416,8 @@ How would we find the names of all the workers who work at Mansell?
 
 How would we find all the workers who work at Mansell?
 
-$ MANSELL\_WORKERS \leftarrow worker \Join_{shelter\_id = sid \land sname = 'Mansell'} \rho_{(sid, sname)}(shelter)$
+$SHELTERS \leftarrow \rho_{sid, sname}(shelter)$
+$MANSELLERS \leftarrow worker \Join_{shelter\_id = sid \land sname = 'Mansell'}(SHELTERS)$
 
 Gives:
 ```
@@ -429,11 +430,11 @@ Gives:
 |  8 | Rohan  |             6 |          2 |   2 | Mansell |
 +----+--------+---------------+------------+-----+---------+
 ```
-then,
+then ...
 
 # Review Question 3 Answer
 
-$\pi{name}(MANSELL\_WORKERS)$
+$\pi_{name}(MANSELLERS)$
 
 gives:
 
@@ -450,4 +451,4 @@ gives:
 
 Full inline expression:
 
-$ \pi_{name}(worker \Join_{shelter\_id = sid \land sname = 'Mansell'} \rho_{(sid, sname)}(shelter))$
+$\pi_{name}(worker \Join_{shelter\_id = sid \land sname = 'Mansell'} \rho_{(sid, sname)}(shelter))$

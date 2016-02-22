@@ -18,7 +18,7 @@ If you run Linux, you already know how to install MySQL. :-)
 1. Install [Homebrew](http://brew.sh/)
 2. Use [Homebrew](http://brew.sh/) to install MySQL:
 
-    ```sh
+    ```bash
     $ brew install mysql
     ```
 
@@ -32,13 +32,13 @@ MySQL is a client-server database system. To "run MySQL" you need both a server 
 
 1. Run the MySQL server:
 
-    ```sh
+    ```bash
     $ mysql.server start
     ```
 
 2. Connect using the MySQL command line client. The general form of the `mysql` command is:
 
-    ```sh
+    ```bash
     $ mysql -h <host_name> -u <user_name> -p <database_name>
     ```
 
@@ -54,7 +54,7 @@ MySQL is a client-server database system. To "run MySQL" you need both a server 
 
 MySQL has user accounts similar to operating system shells. If your installer asks you for a password for the MySQL root user, give it one. If your installer does not ask for a root password then the root password is blank. You can set a root password like this (`$` is the OS shell prompt, `mysql>` is the `mysql` client prompt):
 
-```sh
+```bash
 $ mysql.server start
 Starting MySQL
  SUCCESS!
@@ -71,21 +71,21 @@ After setting a root password it's a good idea to set up MySQL user accounts for
 
 1. Log into the MySQL client program as root:
 
-    ```sh
+    ```bash
     $ mysql -u root -p
     Enter password: (enter the password you set above)
     ```
 
 2. Create a user:
 
-    ```sh
+    ```bash
     mysql> create user 'cs4400'@'localhost' identified by 'cs4400password';
     Query OK, 0 rows affected (0.00 sec)
     ```
 
 3. Grant permissions for each database you want your user to use. (Note: you can grant permissions on a database before the database exists.)
 
-    ```sh
+    ```bash
     mysql> grant all on humanedb.* to 'cs4400'@'localhost';
     Query OK, 0 rows affected (0.00 sec)
     ```

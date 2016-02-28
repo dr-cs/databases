@@ -3,6 +3,24 @@ layout: default
 title: CS 4400 - Summer 2016
 ---
 
+<h2>Weekly Schedule</h2>
+
+<ul>
+  <li>Lecture: 4 days per week from 08:30 - 09:30</li>
+</ul>
+
+<h2>Lecture Schedule</h2>
+
+<p>
+  Topics link to slides, where available.
+</p>
+
+<ul>
+<li>FoDS means <a href="http://www.amazon.com/Fundamentals-Database-Systems-7th-Edition/dp/0133970779" target="_blank">Fundamentals of Database Systems</a>, the course textbook.
+</ul>
+
+
+BEGIN_SCHEDULE
 Week 1
 2016-05-16
 2016-05-17; Arrival and Check In
@@ -70,8 +88,8 @@ Week 11
 2016-07-28; Project Demos
 2016-07-29; Project Demos; Phase 3 Due
 Finals Week
-2016-08-01
-2016-08-02
-2016-08-03
-2016-08-04
+2016-08-01;
+2016-08-02;
+2016-08-03;
+2016-08-04;
 2016-08-05; Departure

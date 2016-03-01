@@ -34,6 +34,19 @@ A catalog is a named collection of schemas. MySQL includes a `table_catalog` col
 # CREATE TABLE
 
 The `CREATE TABLE` command creates a *base table* (`CREATE VIEW` creates a *virtual* or *derived* table):
+
+General form:
+```sql
+CREATE TABLE <table_name> (
+ <column_name> <column_type> <column_constraints>...,
+ [... ,]
+ <table_constraints>,
+ [...]
+);
+```
+
+# CREATE TABLE Example
+
 ```sql
 CREATE TABLE pub (
   pub_id INT PRIMARY KEY,
@@ -46,13 +59,35 @@ By convention, SQL keywords are in ALL CAPS in instructional examples but not wh
 
 Note: see [pubs.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/resources/pubs.sql) for examples of SQL database creation and population commands.
 
-# Attribute Types
+# Numeric Attribute Types
+
+
+
+# Character String Attributes
+
+- `CHAR` fixed length, e.g., `CHAR(10)`
+- `VARCHAR` variable length, e.g.,  `CHAR(10)` (max 10 chars)
+
+# Bits and Booleans
+
+- Bit string
+
+- Boolean
+
+# Dates and Timestamps
 
 
 
 # Constraints
 
-# Primary Key Constraints
+- Attribute (a.k.a. column) constraints
+- Key (a.k.a. unique)
+- Primary key
+- Foreign key
+
+We'll also learn named constraints, assertions and triggers when in Advanced SQL.
+
+# Key and Primary Key Constraints
 
 
 
@@ -84,6 +119,22 @@ Note: see [pubs.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/r
 
 # INSERT Command
 
+General form is
+```sql
+INSERT INTO <table_name> (<column_name> [, ...]) VALUES (<new_value> [, ...]);
+```
+Can leave off column names list to insert positionally.
+
 # DELETE Command
 
+General form:
+```sql
+DELETE FROM <table_name> WHERE <boolean_expression>;
+```
+
 # UPDATE Command
+
+General form:
+```sql
+UPDATE <table_name> SET <column_name>=<new_value> [, ...] WHERE expression
+```

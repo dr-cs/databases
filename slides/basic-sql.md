@@ -135,7 +135,7 @@ INSERT INTO <table_name> (<column_name> [, ...]) VALUES (<new_value> [, ...]);
 Example:
 ```sql
 insert into author (author_id, first_name, second_name)
-    values ("Jenny","McCarthy");
+    values (1, "Jenny","McCarthy");
 ```
 
 Can leave off column names list to insert positionally:
@@ -179,9 +179,43 @@ DROP TABLE <table_name>
 
 To maintain integrity on update or delete specify:
 
-- SET NULL (for deletes)
-- CASCADE (for updates)
-- SET DEFAULT (for deletes) - note that the column must have specified default value
+- For `ON DELETE`:
+    - `SET NULL`
+    - `SET DEFAULT`
+- For `ON UPDATE`
+    - `CASCADE`
+
+Note: for MySQL `ON DELETE RESTRICT` is the default.
+
+# Referential Integrity - SET NULL
+
+Example:
+```sql
+CREATE TABLE pub (
+  pub_id INT PRIMARY KEY,
+  title VARCHAR(16) NOT NULL,
+  book_id INT REFERENCES book(book_id) ON DELETE SET NULL
+);
+```
+
+Means that if the row from the `book` table containing `book_id` is deleted, then `book_id` is set to `NULL` for each affected row in the `pub` table.
+
+# Referential Integrity - SET DEFAULT
+
+Example:
+```sql
+CREATE TABLE pub (
+  pub_id INT PRIMARY KEY,
+  title VARCHAR(16) NOT NULL,
+  book_id INT DEFAULT 0 REFERENCES book(book_id) ON DELETE SET DEFAULT
+);
+```
+
+Means that if the row from the `book` table containing `book_id` is deleted, then `book_id` is set to `0` for each affected row in the `pub` table.
+
+Note: MySQL's default InnoDB engine does not implement `ON DELETE SET DEFAULT`.
+
+# Referential Integrity - CASCADE
 
 Example:
 ```sql
@@ -193,7 +227,6 @@ CREATE TABLE pub (
 ```
 
 Means that if a `book_id` value changes for a row in the `book` table, the change is applied to the affected rows of the `pub` table also.
-
 
 # Retrieval: The SELECT-FROM-WHERE Structure
 

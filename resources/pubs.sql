@@ -5,10 +5,9 @@ use pubs;
 drop table if exists book;
 create table if not exists book (
   book_id int primary key unique not null,
-  book_title varchar(16) unique,
+  book_title varchar(16),
   month varchar(16) not null,
   year int not null,
-  is_good boolean,
   editor int references author(author_id)
 );
 
@@ -20,10 +19,11 @@ create table if not exists author (
 );
 
 drop table if exists pub;
-create table if not exists pub (
-  pub_id int primary key,
-  title varchar(16) not null,
-  book_id int not null references book(book_id)
+CREATE TABLE pub (
+  pub_id INT PRIMARY KEY,
+  title VARCHAR(16) NOT NULL,
+  book_id INT,
+  foreign key (book_id) REFERENCES book(book_id) ON DELETE SET NULL
 );
 
 drop table if exists author_pub;

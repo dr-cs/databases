@@ -4,10 +4,11 @@ use pubs;
 
 drop table if exists book;
 create table if not exists book (
-  book_id int primary key,
-  book_title varchar(16) not null ,
+  book_id int primary key unique not null,
+  book_title varchar(16) unique,
   month varchar(16) not null,
   year int not null,
+  is_good boolean,
   editor int references author(author_id)
 );
 

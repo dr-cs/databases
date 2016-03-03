@@ -23,7 +23,9 @@ CREATE TABLE pub (
   pub_id INT PRIMARY KEY,
   title VARCHAR(16) NOT NULL,
   book_id INT,
-  foreign key (book_id) REFERENCES book(book_id) ON DELETE SET NULL
+  FOREIGN KEY (book_id) REFERENCES book(book_id)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL
 );
 
 drop table if exists author_pub;

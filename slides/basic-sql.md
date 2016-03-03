@@ -125,6 +125,78 @@ CREATE TABLE bartender (
 
 Note: MySQL does not enforce `CHECK` constraints. We'll learn about triggers in Advanced SQL.
 
+# Retrieval: The SELECT-FROM-WHERE Structure
+
+```sql
+SELECT <attributes>
+FROM <tables>
+WHERE <conditions>
+```
+
+From relational algebra:
+- `SELECT <attributes>` corresponds to projection
+- `FROM <tables>` specifies the table in parentheses in a relational algebra expression and joins
+- `WHERE <conditions>` corresponds to selection
+
+# Projection
+
+$\pi_{first\_name, last\_name}(author)$
+
+```sql
+mysql> select first_name, last_name from author;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| John       | McCarthy  |
+| Dennis     | Ritchie   |
+| Ken        | Thompson  |
+| Claude     | Shannon   |
+| Alan       | Turing    |
+| Alonzo     | Church    |
+| Perry      | White     |
+| Moshe      | Vardi     |
+| Roy        | Batty     |
++------------+-----------+
+9 rows in set (0.00 sec)
+```
+
+# Asterisk
+
+```sql
+mysql> select * from author;
++-----------+------------+-----------+
+| author_id | first_name | last_name |
++-----------+------------+-----------+
+|         1 | John       | McCarthy  |
+|         2 | Dennis     | Ritchie   |
+|         3 | Ken        | Thompson  |
+|         4 | Claude     | Shannon   |
+|         5 | Alan       | Turing    |
+|         6 | Alonzo     | Church    |
+|         7 | Perry      | White     |
+|         8 | Moshe      | Vardi     |
+|         9 | Roy        | Batty     |
++-----------+------------+-----------+
+9 rows in set (0.00 sec)
+```
+
+Notice that with no condition on select, all rows returned.
+
+# Select
+
+$\sigma_{year = 2012}(book)$
+
+```sql
+mysql> select * from book where year = 2012;
++---------+------------+-------+------+--------+
+| book_id | book_title | month | year | editor |
++---------+------------+-------+------+--------+
+|       7 | AAAI       | July  | 2012 |      9 |
+|       8 | NIPS       | July  | 2012 |      9 |
++---------+------------+-------+------+--------+
+2 rows in set (0.00 sec)
+```
+
 # INSERT Command
 
 General form is
@@ -194,11 +266,27 @@ Example:
 CREATE TABLE pub (
   pub_id INT PRIMARY KEY,
   title VARCHAR(16) NOT NULL,
-  book_id INT REFERENCES book(book_id) ON DELETE SET NULL
+  book_id INT,
+  foreign key (book_id) REFERENCES book(book_id) ON DELETE SET NULL
 );
 ```
 
 Means that if the row from the `book` table containing `book_id` is deleted, then `book_id` is set to `NULL` for each affected row in the `pub` table.
+
+Notice that if you choose `SET NULL` as your `ON DELETE` action your column definition must allow nulls.
+
+# Referential Integrity in MySQL
+
+MySQL will only enforce referential integrity contraints that are specfied separately from column definitions as above. The following syntax:
+
+```sql
+CREATE TABLE pub (
+  pub_id INT PRIMARY KEY,
+  title VARCHAR(16) NOT NULL,
+  book_id INT REFERENCES book(book_id) ON DELETE SET NULL
+);
+```
+is valid SQL syntax but is ignored by MySQL's default InnoDB engine.
 
 # Referential Integrity - SET DEFAULT
 
@@ -222,77 +310,27 @@ Example:
 CREATE TABLE pub (
   pub_id INT PRIMARY KEY,
   title VARCHAR(16) NOT NULL,
-  book_id INT NOT NULL REFERENCES book(book_id) ON UPDATE CASCADE
+  book_id INT NOT NULL,
+  FOREIGN KEY (book_id) REFERENCES book(book_id) ON UPDATE CASCADE
 );
 ```
 
 Means that if a `book_id` value changes for a row in the `book` table, the change is applied to the affected rows of the `pub` table also.
 
-# Retrieval: The SELECT-FROM-WHERE Structure
+# Multiple Referential Integrity Constraints
 
+You would normally set contraints for updates and deletes.
+
+Example:
 ```sql
-SELECT <attributes>
-FROM <tables>
-WHERE <conditions>
-```
-
-# Projection
-
-$\pi_{first\_name, last\_name)(author)$
-
-```sql
-mysql> select first_name, last_name from author;
-+------------+-----------+
-| first_name | last_name |
-+------------+-----------+
-| John       | McCarthy  |
-| Dennis     | Ritchie   |
-| Ken        | Thompson  |
-| Claude     | Shannon   |
-| Alan       | Turing    |
-| Alonzo     | Church    |
-| Perry      | White     |
-| Moshe      | Vardi     |
-| Roy        | Batty     |
-+------------+-----------+
-9 rows in set (0.00 sec)
-```
-
-# Asterisk
-
-```sql
-mysql> select * from author;
-+-----------+------------+-----------+
-| author_id | first_name | last_name |
-+-----------+------------+-----------+
-|         1 | John       | McCarthy  |
-|         2 | Dennis     | Ritchie   |
-|         3 | Ken        | Thompson  |
-|         4 | Claude     | Shannon   |
-|         5 | Alan       | Turing    |
-|         6 | Alonzo     | Church    |
-|         7 | Perry      | White     |
-|         8 | Moshe      | Vardi     |
-|         9 | Roy        | Batty     |
-+-----------+------------+-----------+
-9 rows in set (0.00 sec)
-```
-
-Notice that with no condition on select, all rows returned.
-
-# Select
-
-$\sigma_{year = 2012}(book)$
-
-```sql
-mysql> select * from book where year = 2012;
-+---------+------------+-------+------+--------+
-| book_id | book_title | month | year | editor |
-+---------+------------+-------+------+--------+
-|       7 | AAAI       | July  | 2012 |      9 |
-|       8 | NIPS       | July  | 2012 |      9 |
-+---------+------------+-------+------+--------+
-2 rows in set (0.00 sec)
+CREATE TABLE pub (
+  pub_id INT PRIMARY KEY,
+  title VARCHAR(16) NOT NULL,
+  book_id INT,
+  FOREIGN KEY (book_id) REFERENCES book(book_id)
+    ON UPDATE CASCADE
+    ON DELETE SET NULL
+);
 ```
 
 # Simple Database: Dorms
@@ -300,13 +338,20 @@ mysql> select * from book where year = 2012;
 1. Download [dorms.sql](../resources/dorms.sql)
 2. On the command line, go to the directory where you downloaded dorms.sql
 3. Make sure your MySQL server is running:
-
+    ```sh
+    $ mysql.server start
+    Starting MySQL
+    SUCCESS!
+    ```
 4. Run the `dorms.sql` script like this:
     ```sh
     $ mysql -u root -p < dorms.sql
     Enter password:
     ```
-5. Now start MySQL's client and `use` the `dorms` database.
+
+# Running Queries on the Dorms Database
+
+Start MySQL's client and `use` the `dorms` database.
 
     ```sh
     $ mysql -u root -p
@@ -319,14 +364,43 @@ mysql> select * from book where year = 2012;
     mysql>
     ```
 
+# Exploring the Database
+
+Get a list of the tables:
+
+```sql
+mysql> show tables;
++-----------------+
+| Tables_in_dorms |
++-----------------+
+| dorm            |
+| student         |
++-----------------+
+2 rows in set (0.00 sec)
+```
+
+See the structure of a table:
+
+```sql
+mysql> describe dorm;
++---------+---------+------+-----+---------+-------+
+| Field   | Type    | Null | Key | Default | Extra |
++---------+---------+------+-----+---------+-------+
+| dorm_id | int(11) | NO   | PRI | NULL    |       |
+| name    | text    | YES  |     | NULL    |       |
+| spaces  | int(11) | YES  |     | NULL    |       |
++---------+---------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+```
+
 # Simple Queries on Dorms Database
 
 - What are the names of all the dorms?
 - Which students are in Armstrong?
 
-# More Advanced Queries on Dorms Database
+# More Advanced Queries
 
-We'll save these for Advanced SQL when we learn aggregate functions:
+After we learn joins and aggregate functions in Advanced SQL we'll be able to answer questions like these:
 
 - What is the total capacity (number of spaces) for all dorms?
 - Which student has the highest GPA?

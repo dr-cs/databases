@@ -1,0 +1,81 @@
+---
+layout: default
+title: CS 4400 - Fall 2016
+---
+
+GT Lorraine Students: <a href="summer2016.html">click here for Summer 2016 schedule</a>.
+
+<h2>Weekly Schedule</h2>
+
+<ul>
+
+  <li>Lecture: Tuesdays and Thrusdays</li>
+  <ul>
+    <li>Section B: 13:25-14:55 in Architecture (East) 123</li>
+  </ul>
+
+</ul>
+
+<h2>Lecture Schedule</h2>
+
+<p>
+  Topics link to slides, where available.
+</p>
+
+<ul>
+<li>FoDS means <a href="http://www.amazon.com/Fundamentals-Database-Systems-7th-Edition/dp/0133970779" target="_blank">Fundamentals of Database Systems</a>, the course textbook.
+</ul>
+
+
+BEGIN_SCHEDULE
+Database Concepts and Conceptual Models
+Week 1
+2016-01-12; intro-cs4400
+2016-01-14; intro-databases
+Week 2
+2016-01-19; database-concepts
+2016-01-21; er-models
+Week 3
+2016-01-26; eer-models
+2016-01-28; <b>Exam 1 Printing Debacle</b>
+Week 4
+2016-02-02; <b>Exam 1 Printing Debacle</b>
+2016-02-04; relational-model
+Week 5
+2016-02-09; relational-model
+2016-02-11; relational-algebra
+Week 6
+2016-02-16; relational-algebra
+2016-02-18; relational-algebra
+Week 7
+2016-02-23; <b>Exam 2</b>
+2016-02-25; er-relational-mapping
+Week 8
+2016-03-01; basic-sql
+2016-03-03; basic-sql
+Week 9
+2016-03-08; basic-sql
+2016-03-10; advanced-sql
+Week 10
+2016-03-15; advanced-sql
+2016-03-17; advanced-sql
+Spring Break
+2016-03-22; No Class - Spring Break
+2016-03-24; No Class - Spring Break
+Week 11
+2016-03-29; <b>Exam 3</b>
+2016-03-10; normal-forms
+Week 12
+2016-04-05; relational-design
+2016-04-07; storage-structures
+Week 13
+2016-04-12; file-structures
+2016-04-14; indexing-structures
+Week 14
+2016-04-19; Review
+2016-04-21; <b>Exam 4</b>
+Week 15
+2016-04-26; Review or Project Work Day
+2016-04-28; Reading Period
+Finals Week
+2016-05-03; Final Exam, 6PM - 8:50PM

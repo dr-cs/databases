@@ -337,3 +337,12 @@ mysql> select author_id, last_name, count(author_id) as pub_count
 ```
 
 We can use comparisons like <, >. Notice that `Turing` is not in the result.
+
+# HAVING vs. WHERE Conditions
+
+Functionally HAVING and WHERE do the same thing: they filter-in tuples. The difference is where they are evaluated in the SELECT pipeline.
+
+- WHERE is evaluated only after the FROM clause that selects the source tables, so WHERE clauses can only reference expressions that do not contain aggregate functions
+- HAVING is evaluated after GROUP BY, and SELECT, so HAVING clauses can reference any result column
+
+Also be aware that rows filtered out by a WHERE clause will not be included in a GROUP BY clause

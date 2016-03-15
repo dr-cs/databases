@@ -352,7 +352,7 @@ Be aware that rows filtered out by a WHERE clause will not be included in a GROU
 
 # WHERE vs. HAVING Example
 
-WHERE can't refer to select columns.
+`WHERE` clause can't refer to column aliases and aggregates in the `SELECT` list.
 
 ```sql
 mysql> select dorm.name as dorm_name, count(*) as occupancy
@@ -383,7 +383,6 @@ Using our small `dorms` database:
 
 - What is the total capacity (number of spaces) for all dorms?
 - Which student has the highest GPA?
-- Which dorm has the most students?
 - Which dorm’s students have the highest average GPA?
 
 # Simple Summation
@@ -417,6 +416,8 @@ mysql> select sum(spaces) from dorm;
 +-------------+
 1 row in set (0.00 sec)
 ```
+
+Or use a column alias in the select list to make output clearer:
 
 ```sql
 mysql> select sum(spaces) as total_capacity from dorm;
@@ -482,3 +483,98 @@ mysql> select dorm.name as dorm_name, count(*) as occupancy
 +-----------+-----------+
 2 rows in set (0.00 sec)
 ```
+
+# Extended Example: Which dorms have the highest average GPA?
+
+Step 1: Group students and their GPAs by dorm.
+Step 2: Get the average GPAs of each dorm.
+Step 3: Order (descending) by average GPA.
+Step 4: Limit result to 1 row, leaving only the final answer.
+
+# Step 1: Group students and their GPAs by dorm
+
+```sql
+mysql> select dorm.name as dorm_name, student.name as student_name, gpa
+    -> from dorm join student using (dorm_id)
+    -> group by dorm_name, student_name, gpa;
++-----------+--------------+------+
+| dorm_name | student_name | gpa  |
++-----------+--------------+------+
+| Armstrong | Alice        |  3.6 |
+| Armstrong | Bob          |  2.7 |
+| Armstrong | Cheng        |  3.9 |
+| Brown     | Dhruv        |  3.4 |
+| Brown     | Ellie        |    4 |
+| Brown     | Fong         |  2.3 |
+| Caldwell  | Gerd         |    4 |
+| Caldwell  | Hal          |  2.2 |
+| Caldwell  | Isaac        |    2 |
+| Caldwell  | Jacque       |    5 |
++-----------+--------------+------+
+10 rows in set (0.00 sec)
+```
+
+# Step 2: Get the average GPAs of each dorm.
+
+```sql
+mysql> select dorm.name as dorm_name, avg(gpa) as average_gpa
+    -> from dorm join student using (dorm_id)
+    -> group by dorm_name;
++-----------+--------------------+
+| dorm_name | average_gpa        |
++-----------+--------------------+
+| Armstrong |  3.400000015894572 |
+| Brown     | 3.2333333492279053 |
+| Caldwell  |  3.300000011920929 |
++-----------+--------------------+
+3 rows in set (0.00 sec)
+```
+
+## Step 2.1 Formatting Numeric Values
+
+```sql
+mysql> select dorm.name as dorm_name, format(avg(gpa), 2) as average_gpa
+    -> from dorm join student using (dorm_id)
+    -> group by dorm_name;
++-----------+-------------+
+| dorm_name | average_gpa |
++-----------+-------------+
+| Armstrong | 3.40        |
+| Brown     | 3.23        |
+| Caldwell  | 3.30        |
++-----------+-------------+
+3 rows in set (0.01 sec)
+```
+
+## `FORMAT(x,d[,locale])`
+
+- Formats the number `x` to `d` decimals using a format like 'nn,nnn.nnn' and returns the result as a string. If `d` is 0, the result has no decimal point or fractional part.
+- `locale` defaults to the value of the `lc_time_names` system variable.
+```sql
+mysql> select @@lc_time_names;
++-----------------+
+| @@lc_time_names |
++-----------------+
+| en_US           |
++-----------------+
+1 row in set (0.00 sec)
+```
+
+# Step 3: Order (descending) by average GPA.
+
+```sql
+mysql> select dorm.name as dorm_name, format(avg(gpa), 2) as average_gpa
+    -> from dorm join student using (dorm_id)
+    -> group by dorm_name
+    -> order by average_gpa desc;
++-----------+-------------+
+| dorm_name | average_gpa |
++-----------+-------------+
+| Armstrong | 3.40        |
+| Brown     | 3.23        |
+| Caldwell  | 3.30        |
++-----------+-------------+
+3 rows in set (0.00 sec)
+```
+
+# Step 4: Limit result to 1 row.

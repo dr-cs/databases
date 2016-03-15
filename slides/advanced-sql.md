@@ -357,6 +357,61 @@ mysql> select author_id, last_name, count(author_id) as pub_count
 
 We can use comparisons like <, >. Notice that `Turing` is not in the result.
 
+# Nested Queries
+
+List all the books published in the same month in which an issue of CACM was published.
+
+```sql
+mysql> select book_title, month
+    -> from book
+    -> where month in (select month
+    ->                 from book
+                       where book_title = 'CACM');
++------------+-------+
+| book_title | month |
++------------+-------+
+| CACM       | April |
+| CACM       | July  |
+| BST        | July  |
+| AAAI       | July  |
+| NIPS       | July  |
++------------+-------+
+5 rows in set (0.00 sec)
+```
+
+
+# Views
+
+``sql
+mysql> create view cacm_issues as select * from book where book_title = 'CACM';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_pubs |
++----------------+
+| author         |
+| author_pub     |
+| book           |
+| cacm_issues    |
+| pub            |
++----------------+
+5 rows in set (0.00 sec)
+
+# A View is Like a Table
+
+```sql
+mysql> select * from cacm_issues;
++---------+------------+-------+------+--------+
+| book_id | book_title | month | year | editor |
++---------+------------+-------+------+--------+
+|       1 | CACM       | April | 1960 |      8 |
+|       2 | CACM       | July  | 1974 |      8 |
++---------+------------+-------+------+--------+
+2 rows in set (0.00 sec)
+```
+
+
 # HAVING vs. WHERE Conditions
 
 Functionally HAVING and WHERE do the same thing: they filter-in tuples. The difference is where they are evaluated in the SELECT pipeline.
@@ -392,10 +447,6 @@ mysql> select dorm.name as dorm_name, count(*) as occupancy
 +-----------+-----------+
 1 row in set (0.00 sec)
 ```
-
-# Nested Queries
-
-
 
 # More Queries with Joins and Aggregate Functions
 
@@ -504,12 +555,12 @@ mysql> select dorm.name as dorm_name, count(*) as occupancy
 2 rows in set (0.00 sec)
 ```
 
-# Extended Example: Which dorms have the highest average GPA?
+# Extended Example: Which dorm has the highest average GPA?
 
 Step 1: Group students and their GPAs by dorm.
 Step 2: Get the average GPAs of each dorm.
-Step 3: Order (descending) by average GPA.
-Step 4: Limit result to 1 row, leaving only the final answer.
+Step 3: Get the max avg GPA from step 2.
+
 
 # Step 1: Group students and their GPAs by dorm
 
@@ -580,27 +631,20 @@ mysql> select @@lc_time_names;
 1 row in set (0.00 sec)
 ```
 
-# Step 3: Order (descending) by average GPA.
+# Step 3: Get max average gpa from average gpa results.
+
+Using a nested query:
 
 ```sql
-mysql> select dorm.name as dorm_name, format(avg(gpa), 2) as average_gpa
-    -> from dorm join student using (dorm_id)
-    -> group by dorm_name
-    -> order by average_gpa desc;
-+-----------+-------------+
-| dorm_name | average_gpa |
-+-----------+-------------+
-| Armstrong | 3.40        |
-| Brown     | 3.23        |
-| Caldwell  | 3.30        |
-+-----------+-------------+
-3 rows in set (0.00 sec)
+mysql> select dorm_name, max(average_gpa) as max_average_gpa
+    -> from (select dorm.name as dorm_name, format(avg(gpa), 2) as average_gpa
+    ->       from dorm join student using (dorm_id)
+    ->       group by dorm_name) as avg_gpas;
++-----------+-----------------+
+| dorm_name | max_average_gpa |
++-----------+-----------------+
+| Armstrong | 3.40            |
++-----------+-----------------+
+1 row in set (0.00 sec)
+
 ```
-
-# Step 4: Limit result to 1 row.
-
-# Views
-
-# Assertions
-
-# Triggers

@@ -220,11 +220,14 @@ Note that strings are not case-sensitive.
 
 # `GROUP BY`
 
-The `GOUR BY` clause groups the results in the working table by the specified column value
+The `GROUP BY` clause groups rows in the working table by the values in the specified column(s) and collapses each group into a single row.
 
-- we can apply an aggregate function to the resulting groups
-- if we don’t apply an aggregate function, only the last row of a group is returned
-    - Since the order of rows unspecified, failing to apply an aggregate function would essentially give us a random result
+- We can apply an aggregate function to the resulting groups
+- If we don’t apply an aggregate function, only the last row of a group is returned.
+    - Since rows within groups are in no particular order, failing to apply an aggregate function would essentially give us a random result.
+
+# Degenerate GROUP BY
+
 
 ```sql
 mysql> select author_id, last_name
@@ -345,4 +348,137 @@ Functionally HAVING and WHERE do the same thing: they filter-in tuples. The diff
 - WHERE is evaluated only after the FROM clause that selects the source tables, so WHERE clauses can only reference expressions that do not contain aggregate functions
 - HAVING is evaluated after GROUP BY, and SELECT, so HAVING clauses can reference any result column
 
-Also be aware that rows filtered out by a WHERE clause will not be included in a GROUP BY clause
+Be aware that rows filtered out by a WHERE clause will not be included in a GROUP BY clause.
+
+# WHERE vs. HAVING Example
+
+WHERE can't refer to select columns.
+
+```sql
+mysql> select dorm.name as dorm_name, count(*) as occupancy
+    -> from dorm join student using(dorm_id)
+    -> where occupancy > 3
+    -> group by dorm_name;
+ERROR 1054 (42S22): Unknown column 'occupancy' in 'where clause'
+```
+
+HAVING can refer to select columns.
+
+```sql
+mysql> select dorm.name as dorm_name, count(*) as occupancy
+    -> from dorm join student using(dorm_id)
+    -> group by dorm_name
+    -> having occupancy > 3;
++-----------+-----------+
+| dorm_name | occupancy |
++-----------+-----------+
+| Caldwell  |         4 |
++-----------+-----------+
+1 row in set (0.00 sec)
+```
+
+# More Queries with Joins and Aggregate Functions
+
+Using our small `dorms` database:
+
+- What is the total capacity (number of spaces) for all dorms?
+- Which student has the highest GPA?
+- Which dorm has the most students?
+- Which dorm’s students have the highest average GPA?
+
+# Simple Summation
+
+Here are the data in the `dorm` table:
+
+```sql
+mysql> select * from dorm;
++---------+-----------+--------+
+| dorm_id | name      | spaces |
++---------+-----------+--------+
+|       1 | Armstrong |    124 |
+|       2 | Brown     |    158 |
+|       3 | Caldwell  |    158 |
++---------+-----------+--------+
+3 rows in set (0.00 sec)
+```
+
+What is the total capacity (number of spaces) for all dorms?
+
+# SUM
+
+To find the total capacity for all dorms, sum the `spaces` column:
+
+```sql
+mysql> select sum(spaces) from dorm;
++-------------+
+| sum(spaces) |
++-------------+
+|         440 |
++-------------+
+1 row in set (0.00 sec)
+```
+
+```sql
+mysql> select sum(spaces) as total_capacity from dorm;
++----------------+
+| total_capacity |
++----------------+
+|            440 |
++----------------+
+1 row in set (0.00 sec)
+```
+
+# Grouping and Counting
+
+What is the occupancy of each dorm?
+
+```sql
+mysql> select dorm.name as dorm_name, count(*) as occupancy
+    -> from dorm join student using (dorm_id)
+    -> group by dorm.name;
++-----------+-----------+
+| dorm_name | occupancy |
++-----------+-----------+
+| Armstrong |         3 |
+| Brown     |         3 |
+| Caldwell  |         4 |
++-----------+-----------+
+3 rows in set (0.00 sec)
+```
+
+# Ordering
+
+```sql
+mysql> select dorm.name as dorm_name, count(*) as occupancy
+    -> from dorm join student using (dorm_id)
+    -> group by dorm.name
+    -> order by occupancy desc;
++-----------+-----------+
+| dorm_name | occupancy |
++-----------+-----------+
+| Caldwell  |         4 |
+| Armstrong |         3 |
+| Brown     |         3 |
++-----------+-----------+
+3 rows in set (0.00 sec)
+```
+
+# Nested Queries
+
+Which dorms have fewer occupants than Caldwell?
+
+```sql
+mysql> select dorm.name as dorm_name, count(*) as occupancy
+    -> from dorm join student using (dorm_id)
+    -> group by dorm_name
+    -> having occupancy < (select count(*) as caldwell_occupancy
+    ->                     from dorm join student using(dorm_id)
+    ->                     where dorm.name = 'caldwell');
++-----------+-----------+
+| dorm_name | occupancy |
++-----------+-----------+
+| Armstrong |         3 |
+| Brown     |         3 |
++-----------+-----------+
+2 rows in set (0.00 sec)
+```

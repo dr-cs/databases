@@ -53,6 +53,20 @@ combines them together into one large working table.
 8. `OFFSET <count>` - Skips over rows at the beginning of the result set. Requires a LIMIT.
 9. `LIMIT <count>` - Limits the result set output to a specific number of rows.
 
+# SELECT Pipeline at a Glance
+
+1. `FROM <source_tables>`
+2. `WHERE <filter_expression>`
+3. `GROUP BY <grouping_expressions>`
+4. `SELECT <select_heading>`
+5. `HAVING <filter_expression>`
+6. `DISTINCT`
+7. `ORDER BY <ordering_expressions>`
+8. `OFFSET <count>`
+9. `LIMIT <count>`
+
+Evaluation order determines what can be cross referenced in clauses.
+
 # The FROM Clause
 
 The `FROM` clause takes one or more source tables from the database and combines them into one (large) table using the `JOIN` operator. Three kinds of joins:
@@ -70,7 +84,7 @@ A CROSS JOIN matches every row of the first table with every row of the second t
 The general syntax for a cross join is:
 
 ```sql
-SELECT select_header FROM table1 CROSS JOIN table2
+SELECT <select_header> FROM <table1> CROSS JOIN <table2>
 ```
 
 or
@@ -140,7 +154,7 @@ mysql> select * from pub cross join book;
 
 # Inner Joins
 
-A simple inner join uses an on condition.
+A simple inner join uses an `ON` condition.
 ```sql
 mysql> select * from pub join book on pub.book_id = book.book_id;
 +--------+-----------------+---------+---------+------------+----------+------+--------+
@@ -160,7 +174,7 @@ Notice that `book_id` appears twice, becuase we get one from each source table. 
 
 # Natural Joins
 
-The using clause, also called a natural join, joins on a like-named column from each table and includes it only once.
+The `USING` clause, also called a natural join, equijoins on a like-named column from each table and includes the join column only once.
 
 ```sql
 mysql> select * from pub join book using (book_id);
@@ -182,7 +196,9 @@ mysql> select * from pub join book using (book_id);
 Remember that we linked the `author` table to the `pub` table using the `author_pub` table to model the many-to-many relationship between authors and publications. We can join all three tables by chaining join clauses:
 
 ```sql
-mysql> select * from author join author_pub using (author_id) join pub using (pub_id);
+mysql> select *
+    -> from author join author_pub using (author_id)
+    ->   join pub using (pub_id);
 +--------+-----------+------------+-----------+-----------------+-----------------+---------+
 | pub_id | author_id | first_name | last_name | author_position | title           | book_id |
 +--------+-----------+------------+-----------+-----------------+-----------------+---------+
@@ -376,6 +392,10 @@ mysql> select dorm.name as dorm_name, count(*) as occupancy
 +-----------+-----------+
 1 row in set (0.00 sec)
 ```
+
+# Nested Queries
+
+
 
 # More Queries with Joins and Aggregate Functions
 
@@ -578,3 +598,9 @@ mysql> select dorm.name as dorm_name, format(avg(gpa), 2) as average_gpa
 ```
 
 # Step 4: Limit result to 1 row.
+
+# Views
+
+# Assertions
+
+# Triggers

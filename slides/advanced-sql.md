@@ -242,38 +242,17 @@ The `GROUP BY` clause groups rows in the working table by the values in the spec
 - If we don’t apply an aggregate function, only the last row of a group is returned.
     - Since rows within groups are in no particular order, failing to apply an aggregate function would essentially give us a random result.
 
-# Degenerate GROUP BY
-
-
-```sql
-mysql> select author_id, last_name
-    -> from author join author_pub using (author_id) join pub using (pub_id)
-    -> group by author_id;
-+-----------+-----------+
-| author_id | last_name |
-+-----------+-----------+
-|         1 | McCarthy  |
-|         2 | Ritchie   |
-|         3 | Thompson  |
-|         4 | Shannon   |
-|         5 | Turing    |
-|         6 | Church    |
-+-----------+-----------+
-6 rows in set (0.00 sec)
-
-```
-
-Notice that Turing has two pubs, but appears only once.
 
 # Aggregate Functions
 
-Aggregate functions apply some function the to rows grouped together by a `GROUP BY` clause.
+Aggregate functions apply some function the to the rows grouped together by a `GROUP BY` clause.
 
 How many papers did each author write?
 
 ```sql
 mysql> select author_id, last_name, count(author_id)
-    -> from author join author_pub using (author_id) join pub using (pub_id)
+    -> from author join author_pub using (author_id)
+    ->   join pub using (pub_id)
     -> group by author_id;
 +-----------+-----------+------------------+
 | author_id | last_name | count(author_id) |
@@ -285,10 +264,9 @@ mysql> select author_id, last_name, count(author_id)
 |         5 | Turing    |                2 |
 |         6 | Church    |                1 |
 +-----------+-----------+------------------+
-6 rows in set (0.00 sec)
 ```
 
-Notice that the aggregate function is applied to the column that you `GROUP BY`.
+Aggregate function is applied to column in `GROUP BY`.
 
 # Sorting, Aliasing, and Limiting
 
@@ -340,7 +318,8 @@ In the previous query we got the top author by pub count. If we want all authors
 
 ```sql
 mysql> select author_id, last_name, count(author_id) as pub_count
-    -> from author join author_pub using (author_id) join pub using (pub_id)
+    -> from author join author_pub using (author_id)
+    ->   join pub using (pub_id)
     -> group by author_id
     -> having count(*) = 1;
 +-----------+-----------+-----------+
@@ -352,7 +331,6 @@ mysql> select author_id, last_name, count(author_id) as pub_count
 |         4 | Shannon   |         1 |
 |         6 | Church    |         1 |
 +-----------+-----------+-----------+
-5 rows in set (0.01 sec)
 ```
 
 We can use comparisons like <, >. Notice that `Turing` is not in the result.
@@ -382,8 +360,10 @@ mysql> select book_title, month
 
 # Views
 
-``sql
-mysql> create view cacm_issues as select * from book where book_title = 'CACM';
+```sql
+mysql> create view cacm_issues as
+    ->   select * from book
+    ->   where book_title = 'CACM';
 Query OK, 0 rows affected (0.00 sec)
 
 mysql> show tables;
@@ -397,6 +377,8 @@ mysql> show tables;
 | pub            |
 +----------------+
 5 rows in set (0.00 sec)
+```
+
 
 # A View is Like a Table
 

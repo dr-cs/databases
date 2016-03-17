@@ -1,6 +1,32 @@
 % Advanced SQL
 % CS 4400
 
+# NULL
+
+The special value `NULL` could mean:
+
+- Unknown
+- Unavailable
+- Not Applicable
+
+# Three-Valued Logic - AND
+
+
+AND | TRUE | FALSE | UNKNOWN
+----+------+-------+--------+
+
+# Three-Valued Logic - OR
+
+# Three-Valued Logic - NOT
+
+
+
+# Comparisons with NULL Values
+
+Each `NULL` is distinct, so comparisons with $<$, $>$, and $=$ don't make sense.
+
+In inner joins, only
+
 
 # Many to Many Relationships
 

@@ -55,13 +55,13 @@
         "readings": ["FoDS 9"],
         "resources": [""]
     },
-    "normal-forms": {
-        "topic": "<a href=\"slides/normal-forms.html\">Normal Forms</a>",
+    "basic-relational-design": {
+        "topic": "<a href=\"slides/basic-relational-design.html\">Basic Relational Design</a>",
         "readings": ["FoDS 14"],
         "resources": [""]
     },
-    "relational-design": {
-        "topic": "<a href=\"slides/relational-design.html\">Relational Design</a>",
+    "advanced-relational-design": {
+        "topic": "<a href=\"slides/advanced-relational-design.html\">Advanced Relational Design</a>",
         "readings": ["FoDS 15"],
         "resources": [""]
     },

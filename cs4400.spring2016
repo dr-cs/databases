@@ -1,6 +1,6 @@
 ---
 layout: default
-title: CS 4400 - Fall 2016
+title: CS 4400 - Spring 2016
 ---
 
 GT Lorraine Students: <a href="summer2016.html">click here for Summer 2016 schedule</a>.
@@ -69,8 +69,8 @@ Week 12
 2016-04-05; basic-relational-design
 2016-04-07; advanced-relational-design
 Week 13
-2016-04-12; storage-structures
-2016-04-14; file-structures
+2016-04-12; advanced-relational-design
+2016-04-14; storage-structures
 Week 14
 2016-04-19; indexing-structures
 2016-04-21; <b>Exam 4</b>

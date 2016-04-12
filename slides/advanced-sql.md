@@ -25,7 +25,7 @@ AND | TRUE | FALSE | UNKNOWN
 
 Each `NULL` is distinct, so comparisons with $<$, $>$, and $=$ don't make sense.
 
-In inner joins, only
+Inner joins include only tuples for which the join condition evaluates to TRUE.
 
 
 # Many to Many Relationships

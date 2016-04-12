@@ -108,7 +108,7 @@ $t_2 = (a_3, b_3, c_2, d_4)$
 
 # Satisfying vs. Holding
 
-We say that a functional dependency $f$ *holds* on a relation if it is not legal to create a tuple that does not satisfy $f$. Alternately, we say that a relation schema (not just a particular state) satisfies a functional dependency.
+We say that a functional dependency $f$ *holds* on a relation if it is not legal to create a tuple that does not satisfy $f$. Alternately, we say that a relation *schema* (not just a particular state) satisfies a functional dependency.
 
 +---------+-----------+-----------+
 | name    | street    | city      |
@@ -120,7 +120,7 @@ We say that a functional dependency $f$ *holds* on a relation if it is not legal
 | Charlie | Elm       | Charlotte |
 +---------+-----------+-----------+
 
-Here $street \rightarrow city$ is satisifed by this relation instance. However, we would not say that the functional dependency *holds*, or that the relation schema satisfies the functional dependency because we know there *can be* different cities with the same street names.
+Here $street \rightarrow city$ is satisifed by this relation state. However, we would not say that the functional dependency *holds*, or that the *relation schema* satisfies the functional dependency because we know there *can be* different cities with the same street names.
 
 # Trivial Functional Dependencies
 
@@ -188,9 +188,11 @@ If $X$ is a superkey of $R$ then $X \rightarrow R$. In other words, all the attr
 
 The set of attributes functionally determined by $X$ under $F$ is the *closure* of $X$ under $F$, denoted $X^+$.
 
-# Algorithm For Computing Attribute Closure
+# Computing Attribute Closure
 
-To compute the closure of an attribute set $X$:
+**Algorithm 15.1** Determining $X^+$, the closure of $X$ under $F$
+
+**Input:** A set $F$ of FDs on relation schema $R$, and a set of attributes $X \subseteq R$
 
 - $X^+$ := $X$
 - **repeat**:
@@ -215,7 +217,7 @@ To compute the closure of an attribute set $X$:
 
 Given $R(A, B, C, G, H, I)$ and $F = \{A \rightarrow B, A \rightarrow C, CG \rightarrow H, CG \rightarrow I, B \rightarrow H\}$,
 
-compute $\{AG\}+$.
+compute $\{AG\}^+$.
 
 The first time we execute the outer loop:
 
@@ -226,7 +228,9 @@ The first time we execute the outer loop:
 
 Since $\{AG\}^+$ now includes all attributes in $R$, the second iteration of the outer loop adds no new attributes, so the algorithm terminates. $\{AG\}^+$ is a superkey of $R$.
 
-# Algorithm for Finding A Candidate Key
+# Finding A Candidate Key
+
+**Algorithm 15.2(a):** Finding a key $K$ for $R$ given a set $F$ of functional dependenceis on $R$
 
 **Input**: A relation $R$ and FDs $F$ on $R$
 
@@ -272,7 +276,7 @@ Note: in this class you will not need to compute the minimal cover set of FDs. T
 
 # Normal Forms
 
-A *normal form* is a set of conditions, based on functional dependencies, on a relation schema that acts as a set of tests for a relation schema.
+A *normal form* is a set of conditions based on functional dependencies that acts as a set of tests for a relation schema.
 
 Normalization is the process of decomposing relation schemas into new relatoin schemas that satisfy normal forms with the goals of:
 
@@ -297,7 +301,7 @@ The following relation is not in 1NF:
 | HQ       | 1              | 888665555 | {Houston}                      |
 +----------+----------------+-----------+--------------------------------+
 
-Because Dlocation values are not atomic.
+Because Dlocations values are not atomic.
 
 # Fixing Non 1NF Schemas
 
@@ -336,8 +340,11 @@ A relation is in 2NF if it is in 1NF and no nonprime attribute has a partial dep
 
 # 2NF Test
 
-Given EMP_PROJ(<u>Ssn</u>, <u>Pnumber</u>, Hours, Ename, Pname, Plocation) and
+Given
 
+EMP_PROJ(<u>Ssn</u>, <u>Pnumber</u>, Hours, Ename, Pname, Plocation)
+
+and
 
 - FD1: Ssn, Pnumber $\rightarrow$ Hours
 - FD2: Ssn $\rightarrow$ Ename,
@@ -442,9 +449,7 @@ LOTS1(<u>Property_id</u>, County_name, Lot#, Area, Price)
 - FD2: County_name, Lot# $\rightarrow$ Property_id, Area, Price, Tax_rate
 - FD4: Area $\rightarrow$ Price
 
-not in 3NF due to FD4. Area is not a superkey and Price is not a prime attribute.
-
-(Note: can also see that Price is transitively dependent on each candidate key --  Property_id and {County_name, Lot#} -- via Area.)
+not in 3NF due to FD4. Area is not a superkey and Price is not a prime attribute. Note that Price is transitively dependent on each candidate key.
 
 # 3NF Decomposition
 
@@ -510,7 +515,16 @@ A relation schema $R$ is in BCNF if whenever a *nontrivial* functional dependenc
 
 Note that this is the same as 3NF except that it doesn't allow any attributes (even prime attributes) to be determnined by non-keys.
 
-In general, given a relation schema $R(A, B, C)$ and FDs $AB \rightarrow C$ and $C \rightarrow B$, $R$ is in 3NF but not BCNF due to the FD $C \rightarrow B$.
+General non-BCNF pattern:
+
+Given a relation schema $R(A, B, C)$
+
+and FDs
+
+- $AB \rightarrow C$
+- $C \rightarrow B$
+
+$R$ is in 3NF but not BCNF due to the FD $C \rightarrow B$.
 
 
 # BCNF Example 1

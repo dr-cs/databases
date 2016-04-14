@@ -575,7 +575,7 @@ A decomposition of $R$ into $R_1$ and $R_2$ must preserve attributes, that is, $
 1. Dependency preservation, and
 2. Non-additive (lossless) joins.
 
-Dependencies can be preserved in 3NF decompositions, but not in all BCNF decompositions. We must have non-additive join property.
+Dependencies can be preserved in all 3NF decompositions, but not in all BCNF decompositions. **In all decompositions we must have non-additive join property.**
 
 # Non-Additive Join Test
 
@@ -590,14 +590,14 @@ For
 
 1. R1(<u>Student</u>, <u>Instructor</u>) and R2(<u>Student</u>, <u>Course</u>)
 
-- $(R_1 \cap R_2)$ = Instructor
+- $(R_1 \cap R_2)$ = Student
 - $(R_1 - R_2)$ = Instructor
-- $(R_2 - R_1)$ = Student
+- $(R_2 - R_1)$ = Course
 
 So either
 
-- Instructor $\rightarrow$ Instructor, or
-- Instructor $\rightarrow$ Student
+- Student $\rightarrow$ Instructor, or
+- Student $\rightarrow$ Course
 
 must be in $F^+$. But they aren't.
 
@@ -676,7 +676,9 @@ We would join on student and end up with ...
 | Smith   | Database          | Ammar      |
 | Smith   | Database          | Navathe    |
 
-... 13 more tuples, which is way more tuples than the original relation due to spurious tuples.
+... 13 more tuples, which is way more tuples than the original relation due to spurious tuples, so the join is not non-additive.
+
+The information that has been lost is the association between Instructor and Course. For example, note from the original table that Mark does not teach Operating Systems.
 
 # Test of Decomposition # 2
 
@@ -685,12 +687,12 @@ For
 2. R1(<u>Instructor</u>, Course) and R2(<u>Student</u>, <u>Course</u>)
 
 - $(R_1 \cap R_2)$ = Course
-- $(R_1 - R_2)$ = Course
+- $(R_1 - R_2)$ = Instructor
 - $(R_2 - R_1)$ = Student
 
 So either
 
-- Course $\rightarrow$ Course, or
+- Course $\rightarrow$ Instructor, or
 - Course $\rightarrow$ Student
 
 must be in $F^+$. But they aren't.

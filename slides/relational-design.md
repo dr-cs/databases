@@ -515,9 +515,7 @@ A relation schema $R$ is in BCNF if whenever a *nontrivial* functional dependenc
 
 Note that this is the same as 3NF except that it doesn't allow any attributes (even prime attributes) to be determnined by non-keys.
 
-General non-BCNF pattern:
-
-Given a relation schema $R(A, B, C)$
+General non-BCNF pattern: given $R(A, B, C)$
 
 and FDs
 
@@ -602,6 +600,83 @@ So either
 - Instructor $\rightarrow$ Student
 
 must be in $F^+$. But they aren't.
+
+# Visualizing Nonadditive Join
+
+Say some original relation state r(R) is:
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Smith   | Database          | Navathe    |
+| Smith   | Operating Systems | Ammar      |
+| Smith   | Theory            | Schulman   |
+| Wallace | Database          | Mark       |
+| Wallace | Operating Systems | Ahamad     |
+| Wong    | Database          | Omiecinski |
+| Zelaya  | Database          | Navathe    |
+
+# Decomposition 1
+
+Then
+<table>
+<tr>
+<td>
+r(R1) =
+</td>
+<td>
+
+| student | instructor |
+|---------|------------|
+| Narayan | Ammar      |
+| Narayan | Mark       |
+| Smith   | Ammar      |
+| Smith   | Navathe    |
+| Smith   | Schulman   |
+| Wallace | Ahamad     |
+| Wallace | Mark       |
+| Wong    | Omiecinski |
+| Zelaya  | Navathe    |
+
+</td>
+<td> </td>
+
+<td>
+r(R2) =
+</td>
+<td>
+
+| student | course            |
+|---------|-------------------|
+| Narayan | Database          |
+| Narayan | Operating Systems |
+| Smith   | Database          |
+| Smith   | Operating Systems |
+| Smith   | Theory            |
+| Wallace | Database          |
+| Wallace | Operating Systems |
+| Wong    | Database          |
+| Zelaya  | Database          |
+
+</td>
+</tr>
+</table>
+
+We would join on student and end up with ...
+
+# Join with Spurious Tuples
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Ammar      |
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Narayan | Operating Systems | Mark       |
+| Smith   | Database          | Ammar      |
+| Smith   | Database          | Navathe    |
+
+... 13 more tuples, which is way more tuples than the original relation due to spurious tuples.
 
 # Test of Decomposition # 2
 

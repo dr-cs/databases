@@ -1,7 +1,7 @@
 % Basic Relational Design
 % CS 4400
 
-# Basic Relational Design
+# Relational Design
 
 - Basic design approaches.
 - What makes a good design better than a bad design?
@@ -12,7 +12,7 @@
 
 - Bottom-up, a.k.a. *synthethis*
 
-    - Start with individual attributes and large set of binary relationship among attributes
+    - Start with individual attributes and large set of binary relationships among attributes
     - Unpopular
 
 - Top-down, a.k.a. *analysis*
@@ -27,7 +27,6 @@
 - There should be little or no redundant information in tuples
 - The should be few or no NULL values in tuples
 - It should be impossible to generate spurious (invalid) tuples
-
 
 # Clear Semantics of Relation Schemas
 
@@ -62,24 +61,25 @@ One way to think of schemas with redundancy: they are joined tables from well-de
 
 Design relation schemas to be naturally joined on attributes that are related by foreign key-primary key relationships.
 
+
 # Functional Dependencies
 
 A generalization of superkeys.
 
-Given a relation schema $R$, and subsets of attributes $\alpha$ and $\beta$, the functional dependedcy
+Given a relation schema $R$, and subsets of attributes $X$ and $Y$, the functional dependency
 
 $$
-\alpha \rightarrow \beta
+X \rightarrow Y
 $$
 
 Means that for any pair of tuples $t_1$ and $t_2$ in $r(R)$
 
 <center>
-if $t_1[\alpha] = t_2[\alpha]$ <br/>
-then $t_1[\beta] = t_2[\beta]$
+if $t_1[X] = t_2[X]$ <br/>
+then $t_1[Y] = t_2[Y]$
 </center>
 
-In other words, whenever the attributes on the left side of a functional dependency are the same for two tuples in the relation, the attributes on the right side of the functional dependency will be equal.
+In other words, whenever the attributes on the left side of a functional dependency are the same for two tuples in the relation, the attributes on the right side of the functional dependency will also be equal.
 
 # Relations *Satisfy* FDs
 
@@ -105,7 +105,7 @@ $t_2 = (a_3, b_3, c_2, d_4)$
 
 # Satisfying vs. Holding
 
-We say that a functional dependency $f$ *holds* on a relation if it is not legal to create a tuple that does not satisfy $f$.
+We say that a functional dependency $f$ *holds* on a relation if it is not legal to create a tuple that does not satisfy $f$. Alternately, we say that a relation *schema* (not just a particular state) satisfies a functional dependency.
 
 +---------+-----------+-----------+
 | name    | street    | city      |
@@ -117,15 +117,13 @@ We say that a functional dependency $f$ *holds* on a relation if it is not legal
 | Charlie | Elm       | Charlotte |
 +---------+-----------+-----------+
 
-Here $street \rightarrow city$ is satisifed. However, we would not say that it *holds* because we know there *can be* different cities with the same street names.
-
-Though there may be relation states that satisfy a FD, we only include FDs that hold for every possible relation state when we design a database. The set of FDs come from domain knowledge about the data, not a particular set of data.
+Here $street \rightarrow city$ is satisifed by this relation state. However, we would not say that the functional dependency *holds*, or that the *relation schema* satisfies the functional dependency because we know there *can be* different cities with the same street names.
 
 # Trivial Functional Dependencies
 
 A functional dependency is *trivial* if it is satisfied by all relations.
 
-Formally, a functional dependency $\alpha \rightarrow \beta$ is **trivial** if $\beta \subseteq \alpha$
+Formally, a functional dependency $X \rightarrow Y$ is **trivial** if $Y \subseteq X$
 
 For example:
 
@@ -137,129 +135,18 @@ $$
 
 are trivial.
 
-# Logically Implied FDs
-
-Given a relation schema $R$, a functional dependency $f$  is logically implied by a set of FDs $F$  if every relation state $r(R)$ that stasifies $F$ also satisfies $f$.
-
-For example, given $R(A, B, C, G, H, I)$ and $F$ =
-
-$$
-A \rightarrow B\\
-A \rightarrow C\\
-CG \rightarrow H\\
-CG \rightarrow I\\
-B \rightarrow H
-$$
-
-The functional dependency $A \rightarrow H$ also holds on R.
-
-# Closure of a Set of FDs
-
-The closure $F^+$ of $F$ is the set of all FDs logically implied by $F$. We can use a set if inference rules known as **Armstrong's Axioms** to derive new FDs.
-
-- **Reflexivity**. If $\beta \subseteq \alpha$, then $\alpha \rightarrow \beta$
-- **Augmentation**. If $\alpha \rightarrow \beta$ holds, then $\gamma\alpha \rightarrow \gamma\beta$
-- **Transitivity**. If $\alpha \rightarrow \beta$ holds and $\beta \rightarrow \gamma$ holds, then $\alpha \rightarrow \gamma$ holds
-
-Note that $\alpha\beta$ is shorhand for $\alpha \cup \beta$.
-
-Armostrong's axioms are **sound** because they do not produce new FDs that don't hold, and **complete** becuase applying them repeatedly finds $F^+$, i.e., all FDs that are logically implied by $F$.
-
-# Algorithm for Finding $F^+$
-
-The following algorithm applies Armstrong's Axioms repeatedly to find $F^+$.
-
-- Let $F^+ = F$
-- **repeat**:
-    - **for each** FD $f$ in $F^+$:
-        - add results of applying reflexivity and augmentation rules on $f$ to $F^+$
-    - **for each** pair of FDs $\alpha \rightarrow \beta$ and $\gamma \rightarrow \delta$ in $F^+$:
-        - **if** $\beta = \gamma$, add $\alpha \rightarrow \delta$ to $F^+$
-- **until** $F^+$ does not change any further
-
-This algorithm is instructive, but tedious and expensive. There's a better way ...
-
-# Attribute Closure
-
-The normal forms we consider in this class (1NF through BCNF) are based on keys, so we need a way to use FDs to determine the keys of a relation.
-
-If $\alpha$ is a superkey of $R$ then $\alpha \rightarrow R$. In other words, all the attributes of $R$ are determined by $\alpha$.
-
-The set of attributes functionally determined by $\alpha$ under $F$ is the *closure* of $\alpha$ under $F$, denoted $\alpha^+$.
-
-# Algorithm For Computing Attribute Closure
-
-To compute the closure of an attribute set $\alpha$:
-
-- $\alpha^+$ := $\alpha$
-- **repeat**:
-    - $old\alpha^+$ := $\alpha^+$
-    - **for each** functional dependency $Y \rightarrow Z$:
-        - if $Y \subseteq \alpha^+$ then $\alpha^+$ := $\alpha^+ \cup Z$
-- **until** $\alpha^+$ = $old\alpha^+$
-
-
-# Attribute Closure Example
-
-Given $R(A, B, C, G, H, I)$ and $F = \{A \rightarrow B, A \rightarrow C, CG \rightarrow H, CG \rightarrow I, B \rightarrow H\}$,
-
-compute $(AG)+$.
-
-The first time we execute the outer loop:
-
-- $A \rightarrow B$ adds $B$ to $(AG)^+$, making $(AG)^+$ = $ABG$.
-- $A \rightarrow C$ adds $C$, making $(AG)^+$ = $ABCG$.
-- $CG \rightarrow H$ adds $H$, making $(AG)^+$ = $ABCGH$.
-- $CG \rightarrow I$ adds $I$, making $(AG)^+$ = $ABCGHI$.
-
-Since $(AG)^+$ now includes all attributes in $R$, the second iteration of the outer loop adds no new attributes, so the algorithm terminates. $(AG)^+$ is a superkey of $R$.
-
-# Uses of Attribute Closure
-
-- Test whether $\alpha$ is a superkey of $R$.
-    - If $\alpha^+$ contains all attributes in $R$, then $\alpha$ is a superkey of $R$.
-
-- Checking whether an FD $\alpha \rightarrow \beta$ holds on $R$ under $F$.
-    - Compute $\alpha^+$. If $\beta \subseteq \alpha^+$ then $\alpha \rightarrow \beta$ holds.
-
-- An alternate way to compute $F^+$.
-    - For each $\gamma \subseteq R$, compute $\gamma^+$
-        - For each $S \subseteq \gamma^+$ add FD $\gamma \rightarrow S$ to $F^+$
-
-# Extraneous Attributes in FDs
-
-An attribute of an FD in $F$ is **extraneous** if we can remove it without changing the closure set $F^+$
-
-Formally, given $\alpha \rightarrow \beta$ in $F$,
-
-- Attribute $A$ is extraneous in $\alpha$ if $A \subset \alpha$ and $F$ logically implies $(F - (\alpha \rightarrow \beta) \cup \{(\alpha - A) \rightarrow \beta\})$.
-
-- Attribute $A$ is extraneous in $\beta$ if $A \subset \beta$ and the set of FDs
-$(F - \{\alpha \rightarrow \beta\}) \cup \{\alpha \rightarrow (\beta - A)\}$ logically implies $F$.
-
-
-# Minimal Cover FD Sets
-
-Two sets of FDs $F$ and $E$ are equivalent if $F^+$ = $E^+$.
-
-A set of FDs $F$ is minimal if:
-
-1. Every dependency in F has a single attribute on the right side (canonical form).
-2. We cannot replace any FD $\alpha \rightarrow A$ in $F$ with an FD $\beta \rightarrow A$ where $\beta \subset \alpha$ and have set of FDs that is equivalent to $F$.
-3. We cannot remove any dependency from F and still have a set of FDs that is equivalent to F.
-
-Note: in this class you will not need to compute the minimal cover set of FDs. They will always be given.
+We don't write trivial functional dependencies when we enumerate a set of functional dependencies that hold on a schema.
 
 # Normal Forms
 
-Normalization uses functional dependencies to analyze relations and decompose them into new relations to:
+A *normal form* is a set of conditions based on functional dependencies that acts as a set of tests for a relation schema.
 
-- minimize redundancy, and
-- minimize insertion, deletion, and update anomalies
+Normalization is the process of decomposing relation schemas into new relatoin schemas that satisfy normal forms with the goals of:
 
-We will consider first, second, third, and Boyce-Codd normal forms in this class.
+- minimizing redundancy, and
+- minimizing insertion, deletion, and update anomalies
 
-The normal form of a relation is the highest normal form it satisfies.
+We will consider first, second, third, and Boyce-Codd normal forms in this class. Each higher normal form subsumes the normal forms below it. The normal form of a relation schema is the highest normal form it satisfies.
 
 # First Normal Form (1NF)
 
@@ -277,7 +164,7 @@ The following relation is not in 1NF:
 | HQ       | 1              | 888665555 | {Houston}                      |
 +----------+----------------+-----------+--------------------------------+
 
-Because Dlocation values are not atomic.
+Because Dlocations values are not atomic.
 
 # Fixing Non 1NF Schemas
 
@@ -316,15 +203,19 @@ A relation is in 2NF if it is in 1NF and no nonprime attribute has a partial dep
 
 # 2NF Test
 
-Given EMP_PROJ(<u>Ssn</u>, <u>Pnumber</u>, Hours, Ename, Pname, Plocation) and
+Given
 
-$$
-Ssn, Pnumber \rightarrow Hours,\\
-Ssn \rightarrow Ename,\\
-Pnumber \rightarrow Pname, Plocation\\
-$$
+EMP_PROJ(<u>Ssn</u>, <u>Pnumber</u>, Hours, Ename, Pname, Plocation)
 
-EMP_PROJ is not in 2NF due to FD2, $Ssn \rightarrow Ename$. Nonprime attribute Ename is partially dependent on the primary key <u>Ssn</u>, <u>Pnumber</u>.
+and
+
+- FD1: Ssn, Pnumber $\rightarrow$ Hours
+- FD2: Ssn $\rightarrow$ Ename,
+- FD3: Pnumber $\rightarrow$ Pname, Plocation
+
+EMP_PROJ is not in 2NF due to FD2. Nonprime attribute Ename is partially dependent on the primary key <u>Ssn</u>, <u>Pnumber</u>.
+
+EMP_PROJ is also not in 2NF due to FD3. Nonprime attributes Pname and Plocation are only partially dependent on the primary key.
 
 # Fixing non 2NF Schemas
 
@@ -350,12 +241,12 @@ EMP_DEPT(<u>Ssn</u>, Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn)
 
 and
 
-$Ssn \rightarrow Ename, Bdate, Address, Dnumber, Dname, Dmgr\_ssn$
-$Dnumber \rightarrow Dname, Dmgr\_ssn$
+- FD1: Ssn $\rightarrow$ Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn
+- FD2: Dnumber $\rightarrow$ Dname, Dmgr_ssn
 
-EMP_DEPT is not in 3NF because Dname and Dmgr_ssn are transitively dependent on Ssn via a transitive dependency on Dnumber.
+EMP_DEPT is not in 3NF because Dname and Dmgr_ssn are transitively dependent on Ssn via dependency on Dnumber.
 
-# Fixing Non-3NFf Schemas
+# Fixing Non-3NF Schemas
 
 Move the nonprime attributes that are transitively dependent on the primary key through another attribute to a separate schema along with the attribute through which they are transitively dependent on the PK.
 
@@ -368,3 +259,322 @@ EMP(<u>Ssn</u>, Ename, Bdate, Address, Dnumber)
 DEPT(<u>Dnumber</u>, Dname, Dmgr_ssn)
 
 Note that a natural join on Dnumber will recover the original relation.
+
+# General Definition of 2NF and 3NF
+
+Preceding definitions based on primary key. General definitions based on all candidate keys.
+
+Remember:
+
+- An attribute is *prime* if it is part of a candidate key,
+- otherwise it is *nonprime*.
+
+General definition of 2NF: A relation schema $R$ is in 2NF if every nonprime attribute $A$ in $R$ is not partially dependent on *any* key of $R$.
+
+# A Non-2NF Schema
+
+LOTS(<u>Property_id</u>, County_name, Lot#, Area, Price, Tax_rate)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area, Price, Tax_rate
+- FD2: County_name, Lot# $\rightarrow$ Property_id, Area, Price, Tax_rate
+- FD3: County_name $\rightarrow$ Tax_rate
+- FD4: Area $\rightarrow$ Price
+
+Both Property_id and {County_name, Lot#} are candidate keys. So, by the general definition of 2NF LOTS is not in 2NF due to FD3, i.e., Tax_rate is partially dependent on a candidate key.
+
+# 2NF Decomposition
+
+LOTS(<u>Property_id</u>, County_name, Lot#, Area, Price, Tax_rate)
+
+becomes
+
+LOTS1(<u>Property_id</u>, County_name, Lot#, Area, Price)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area, Price, Tax_rate
+- FD2: County_name, Lot# $\rightarrow$ Property_id, Area, Price, Tax_rate
+- FD4: Area $\rightarrow$ Price
+
+LOTS2(<u>County_name</u>, Tax_rate)
+
+- FD3: County_name $\rightarrow$ Tax_rate
+
+
+# General Definition of 3NF
+
+A relation schema $R$ is in 3NF if, whenever a *nontrivial* functional dependency $X \rightarrow A$ holds in $R$, either
+
+(a) $X$ is a superkey of $R$, or
+(b) $A$ is a prime attribute of $R$.
+
+LOTS1(<u>Property_id</u>, County_name, Lot#, Area, Price)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area, Price, Tax_rate
+- FD2: County_name, Lot# $\rightarrow$ Property_id, Area, Price, Tax_rate
+- FD4: Area $\rightarrow$ Price
+
+not in 3NF due to FD4. Area is not a superkey and Price is not a prime attribute. Note that Price is transitively dependent on each candidate key.
+
+# 3NF Decomposition
+
+LOTS1(<u>Property_id</u>, County_name, Lot#, Area, Price)
+
+becomes
+
+LOTS1A(<u>Property_id</u>, County_name, Lot#, Area)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area, Price, Tax_rate
+- FD2: County_name, Lot# $\rightarrow$ Property_id, Area, Price, Tax_rate
+
+and
+
+LOTS1B(<u>Area</u>, Price)
+
+- FD4: Area $\rightarrow$ Price
+
+# Straight to 3NF
+
+Though we present a progression through 2NF to 3NF for historical reasons it's not necessary. Given our origial LOTS
+
+LOTS(<u>Property_id</u>, County_name, Lot#, Area, Price, Tax_rate)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area, Price, Tax_rate
+- FD2: County_name, Lot# $\rightarrow$ Property_id, Area, Price, Tax_rate
+- FD3: County_name $\rightarrow$ Tax_rate
+- FD4: Area $\rightarrow$ Price
+
+We see that FD3 and FD4 are problem FDs because neither County_name nor Area is a superkey.
+
+# Decomposition Straight to 3NF
+
+So we can decompose
+
+LOTS(<u>Property_id</u>, County_name, Lot#, Area, Price, Tax_rate)
+
+directly into:
+
+LOTS1A(<u>Property_id</u>, County_name, Lot#, Area)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area
+- FD2: County_name, Lot# $\rightarrow$ Property_id, Area
+
+LOTS1B(<u>Area</u>, Price)
+
+- FD4: Area $\rightarrow$ Price
+
+LOTS2(<u>County_name</u>, Tax_rate)
+
+- FD3: County_name $\rightarrow$ Tax_rate
+
+# Observations of General 3NF Tests
+
+Two types of problematic FDs:
+
+- A nonprime attribute determines another nonprime attribute, giving rise to a transitive dependency on a key.
+- Some subset of a key determines a nonprime attribute, giving rise to a partial dependencey on a key which violates 2NF.
+
+# Boyce-Codd Normal Form (BCNF)
+
+A relation schema $R$ is in BCNF if whenever a *nontrivial* functional dependency $X \rightarrow A$ holds in $R$, then $X$ is a superkey of $R$
+
+Note that this is the same as 3NF except that it doesn't allow any attributes (even prime attributes) to be determnined by non-keys.
+
+General non-BCNF pattern: given $R(A, B, C)$
+
+and FDs
+
+- $AB \rightarrow C$
+- $C \rightarrow B$
+
+$R$ is in 3NF but not BCNF due to the FD $C \rightarrow B$.
+
+
+# BCNF Example 1
+
+Say we add FD5 to LOTS1A(<u>Property_id</u>, County_name, Lot#, Area)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area
+- FD2: County_name, Lot# $\rightarrow$ Property_id, Area
+- FD5: Area $\rightarrow$ County_name
+
+And say that Fulton county lots are restriced to 1.1, 1.2, ..., 2.0 acres and DeKalb county lots are restricted to 0.5, 0.6, ..., 1.0 acres. LOTS1A will have a great deal of redundancy. BCNF doesn't allow this schema because of FD5: Area is not a superkey.
+
+# BCNF Example 1 Decomposition
+
+LOTS1A(<u>Property_id</u>, County_name, Lot#, Area)
+
+becomes
+
+LOTS1AX(<u>Property_id</u>, Area, Lot#)
+
+- FD1: Property_id $\rightarrow$ County_name, Lot#, Area
+
+and
+
+LOTS1AY(<u>Area</u>, County_name)
+
+- FD5: Area $\rightarrow$ County_name
+
+Note that FD2 is lost because its attributes are no longer in the same relation schema. In general, FDs may not be preservable in BCNF decompositions.
+
+# BCNF Example 2
+
+Given TEACH(Student, Course, Instructor) and
+
+- FD1: {Student, Course} $\rightarrow$ Instructor
+- FD2: Instructor $\rightarrow$ Course.
+
+FD2 violates BCNF. There are three possible BCNF decompositions:
+
+1. R1(<u>Student</u>, <u>Instructor</u>) and R2(<u>Student</u>, <u>Course</u>)
+2. R1(<u>Instructor</u>, Course) and R2(<u>Student</u>, <u>Course</u>)
+3. R1(<u>Instructor</u>, Course) and R2(<u>Instructor</u>, <u>Student</u>)
+
+All three decompositions lose FD1. Which decompositions are good?
+
+# Desirable Properties of Decompositions
+
+A decomposition of $R$ into $R_1$ and $R_2$ must preserve attributes, that is, $R = R_1 \cup R_2$. We'd also like:
+
+1. Dependency preservation, and
+2. Non-additive (lossless) joins.
+
+Dependencies can be preserved in all 3NF decompositions, but not in all BCNF decompositions. **In all decompositions we must have non-additive join property.**
+
+# Non-Additive Join Test
+
+A Decomposition $D = \{R_1, R_2\}$ of $R$ has the lossless (nonadditive) join property with repect to FDs $F$ on $R$ if and only if either
+
+- The FD $((R_1 \cap R_2) \rightarrow (R_1 - R_2))$ is in $F^+$, or
+- The FD $((R_1 \cap R_2) \rightarrow (R_2 - R_1))$ is in $F^+$
+
+Important note: the non-additive join property assumes that **no null values are allowed for join attributes**.
+
+# Test of Decomposition # 1
+
+For
+
+1. R1(<u>Student</u>, <u>Instructor</u>) and R2(<u>Student</u>, <u>Course</u>)
+
+- $(R_1 \cap R_2)$ = Student
+- $(R_1 - R_2)$ = Instructor
+- $(R_2 - R_1)$ = Course
+
+So either
+
+- Student $\rightarrow$ Instructor, or
+- Student $\rightarrow$ Course
+
+must be in $F^+$. But they aren't.
+
+# Visualizing Nonadditive Join
+
+Say some original relation state r(R) is:
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Smith   | Database          | Navathe    |
+| Smith   | Operating Systems | Ammar      |
+| Smith   | Theory            | Schulman   |
+| Wallace | Database          | Mark       |
+| Wallace | Operating Systems | Ahamad     |
+| Wong    | Database          | Omiecinski |
+| Zelaya  | Database          | Navathe    |
+
+# Decomposition 1
+
+Then
+<table>
+<tr>
+<td>
+r(R1) =
+</td>
+<td>
+
+| student | instructor |
+|---------|------------|
+| Narayan | Ammar      |
+| Narayan | Mark       |
+| Smith   | Ammar      |
+| Smith   | Navathe    |
+| Smith   | Schulman   |
+| Wallace | Ahamad     |
+| Wallace | Mark       |
+| Wong    | Omiecinski |
+| Zelaya  | Navathe    |
+
+</td>
+<td> </td>
+
+<td>
+r(R2) =
+</td>
+<td>
+
+| student | course            |
+|---------|-------------------|
+| Narayan | Database          |
+| Narayan | Operating Systems |
+| Smith   | Database          |
+| Smith   | Operating Systems |
+| Smith   | Theory            |
+| Wallace | Database          |
+| Wallace | Operating Systems |
+| Wong    | Database          |
+| Zelaya  | Database          |
+
+</td>
+</tr>
+</table>
+
+We would join on student and end up with ...
+
+# Join with Spurious Tuples
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Ammar      |
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Narayan | Operating Systems | Mark       |
+| Smith   | Database          | Ammar      |
+| Smith   | Database          | Navathe    |
+
+... 13 more tuples, which is way more tuples than the original relation due to spurious tuples, so the join is not non-additive.
+
+The information that has been lost is the association between Instructor and Course. For example, note from the original table that Mark does not teach Operating Systems.
+
+# Test of Decomposition # 2
+
+For
+
+2. R1(<u>Instructor</u>, Course) and R2(<u>Student</u>, <u>Course</u>)
+
+- $(R_1 \cap R_2)$ = Course
+- $(R_1 - R_2)$ = Instructor
+- $(R_2 - R_1)$ = Student
+
+So either
+
+- Course $\rightarrow$ Instructor, or
+- Course $\rightarrow$ Student
+
+must be in $F^+$. But they aren't.
+
+# Test of Decomposition # 3
+
+For
+
+3. R1(<u>Instructor</u>, Course) and R2(<u>Instructor</u>, <u>Student</u>)
+
+- $(R_1 \cap R_2)$ = Instructor
+- $(R_1 - R_2)$ = Course
+- $(R_2 - R_1)$ = Student
+
+So either
+
+- Instructor $\rightarrow$ Course, or
+- Instructor $\rightarrow$ Student
+
+must be in $F^+$. Instructor $\rightarrow$ Course is in $F^+$, so this decomposition is the right one.

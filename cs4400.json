@@ -55,9 +55,14 @@
         "readings": ["FoDS 9"],
         "resources": [""]
     },
-    "relational-design": {
-        "topic": "<a href=\"slides/relational-design.html\">Relational Design</a>",
-        "readings": ["FoDS 14.1-14.5, 15.1-15.4"],
+    "basic-relational-design": {
+        "topic": "<a href=\"slides/basic-relational-design.html\">Basic Relational Design</a>",
+        "readings": ["FoDS 14.1-14.5"],
+        "resources": [""]
+    },
+    "advanced-relational-design": {
+        "topic": "<a href=\"slides/advanced-relational-design.html\">Advanced Relational Design</a>",
+        "readings": ["FoDS 15.1-15.4"],
         "resources": [""]
     },
     "storage-structures": {

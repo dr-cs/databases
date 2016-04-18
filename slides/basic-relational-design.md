@@ -135,7 +135,7 @@ $$
 
 are trivial.
 
-We don't write trivial functional dependencies when we enumerate a set of functional dependencies that hold on a schema.
+We don't write trivial functional dependencies when we enumerate a set of functional dependencies that hold on a schema for the purposes of normalization or normal form testing.
 
 # Normal Forms
 

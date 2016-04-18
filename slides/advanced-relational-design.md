@@ -14,6 +14,8 @@ Note that $XY$ is shorhand for $X \cup Y$.
 
 Armostrong's axioms are **sound** because they do not produce new FDs that don't hold, and **complete** becuase applying them repeatedly finds $F^+$, i.e., all FDs that are logically implied by $F$.
 
+Note that $F^+$ includes **all** FDs, including trivial FDs.
+
 # Algorithm for Finding $F^+$
 
 The following algorithm applies Armstrong's Axioms repeatedly to find $F^+$.
@@ -26,17 +28,11 @@ The following algorithm applies Armstrong's Axioms repeatedly to find $F^+$.
         - add $X \rightarrow Z$ to $F^+$
 - **until** $F^+$ does not change any further
 
-This algorithm is instructive, but tedious and expensive. There's a better way ...
+This algorithm is instructive, but tedious and expensive and we present it mainly for conceptual understanding. There's also a better way ...
 
 # Attribute Closure
 
-The normal forms we consider in this class (1NF through BCNF) are based on keys, so we need a way to use FDs to determine the keys of a relation.
-
-If $X$ is a superkey of $R$ then $X \rightarrow R$. In other words, all the attributes of $R$ are determined by $X$.
-
 The set of attributes functionally determined by $X$ under $F$ is the *closure* of $X$ under $F$, denoted $X^+$.
-
-# Computing Attribute Closure
 
 **Algorithm 15.1** Determining $X^+$, the closure of $X$ under $F$
 
@@ -134,8 +130,6 @@ REove extraneous attributes by:
         - **if** $Z \rightarrow B$ follows from the FDs in $T$ (including $Y \rightarrow B$), **then** replace $Y \rightarrow B$ with $Z \rightarrow B$
 
 - **until** no more changes to $T$ can be made
-
-
 
 # Normal Forms
 

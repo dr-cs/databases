@@ -62,12 +62,12 @@
     },
     "advanced-relational-design": {
         "topic": "<a href=\"slides/advanced-relational-design.html\">Advanced Relational Design</a>",
-        "readings": ["FoDS 15.1-15.4"],
+        "readings": ["FoDS 15.1-15.3"],
         "resources": [""]
     },
     "storage-structures": {
-        "topic": "<a href=\"slides/storage-structures.html\">Storage Structures</a>",
-        "readings": ["FoDS 16"],
+        "topic": "<a href=\"slides/storage-structures.html\">Storage Structures</a><br/>T-Square slides: <a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-6170-2d0c-557c-837e-a9ff09efa298/Prof.%20Omiecinski/Prof%20O%20Revisions/Ch17_Ed.pdf\">Ch17_Ed.pdf</a>",
+        "readings": ["FoDS 16.1-16.7"],
         "resources": [""]
     },
     "indexing-structures": {

@@ -2,6 +2,7 @@
 % CS 4400
 
 
+
 # Closure of a Set of FDs
 
 The closure $F^+$ of $F$ is the set of all FDs logically implied by $F$. We can use a set if inference rules known as **Armstrong's Axioms** to derive new FDs.
@@ -28,7 +29,7 @@ The following algorithm applies Armstrong's Axioms repeatedly to find $F^+$.
         - add $X \rightarrow Z$ to $F^+$
 - **until** $F^+$ does not change any further
 
-This algorithm is instructive, but tedious and expensive and we present it mainly for conceptual understanding. There's also a better way ...
+This algorithm is instructive, but tedious and expensive and we present it mainly for conceptual understanding. Two sets of FDs are equivalent if they imply the same closure set of FDs.
 
 # Attribute Closure
 
@@ -119,12 +120,11 @@ A set of FDs $F$ is minimal if:
 
 # Computing Minimal Cover FDs
 
-REove extraneous attributes by:
+**Input:** $T$, a set of FDs
 
 - **while** there is an FD $F$ in $T$ that is implied by other FDs in $T$:
     - remove $F$ from $T$
 - **repeat**
-
     - **for each** FD $Y \rightarrow B$ in $T$ such that $|Y| > 1$:
         - let $Z$ be $Y$ minus one attribute in $Y$
         - **if** $Z \rightarrow B$ follows from the FDs in $T$ (including $Y \rightarrow B$), **then** replace $Y \rightarrow B$ with $Z \rightarrow B$
@@ -161,7 +161,7 @@ To find the functional dependencies that hold on $R_1$ and $R_2$ we project the 
 2. **for each** subset of attributes $X$ in $R_1$:
     - compute $X^+$ with respect to $S$. Note that there may be attributes in $X^+$ that are in $R$ but not in $R_1$.
     - Add to $T$ on nontrivial FDs $X \rightarrow A$ for which $A$ is in $X^+$ and $R_1$.
-3. Transform $T$ into a minimal cover of the FDs that hold on $R_1$ by the follosing procedure:
+3. Optional: transform $T$ into a minimal cover of the FDs that hold on $R_1$ by the follosing procedure:
     - **while** there is an FD $F$ in $T$ that is implied by other FDs in $T$:
         - remove $F$ from $T$
     - **repeat**
@@ -219,9 +219,174 @@ If either of these relations is not in BCNF, repeat the process.
 2. **while** there is a relation schema $Q$ in $D$ that is not in BCNF:
     - choose a relation schema $Q$ in $D$ that is not in BCNF
     - find a functional dependency $X \rightarrow Y$ in $Q$ that violates BCNF
-    - replace $Q$ in $D$ by two schemas $(Q - X^+)$ jand $X^+$
+    - replace $Q$ in $D$ by two schemas $(Q - X^+ + X)$ jand $X^+$
     - project the functional dependencies from $Q$ into the new schemas.
 
 **Output:** $D$, a set of relation schemas in BCNF with the non-additive join property such that $D = \bigcup_1^n D_i$
 
 Note that each schema has its own set of functional dependencies, so each decomposition results in the loss of one schema from $D$ along with its functional dependencies, and the addition of two new schemas each with their own sets of functional dependencies.
+
+# BCNF Example 2
+
+Given TEACH(Student, Course, Instructor) and
+
+- FD1: {Student, Course} $\rightarrow$ Instructor
+- FD2: Instructor $\rightarrow$ Course.
+
+FD2 violates BCNF. There are three possible BCNF decompositions:
+
+1. R1(<u>Student</u>, <u>Instructor</u>) and R2(<u>Student</u>, <u>Course</u>)
+2. R1(<u>Instructor</u>, Course) and R2(<u>Student</u>, <u>Course</u>)
+3. R1(<u>Instructor</u>, Course) and R2(<u>Instructor</u>, <u>Student</u>)
+
+All three decompositions lose FD1. Which decompositions are good?
+
+# Desirable Properties of Decompositions
+
+A decomposition of $R$ into $R_1$ and $R_2$ must preserve attributes, that is, $R = R_1 \cup R_2$. We'd also like:
+
+1. Dependency preservation, and
+2. Non-additive (lossless) joins.
+
+Dependencies can be preserved in all 3NF decompositions, but not in all BCNF decompositions. **In all decompositions we must have non-additive join property.**
+
+# Non-Additive Join Test
+
+A Decomposition $D = \{R_1, R_2\}$ of $R$ has the lossless (nonadditive) join property with repect to FDs $F$ on $R$ if and only if either
+
+- The FD $((R_1 \cap R_2) \rightarrow (R_1 - R_2))$ is in $F^+$, or
+- The FD $((R_1 \cap R_2) \rightarrow (R_2 - R_1))$ is in $F^+$
+
+Important note: the non-additive join property assumes that **no null values are allowed for join attributes**.
+
+How to text if $X \rightarrow Y$ is in $F^+$: $Y$ is in $X^+$ under $F$.
+
+# Test of Decomposition # 1
+
+For
+
+1. R1(<u>Student</u>, <u>Instructor</u>) and R2(<u>Student</u>, <u>Course</u>)
+
+- $(R_1 \cap R_2)$ = Student
+- $(R_1 - R_2)$ = Instructor
+- $(R_2 - R_1)$ = Course
+
+So either
+
+- Student $\rightarrow$ Instructor, or
+- Student $\rightarrow$ Course
+
+must be in $F^+$. But they aren't.
+
+# Visualizing Nonadditive Join
+
+Say some original relation state r(R) is:
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Smith   | Database          | Navathe    |
+| Smith   | Operating Systems | Ammar      |
+| Smith   | Theory            | Schulman   |
+| Wallace | Database          | Mark       |
+| Wallace | Operating Systems | Ahamad     |
+| Wong    | Database          | Omiecinski |
+| Zelaya  | Database          | Navathe    |
+
+# Decomposition 1
+
+Then
+<table>
+<tr>
+<td>
+r(R1) =
+</td>
+<td>
+
+| student | instructor |
+|---------|------------|
+| Narayan | Ammar      |
+| Narayan | Mark       |
+| Smith   | Ammar      |
+| Smith   | Navathe    |
+| Smith   | Schulman   |
+| Wallace | Ahamad     |
+| Wallace | Mark       |
+| Wong    | Omiecinski |
+| Zelaya  | Navathe    |
+
+</td>
+<td> </td>
+
+<td>
+r(R2) =
+</td>
+<td>
+
+| student | course            |
+|---------|-------------------|
+| Narayan | Database          |
+| Narayan | Operating Systems |
+| Smith   | Database          |
+| Smith   | Operating Systems |
+| Smith   | Theory            |
+| Wallace | Database          |
+| Wallace | Operating Systems |
+| Wong    | Database          |
+| Zelaya  | Database          |
+
+</td>
+</tr>
+</table>
+
+We would join on student and end up with ...
+
+# Join with Spurious Tuples
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Ammar      |
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Narayan | Operating Systems | Mark       |
+| Smith   | Database          | Ammar      |
+| Smith   | Database          | Navathe    |
+
+... 13 more tuples, which is way more tuples than the original relation due to spurious tuples, so the join is not non-additive.
+
+The information that has been lost is the association between Instructor and Course. For example, note from the original table that Mark does not teach Operating Systems.
+
+# Test of Decomposition # 2
+
+For
+
+2. R1(<u>Instructor</u>, Course) and R2(<u>Student</u>, <u>Course</u>)
+
+- $(R_1 \cap R_2)$ = Course
+- $(R_1 - R_2)$ = Instructor
+- $(R_2 - R_1)$ = Student
+
+So either
+
+- Course $\rightarrow$ Instructor, or
+- Course $\rightarrow$ Student
+
+must be in $F^+$. But they aren't.
+
+# Test of Decomposition # 3
+
+For
+
+3. R1(<u>Instructor</u>, Course) and R2(<u>Instructor</u>, <u>Student</u>)
+
+- $(R_1 \cap R_2)$ = Instructor
+- $(R_1 - R_2)$ = Course
+- $(R_2 - R_1)$ = Student
+
+So either
+
+- Instructor $\rightarrow$ Course, or
+- Instructor $\rightarrow$ Student
+
+must be in $F^+$. Instructor $\rightarrow$ Course is in $F^+$, so this decomposition is the right one.

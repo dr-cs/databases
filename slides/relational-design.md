@@ -579,10 +579,12 @@ Dependencies can be preserved in all 3NF decompositions, but not in all BCNF dec
 
 # Non-Additive Join Test
 
-A Decomposition $D = \{R_1, R_2\}$ of $R$ has the lossless (nonadditive) joint property with repect to FDs $F$ on $R$ if and only if either
+A Decomposition $D = \{R_1, R_2\}$ of $R$ has the lossless (nonadditive) join property with repect to FDs $F$ on $R$ if and only if either
 
 - The FD $((R_1 \cap R_2) \rightarrow (R_1 - R_2))$ is in $F^+$, or
 - The FD $((R_1 \cap R_2) \rightarrow (R_2 - R_1))$ is in $F^+$
+
+Important note: the non-additive join property assumes that **no null values are allowed for join attributes**.
 
 # Test of Decomposition # 1
 
@@ -714,7 +716,29 @@ So either
 
 must be in $F^+$. Instructor $\rightarrow$ Course is in $F^+$, so this decomposition is the right one.
 
-# BCNF Decomposition Algorithm
+# Bottom-Up Design Approaches
+
+Bottom-up approaches start with one **universl relation** which contains all attributes in the database. 3NF or BCNF relation schemas are *synthesized* from this universal relation schema.
+
+- Algorithm 15.4 sythesizes univeral relation $R$ into 3NF schemas that have the nonadditive join property *and* preserve dependencies.
+- Algorithm 15.5 converts univeral relation $R$ into BCNF schemas that have the nonadditive join property (but not necessarily preserving dependencies) by iterative decomposition.
+
+In this class you only need to know Algorithm 15.5, BCNF decomposition.
+
+# Informal 3NF Synthesis
+
+Informally, Algorithm 15.4 for 3NF synthesis does this:
+
+1. Find a minimal cover set of FDs for $R$.
+2. For each FD in the minimal cover create a relation schema with each attribute in the FD. The left-hand side of the FD is the key.
+3. If none of the schemas above contains a key of $R$, create one more relation schema with attributes that form a key of $R$ (the previously created schemas will contain foreign keys to this relation schema).
+4. Elminate redundant schemas.
+
+Easy to understand conceptually, but many details which we don't require you to know.
+
+# Informal BCNF Decomposition
+
+Before diving into the much simpler BCNF decomposition algorithm, here's an informal decription of the process it follows.
 
 Let
 
@@ -722,9 +746,23 @@ Let
 - $X \subseteq R$, and
 - $X \rightarrow A$ be the FD that violates BCNF.
 
-$R$ may be decomposed into
+Decompose $R$ into
 
 - $R - A$, and
 - $XA$
 
 If either of these relations is not in BCNF, repeat the process.
+
+# BCNF Decomposition Algorithm
+
+**Algorithm 15.5:** Relational Decomposition into BCNF with Nonadditive Join Property
+
+**Input:** A universal relation $R$ and a set of FDs $F$ on $R$
+
+1. **set** $D := \{R\}$
+2. **while** there is a relation schema $Q$ in $D$ that is not in BCNF:
+    - choose a relation schema $Q$ in $D$ that is not in BCNF
+    - find a functional dependency $X \rightarrow Y$ in $Q$ that violates BCNF
+    - replace $Q$ in $D$ by two schemas $(Q - Y)$ jand $(X \cup Y)$
+
+**Output:** $D$, a set of relation schemas in BCNF with the non-additive join property such that $D = \bigcup_1^n D_i$

@@ -35,25 +35,25 @@ Week 2
 2016-05-27; eer-models
 Week 3
 2016-05-30; eer-models
-2016-05-31; Review
-2016-06-01; <b>Exam 1</b>
+2016-05-31; conceptual-design-process
+2016-06-01; Review
 2016-06-02; Field Trip
-2016-06-03; relational-model
+2016-06-03; <b>Exam 1</b>
 Week 4
 2016-06-06; No Class
 2016-06-07; relational-model
-2016-06-08; relational-algebra
+2016-06-08; relational-model
 2016-06-09; relational-algebra
 2016-06-10; Project Work Day; Phase 1 Due
 Week 5
 2016-06-13; No Class
-2016-06-14; relational-calculus
+2016-06-14; relational-algebra
 2016-06-15; relational-calculus
 2016-06-16; Review
 2016-06-17; <b>Exam 2</b>
 Week 6
-2016-06-20; basic-sql
-2016-06-21; basic-sql
+2016-06-20; er-relational-mapping
+2016-06-21; basic-relational-design
 2016-06-22; basic-sql
 2016-06-23; basic-sql
 2016-06-24; No Class
@@ -62,15 +62,15 @@ Week 7
 2016-06-28; advanced-sql
 2016-06-29; advanced-sql
 2016-06-30; advanced-sql
-2016-07-01; er-relational-mapping
+2016-07-01; advanced-sql
 Week 8
 2016-07-04; No Class
-2016-07-05; er-relational-mapping
+2016-07-05; advanced-sql
 2016-07-06; Review
 2016-07-07; <b>Exam 3</b>
 2016-07-08; Project Work Day; Phase 2 Due
 Week 9
-2016-07-11; basic-relational-design
+2016-07-11;
 2016-07-12; basic-relational-design
 2016-07-13; advanced-relational-design
 2016-07-14; Bastille Day - No class

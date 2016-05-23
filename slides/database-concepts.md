@@ -23,17 +23,17 @@
 
 # Categories of Data Models
 
-- High level conceptual models
+- High level conceptual, e.g., (E)ER
 
-    - The end users' conception of their data
-    - A tool for understanding user data in enough detail to derive an implementaion model from it (think ER models)
+    - The end users' conception of their data, understood by end users and database developers
+    - A tool for understanding user data in enough detail to derive an implementaion model from it
 
-- Representational (implementation) models
+- Representational (implementation), e.g., Relational
 
-    - Understandable by end users
-    - Rigorous, mechanically translatable to physical model (think SQL)
+    - Understood by database developers
+    - Rigorous, mechanically translatable to physical model
 
-- Low-level physical models
+- Low-level physical
 
     - How data are stored on disk (the code inside a DBMS)
 
@@ -80,15 +80,21 @@ Three layers of abstraction:
 
 - Conceptual level: conceptual schema
 
-    - Conceptual schema corresponds to represeantational (implementation) model, not conceptual model
+    - Conceptual schema corresponds to representational (implementation) model, not conceptual model
 
 - Internal level: internal schema -- physical storage structures
 
 Transformations of data between levels is called *mapping*; may be computationally expensive
 
+Note: be careful not to confuse categories of data models with levels of abstraction in the three-schema architecture.
+
+# Three Schema Diagram
+
+<img src="three-schema.png" />
+
 # Data Independence
 
-- Goal of Three-Schema Architecure is separate user applications from physical database. We call this *data independence*: isolation of changes at one level from levels above
+- Goal of Three-Schema Architecure is to separate user applications from physical database. We call this *data independence*: isolation of changes at one level from levels above
 
     - Logical data independence: changes to the conceptual schema don't requre changes to external schemas
 
@@ -113,6 +119,20 @@ Modern DBMS systems don't have distinct languages.
 - Centralized
 - Client/Server
 - Three-tier and n-tier
+
+# Centralized Database Architecture
+
+<img src="centralized-architecture.png" />
+
+# Client/Server Database Architecture
+
+Also known as "two-tier."
+
+<img src="two-tier-architecture.png" />
+
+# Three-tier and n-tier Database Architecture
+
+<img src="three-tier-architecture.png" />
 
 # DBMS Classification Criteria
 

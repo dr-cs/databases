@@ -25,6 +25,11 @@
         "readings": ["FoDS 4"],
         "resources": [""]
     },
+    "conceptual-design-process": {
+        "topic": "<a href=\"slides/conceptual-design-process.pdf\">Conceptual Design Process</a>",
+        "readings": [""],
+        "resources": [""]
+    },
     "relational-model": {
         "topic": "<a href=\"slides/relational-model.html\">Relational Model</a>",
         "readings": ["FoDS 5"],

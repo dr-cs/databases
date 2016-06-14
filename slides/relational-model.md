@@ -1,6 +1,5 @@
 % Relational Data Model
 % CS 4400
-% Note: these slides are incomplete!
 
 # Relational Data Model
 
@@ -36,6 +35,12 @@ A *relation*, or *relation state*, $r(R)$ is a **set** of tuples that conform to
 
 A *database* is a set of relations.
 
+# An Example Relation
+
+<center>
+<img src="student-relation.png" />
+</center>
+
 # Tuples
 
 A *tuple* is an **ordered list** of values that is part of a relation
@@ -50,7 +55,7 @@ Each value in the tuple is that tuple's value for the corresponding attribute of
     - $t_1.first\_name =$ `'John'` (object notation)
     - $t_1[2] =$ `'John'` (positional notation)
 
-The *degree* or *arity* of a relation is the number of attributes of its relation schema.
+The *degree* or *arity* of a relation schema is the number of attributes it has.
 
 - Example: $AUTHOR$ has degree 3.
 
@@ -80,17 +85,30 @@ $|dom(A_1)| \times |dom(A_2)| \times ... \times |dom(A_n)|$
 
 # Properties of Relations
 
-- Atomicity of values
+- Atomicity of values, i.e., the First Normal Form assumption
+
+    - Attribute values in tuples are indivisible, e.g., no compound or multivalued attributes as in EER models
 
 - Nulls
 
+    - Unknown, not applicable, not existing
+
 - Closed world assumption
+
+    - Facts not asserted explicitly are assumed to be false
 
 # Constraints
 
 - Inherent model-based (or *implicit*) constraints
+
+    - domain constraints, atomic attribute values
+
 - Schema-based (or *explicit*) contstraints
+
+    - keys, referential integrity
+
 - Application-based (or semantic constraints), a.k.a., business rules
+
 
 # Superkeys
 
@@ -118,16 +136,85 @@ We underline the primary key in a relation schema.
 
 - Example: $AUTHOR(\underline{author\_id}, first\_name, last\_name)$
 
-# Databases and Integrity Constraints
+# Database Integrity Constraints
 
-# Entity Integrity Constraints
+- Domain constraints - Attribute values in tuples must be in domain for that attribute
+
+- Key constraints - No two tuples can have the same values for the primary key
+
+- Entity Integrity Constraints - No tuple can have a NULL value for its primary key attribute
+
+- Referential Integrity Constraints - Tuples in one relation referencing tuples in another relation
+
+- Semantic Integrity Constraints - Constraints on values of attributes that cannot be specified in the databases DDL
 
 # Referential Integrity Constraints
 
+A foreign key value from a tuple in one relation must refer to nothing, or to the primary key for an existing tuple in another relation. Formally:
+
+Given relation schemas $R_1$ and $R_2$, a set of attributes $FK$ in $R_1$ is a foreign key referencing $R_2$ if
+
+- the attributes in $FK$ in $R_1$ have same domains as $PK$ in $R_2$
+- Given some $t_1$ in $r_1(R_1)$ and $t_2$ in $r_2(R_2)$, either $t_1[FK]$ = $t_2[PK]$ or $t_1[FK]$ is NULL.
+
+$R_1$ is the referencing relation, $R_2$ is the referenced relation.
+
+# Diagramming FK Relationships
+
+<center>
+<img src="company-foreign-keys.png" height="600px"/>
+</center>
+
 # Semantic Integrity Constraints
+
+- Can't be specified in DDL
+- Can be checked with triggers and assertions
+- Usually checked in application code
+
+Example: salary of an employee cannot exceed the salary of the employee's supervisor.
 
 # Constraint Violations on Insert
 
+- Domain constraints
+
+    - Insert a tuple with an attribute value not in attribute's domain
+
+- Key constraints
+
+    - Insert a tuple with a key that's already in the relation state
+
+- Entity integrity constraints
+
+    - Insert a tuple with a NULL value for any part of the primary key
+
+- Referential integrity constraints
+
+    - Insert a tuple in a refferring relation whose FK does not appear as a PK value in any tuple of the referenced relation
+
 # Constraint Violations on Update
 
+- Domain constraints
+
+    - Update a tuple with an attribute value not in attribute's domain
+
+- Key constraints
+
+    - Update a tuple with a key value that already appears in another tuple in the relation
+
+- Entity integrity constraints
+
+    - Update a tuple with a NULL value for any part of the primary key
+
+- Referential integrity constraints
+
+    - Update a tuple in a refferring relation with a FK does not appear as a PK value in any tuple of the referenced relation
+
 # Constraint Violations on Delete
+
+- Referential integrity
+
+# Employee - Department Example
+
+<center>
+<img src="employee-department.png" />
+</center>

@@ -16,3 +16,11 @@ To generate all the slides:
 ```sh
 $ for file in `ls *.md`; do pandoc -s --mathjax -t revealjs -V theme=gt -V slideNumber=true -V progress=true -o $(basename $file .md).html $file; done
 ```
+
+# ER Diagrams
+
+To the extent possible, I store data in plain text files. It's possible to create ER diagrams using Graphviz.
+
+```sh
+dot -Tsvg -o humane-society.svg humane-society.dot
+```

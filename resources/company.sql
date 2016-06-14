@@ -1,3 +1,8 @@
+drop database if exists company;
+create database company;
+use company;
+
+drop table if exists employee;
 create table employee (
   Fname varchar(15) not null,
   Minit char,
@@ -12,6 +17,7 @@ create table employee (
   primary key (Ssn)
 );
 
+drop table if exists department;
 create table department (
   Dname varchar(15) not null,
   Dnumber int not null,
@@ -22,6 +28,7 @@ create table department (
   foreign key (Mgr_ssn) references employee (Ssn)
 );
 
+drop table if exists dept_locations;
 create table dept_locations (
   Dnumber int not null,
   Dlocation varchar(15) not null,
@@ -29,6 +36,7 @@ create table dept_locations (
   foreign key (Dnumber) references department (Dnumber)
 );
 
+drop table if exists project;
 create table project (
   Pname varchar(15) not null,
   Pnumber int not null,
@@ -42,12 +50,13 @@ create table project (
 create table works_on (
   Essn char(9) not null,
   Pno int not null,
-  Hours decimal(3,1) not null,
+  Hours decimal(3,1),
   primary key (Essn, Pno),
   foreign key (Essn) references employee (Ssn),
   foreign key (Pno) references project (Pnumber)
 );
 
+drop table if exists dependent;
 create table dependent (
   Essn char(9) not null,
   Dependent_name varchar(15) not null,
@@ -77,6 +86,13 @@ insert into DEPT_LOCATIONS values (5, 'Bellaire');
 insert into DEPT_LOCATIONS values (5, 'Sugarland');
 insert into DEPT_LOCATIONS values (5, 'Houston');
 
+insert into PROJECT values ('ProductX', 1, 'Bellaire', 5);
+insert into PROJECT values ('ProductY', 2, 'Sugarland', 5);
+insert into PROJECT values ('ProductZ', 3, 'Houston', 5);
+insert into PROJECT values ('Computerization', 10, 'Stafford', 4);
+insert into PROJECT values ('Reorganization', 20, 'Houston', 1);
+insert into PROJECT values ('Newbenefits', 30, 'Stafford', 4);
+
 insert into WORKS_ON values (123456789, 1, 32.5);
 insert into WORKS_ON values (123456789, 2, 7.5);
 insert into WORKS_ON values (666884444, 3, 40.0);
@@ -93,13 +109,6 @@ insert into WORKS_ON values (987987987, 30, 5.0);
 insert into WORKS_ON values (987654321, 30, 20.0);
 insert into WORKS_ON values (987654321, 20, 15.0);
 insert into WORKS_ON values (888665555, 20, NULL);
-
-insert into PROJECT values ('ProductX', 1, 'Bellaire', 5);
-insert into PROJECT values ('ProductY', 2, 'Sugarland', 5);
-insert into PROJECT values ('ProductZ', 3, 'Houston', 5);
-insert into PROJECT values ('Computerization', 10, 'Stafford', 4);
-insert into PROJECT values ('Reorganization', 20, 'Houston', 1);
-insert into PROJECT values ('Newbenefits', 30, 'Stafford', 4);
 
 insert into DEPENDENT values (333445555, 'Alice', 'F', '1986-04-05', 'Daughter');
 insert into DEPENDENT values (333445555, 'Theodore', 'M', '1983-10-25', 'Son');

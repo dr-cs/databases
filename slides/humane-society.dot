@@ -31,15 +31,17 @@ graph humane_society {
 
   WORKER -- sub_worker [color="black:invis:black"];
   sub_worker -- VOLUNTEER [headlabel=<&#x222a;>, labeldistance=5, labelangle=0];
-  sub_worker -- EMPLOYEE [headlabel=<&#x222a;>, labeldistance=4, labelangle=0];
+  sub_worker -- EMPLOYEE [headlabel=<&#x222a;>, labeldistance=3, labelangle=0];
   EMPLOYEE -- MANAGER [headlabel=<&#x222a;>, labeldistance=2, labelangle=0];
 
   rankdir=LR
   node [shape=diamond]; WORKS_FOR;
+  node [shape=ellipse, peripheries=2]; days;
+  WORKS_FOR -- days;
   WORKS_FOR -- SHELTER [label="1", color="black:invis:black"];
   WORKER -- WORKS_FOR [label="N", color="black:invis:black"];
 
-  node [shape=diamond]; MANAGES;
+  node [shape=diamond, peripheries=1]; MANAGES;
   MANAGER -- MANAGES [label = "1", color="black:invis:black"];
   MANAGES -- SHELTER [label="1", color="black:invis:black"];
 
@@ -47,7 +49,7 @@ graph humane_society {
 
   rankdir=TB
   node [shape=box, peripheries=2]; PET;
-  node [shape=ellipse, peripheries=1]; PID [label=<<font style="text-decoration-line: underline; text-decoration-style: dashed">PID</font>>]; PetName [label="Name"]; Species; BirthDate;
+  node [shape=ellipse, peripheries=1]; PID [label=<<u>PID</u>>]; PetName [label="Name"]; Species; BirthDate;
   node [shape=ellipse, peripheries=1, style=dotted] Age;
 
   PET -- PID;

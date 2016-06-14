@@ -16,13 +16,13 @@
         "resources": [""]
     },
     "er-models": {
-        "topic": "<a href=\"slides/er-models.html\">ER Models</a>",
-        "readings": ["FoDS 3"],
+        "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-ae1a-73e5-5c31-9a91-d47ce30ac976/book-slides/simpkins/Chapter03_7ed_simpkins.pdf\">ER Models</a>",
+        "readings": ["FoDS 3.1-3.7.3"],
         "resources": [""]
     },
     "eer-models": {
-        "topic": "<a href=\"slides/eer-models.html\">EER Models</a>",
-        "readings": ["FoDS 4"],
+        "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-ae1a-73e5-5c31-9a91-d47ce30ac976/book-slides/Chapter04_7ed_revised.pdf\">EER Models</a>",
+        "readings": ["FoDS 4.1-4.3"],
         "resources": [""]
     },
     "conceptual-design-process": {
@@ -75,8 +75,8 @@
         "readings": ["FoDS 16.1-16.7"],
         "resources": [""]
     },
-    "indexing-structures": {
-        "topic": "<a href=\"slides/indexing-structures.html\">Indexing Structures</a>",
+    "index-structures": {
+        "topic": "<a href=\"slides/index-structures.html\">Indexing Structures</a>",
         "readings": ["FoDS 17"],
         "resources": [""]
     }

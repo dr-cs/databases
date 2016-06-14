@@ -80,8 +80,6 @@ The project operation returns all the tuples in $R$ but with only the attributes
 
 # `PROJECT` Example
 
-Given the following data for `pet`:
-
 ```
 +------------+----+--------+-----------+
 | shelter_id | id | name   | breed     |
@@ -94,9 +92,7 @@ Given the following data for `pet`:
 |          2 |  3 | Heidi  | Dachshund |
 +------------+----+--------+-----------+
 ```
-
-$\pi_{name, breed}(pet)$ returns:
-
+$\pi_{name, breed}(pet)$ =
 ```
 +--------+-----------+
 | name   | breed     |
@@ -108,7 +104,9 @@ $\pi_{name, breed}(pet)$ returns:
 | Sophie | Lab       |
 +--------+-----------+
 ```
-
+</td>
+</tr>
+</table>
 Notice that the duplicate tuple `<Heidi, Dachshund>` was removed. Results of relational algebra operations are sets.
 
 # Properties of `PROJECT`

@@ -26,7 +26,7 @@ High-level but concrete view of data understandable by end users and database de
 ER modeling is the box labeled "Conceptual Design."
 
 <!---------------------------------- Slide ---------------------------------->
-# Human Society Data Specification
+# Humane Society Data Specification
 
 Here's an initial data specification provided by the humane society staff:
 
@@ -105,13 +105,15 @@ Now a shelter instance would look like:
 
 A shelter instance would look like:
 
-`<1001, Address("981 Howell Mill Rd NW", "Atlanta", "GA", "30318"),`
+`< 1001, Address("981 Howell Mill Rd NW", "Atlanta", "GA", "30318"),`
 `{M, W, F}, {"404-875-5331", "404-875-5332"} >`
 
 <!---------------------------------- Slide ---------------------------------->
-# Worker, v1
+# Worker Entity Type
 
+Given the following specification, create an ER model for `Worker`.
 
+-
 
 <!---------------------------------- Slide ---------------------------------->
 # Pet, v1

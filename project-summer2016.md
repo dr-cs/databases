@@ -7,6 +7,8 @@ title: CS 4400 - Summer 2016 Project
 
 You will create a database for an application that allows users to explore the attractions in a given city and create a trip plan that lists all the attractions they will see during a trip to that city. The general description below describes the data your database will need to maintain and the constraints your database must enforce, in some cases with application code.
 
+Phase 1 example EER: [trip-planner.svg](trip-planner.svg)
+
 ## General Description
 
 A user account is required to access the trip planning system, so the database must maintain user account information such as a user's name and email address. Some users will have administrative rights to the system in order to add attractions, update attraction information, and get reports of an attraction's rosters and schedules. An admin user will also have the ability to add and delete user accounts and place user accounts on hold if abuse is detected (see section on reviews below).

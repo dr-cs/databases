@@ -16,8 +16,9 @@ drop table if exists student;
 create table student (
     student_id integer primary key,
     name text,
-    gpa float,
-    dorm_id integer references dorm(dorm_id)
+    gpa float(3,2),
+    dorm_id integer,
+    foreign key (dorm_id) references dorm(dorm_id)
 );
 insert into student values (1, 'Alice', 3.6, 1);
 insert into student values (2, 'Bob', 2.7, 1);
@@ -28,4 +29,4 @@ insert into student values (6, 'Fong', 2.3, 2);
 insert into student values (7, 'Gerd', 4.0, 3);
 insert into student values (8, 'Hal', 2.2, 3);
 insert into student values (9, 'Isaac', 2.0, 3);
-insert into student values (10, 'Jacque', 5.0, 3);
+insert into student values (10, 'Jacque', 4.0, 3);

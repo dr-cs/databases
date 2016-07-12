@@ -1,0 +1,215 @@
+\documentclass[10pt]{article}
+
+\usepackage{verbatim, multicol, tabularx, graphicx, float, xcolor, colortbl}
+\usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=1mm,
+  belowskip=0mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numbers=none,
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true
+}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = -0.25 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.0in
+\parindent = 0.0in
+
+\def\ojoin{\setbox0=\hbox{$\bowtie$}%
+  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+\def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+\def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+\def\fullouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
+
+\title{Relational Algebra Masterclass}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+{\large {\bf Given:}}\\
+
+Student(\underline{SID}, Sname, GPA)\\
+
+Department(\underline{DName}, Chair, Building, Room)\\
+
+Course(\underline{DName}, \underline{CID}, CName, Hours)\\
+
+Enrolled(\underline{DName}, \underline{CID}, \underline{SID})\\
+
+where
+\begin{itemize}
+\item DName in Course is a foreign key referencing Department,
+\item DName,CID in Enrolled is a foreign key referencing Course,
+\item SID in Enrolled is a foreign key referencing Student, and
+\item primary keys are underlined.
+\end{itemize}
+
+and the relation states\\
+
+\begin{multicols}{2}
+
+Student\\
+\begin{tabular}{|l|l|l|}\hline
+\rowcolor{lightgray}  SID & Sname & GPA \\\hline
+11 & Bush & 3.0 \\\hline
+12 & Cruz & 3.2 \\\hline
+13 & Clinton & 3.9 \\\hline
+22 & Sanders& 3.0 \\\hline
+33 & Trump & 3.8 \\\hline
+\end{tabular}
+
+\columnbreak
+
+Enrolled\\
+\begin{tabular}{|l|l|l|}\hline
+\rowcolor{lightgray} DName & CID & SID \\\hline
+CS & 101 & 11 \\\hline
+Math & 101 & 11 \\\hline
+CS & 101 & 12 \\\hline
+CS & 101 & 22 \\\hline
+Math & 103 & 33 \\\hline
+EE & 102 & 33 \\\hline
+CS & 102 & 22 \\\hline
+\end{tabular}
+
+\end{multicols}
+
+\vspace{.2in}
+
+\begin{multicols}{2}
+Department\\
+\begin{tabular}{|l|l|l|l|}\hline
+\rowcolor{lightgray} DName & Chair & Building & Room \\\hline
+CS & Rubio & Ajax & 100 \\\hline
+Math & Carson & Acme & 300 \\\hline
+EE & Kasich & Ajax & 200 \\\hline
+Music & Costello & North & 100  \\\hline
+\end{tabular}
+
+\columnbreak
+
+Course\\
+\begin{tabular}{|l|l|l|l|}\hline
+\rowcolor{lightgray} DName & CID & CName & Hours \\\hline
+CS & 101 & Programming & 4 \\\hline
+CS & 102 & Algorithms & 3 \\\hline
+Math & 101 & Algebra & 3 \\\hline
+Math & 103 & Calculus & 4 \\\hline
+Music & 104 & Jazz & 3 \\\hline
+EE & 102 & Circuits & 3 \\\hline
+\end{tabular}
+
+\end{multicols}
+
+\newpage
+
+{\bf Show how the following relational algebra expression gives the names of all students enrolled in two or more courses.}
+\[
+\pi_{SName}(\pi_{SID} (\sigma_{DName \ne D \text{ OR } CID \ne C} (\rho_{(D, C, SID)}(Enrolled) * Enrolled)) * Student)
+\]
+
+\begin{quote}
+  Work from the inside out and play close attention to parentheses and operator-operand binding.
+\end{quote}
+
+Apply $\rho_{(D, C, SID)}(Enrolled)$, which creates a relation like $Enrolled$ but with $Dname$ and $CID$ renamed:\\
+
+\begin{tabular}{|l|l|l|}\hline
+\rowcolor{lightgray} D & C & SID \\\hline
+CS & 101 & 11 \\\hline
+Math & 101 & 11 \\\hline
+CS & 101 & 12 \\\hline
+CS & 101 & 22 \\\hline
+Math & 103 & 33 \\\hline
+EE & 102 & 33 \\\hline
+CS & 102 & 22 \\\hline
+\end{tabular}\\
+
+Then apply $\rho_{(D, C, SID)}(Enrolled) * Enrolled$, which natural joins the relation created above with $Enrolled$:\\
+
+\begin{tabular}{|l|l|l|l|l|}\hline
+\rowcolor{lightgray} D & C & SID & DName & CID \\\hline
+CS & 101 & 11 & CS & 101 \\\hline
+CS & 101 & 11 & Math & 101 \\\hline
+Math & 101 & 11 & CS & 101 \\\hline
+Math & 101 & 11 & Math & 101\\\hline
+CS & 101 & 12 & CS & 101 \\\hline
+CS & 101 & 22 & CS & 101 \\\hline
+CS & 101 & 22 & CS & 102 \\\hline
+Math & 103 & 33 & Math & 103\\\hline
+Math & 103 & 33 & EE & 102 \\\hline
+EE & 102 & 33 & Math & 103 \\\hline
+EE & 102 & 33 & EE & 102 \\\hline
+CS & 102 & 22 & CS & 101 \\\hline
+CS & 102 & 22 & CS & 102 \\\hline
+\end{tabular}\\
+
+Then apply $\sigma_{DName \ne D \text{ OR } CID \ne C} (\rho_{(D, C, SID)}(Enrolled) * Enrolled)$, which selects from the previous result only the rows for which $Dname \ne D$ or $CID \ne C$:
+
+\begin{quote}
+Tip: You can view selection as choosing tuples for inclusion, or choosing tuples for elimination by negating the $\theta$ condition. By DeMorgan's Law $\lnot\theta$ is $Dname = D \land CID = C$.
+\end{quote}
+
+\begin{tabular}{|l|l|l|l|l|}\hline
+\rowcolor{lightgray} D & C & SID & DName & CID \\\hline
+CS & 101 & 11 & Math & 101 \\\hline
+Math & 101 & 11 & CS & 101 \\\hline
+CS & 101 & 22 & CS & 102 \\\hline
+Math & 103 & 33 & EE & 102 \\\hline
+EE & 102 & 33 & Math & 103 \\\hline
+CS & 102 & 22 & CS & 101 \\\hline
+\end{tabular}\\
+
+From that result we project the SID attribute by applying $\pi_{SID} (...)$, which gives us:\\
+
+\begin{tabular}{|l|}\hline
+\rowcolor{lightgray} SID  \\\hline
+11 \\\hline
+22 \\\hline
+33 \\\hline
+\end{tabular}\\
+
+From there you can easily see that we have the $SID$s of all the students enrolled in two or more courses, which we natrual join with $Student$ so we can project the $SName$s for the final result.
+
+%% \section{The lowest GPA of any student}
+
+%% \[
+%% \pi_{GPA}(Student) - \pi_{GPA}(\sigma_{GPA>G}(Student \times \rho_{(G)}(\pi_{GPA}(Student))))
+%% \]
+
+
+%% \section{Students who don't have he lowest GPA}
+
+%% \[
+%% \pi_{SName}(\sigma_{GPA>G}(\rho_{(G)}(\pi_{GPA}(Student)) \times Student))
+%% \]
+
+%% \begin{tabular}{|l|}\hline
+%%   Cruz \\\hline
+%%   Clinton \\\hline
+%%   Trump \\\hline
+%% \end{tabular}
+
+
+%% \section{The SName of each student that has a GPA $>$ 3.0 and is enrolled in at least 1 course in the CS department}
+
+%% \begin{itemize}
+%% \item $\pi_{SName}(\sigma_{GPA > 3.0}(Student) * \sigma_{DName = 'CS'}(Enrolled))$
+%% \item $\pi_{SName}(\sigma_{GPA > 3.0 \text{ AND } DName = 'CS'}(Student * Enrolled))$
+%% \item $\pi_{SName}(\pi_{SName,SID}(\sigma_{GPA > 3.0}(Student)) * \pi_{SID}(\sigma_{DName = 'CS'}(Enrolled)))$
+%% \end{itemize}
+
+\end{document}

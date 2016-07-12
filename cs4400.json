@@ -55,6 +55,21 @@
         "readings": ["FoDS 7"],
         "resources": [""]
     },
+    "sql-ddl-crud": {
+        "topic": "<a href=\"slides/sql-ddl-crud.html\">SQL DDL and CRUD</a>",
+        "readings": ["FoDS 6"],
+        "resources": [""]
+    },
+    "sql-queries": {
+        "topic": "<a href=\"slides/sql-queries.html\">SQL Queries</a>",
+        "readings": ["FoDS 6"],
+        "resources": [""]
+    },
+    "sql-advanced": {
+        "topic": "<a href=\"slides/sql-advanced.html\">Advanced SQL</a>",
+        "readings": ["FoDS 6"],
+        "resources": [""]
+    },
     "er-relational-mapping": {
         "topic": "<a href=\"slides/er-relational-mapping.html\">ER - Relational Mapping</a>",
         "readings": ["FoDS 9"],
@@ -62,6 +77,11 @@
     },
     "basic-relational-design": {
         "topic": "<a href=\"slides/basic-relational-design.html\">Basic Relational Design</a>",
+        "readings": ["FoDS 14.1-14.3"],
+        "resources": [""]
+    },
+    "relational-design": {
+        "topic": "<a href=\"slides/relational-design.html\">Relational Design</a>",
         "readings": ["FoDS 14.1-14.5"],
         "resources": [""]
     },

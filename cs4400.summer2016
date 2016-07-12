@@ -36,60 +36,60 @@ Week 2
 Week 3
 2016-05-30; <a href="slides/eer-exercise.html">EER Exercise</a>
 2016-05-31; conceptual-design-process
-2016-06-01; Review; <a href="office-hours.html">Extended office hours</a>
+2016-06-01; Review
 2016-06-02; Field Trip
 2016-06-03; <b>Exam 1</b>
 Week 4
 2016-06-06; <b>No Class</b>
-2016-06-07; relational-model; <a href="office-hours.html">Extended office hours</a>
-2016-06-08; relational-model; <a href="office-hours.html">Extended office hours</a>
+2016-06-07; relational-model
+2016-06-08; relational-model
 2016-06-09; Project Work Day; <b>Phase 1 Due</b>
 2016-06-10; relational-algebra
 Week 5
 2016-06-13; <b>No Class</b>
 2016-06-14; relational-algebra
-2016-06-15; relational-algebra; <a href="office-hours.html">Extended office hours</a>
-2016-06-16; Review; <a href="office-hours.html">Extended office hours</a>
+2016-06-15; relational-algebra
+2016-06-16; Review
 2016-06-17; <b>Exam 2</b>
 Week 6
 2016-06-20; er-relational-mapping
 2016-06-21; basic-relational-design
-2016-06-22; basic-sql
-2016-06-23; basic-sql
+2016-06-22; sql-ddl-crud
+2016-06-23; sql-ddl-crud
 2016-06-24; <b>No Class</b>
 Week 7
 2016-06-27; <b>No Class</b>
-2016-06-28; advanced-sql; <a href="office-hours.html">Extended office hours</a>
-2016-06-29; advanced-sql; <a href="office-hours.html">Extended office hours</a>
-2016-06-30; Project Work Day; <b>Phase 2 Due</b>
-2016-07-01; advanced-sql; Withdrawal deadline: 2 July
+2016-06-28; sql-queries
+2016-06-29; sql-queries
+2016-06-30; sql-advanced
+2016-07-01; sql-advanced; Withdrawal deadline: 2 July
 Week 8
 2016-07-04; <b>No Class</b>
-2016-07-05; advanced-sql
-2016-07-06; Review; <a href="office-hours.html">Extended office hours</a>
-2016-07-07; <b>Exam 3</b>
-2016-07-08; DB Application Development
+2016-07-05; In-class exercise: <a href="exercises/sakila-queries.sql">sakila-queries.sql</a>
+2016-07-06; In-class exercise: <a href="exercises/sakila-queries.sql">sakila-queries.sql</a>
+2016-07-07; In-class exercise: <a href="exercises/sakila-queries.sql">sakila-queries.sql</a>
+2016-07-08; In-class exercise answers: <a href="exercises/sakila-queries-answers.sql">sakila-queries-answers.sql</a>
 Week 9
-2016-07-11; basic-relational-design
-2016-07-12; advanced-relational-design
+2016-07-11; Database web app development: <a href="https://github.com/csimpkins/sakila-demo">https://github.com/csimpkins/sakila-demo</a>
+2016-07-12; relational-design; <b>Phase 2 Due</b>
 2016-07-13; advanced-relational-design
-2016-07-14; Bastille Day - No class
+2016-07-14; <b>Bastille Day - No class</b>
 2016-07-15; <b>No Class</b>
 Week 10
-2016-07-18; storage-structures
-2016-07-19; index-structures
-2016-07-20; Review
-2016-07-21; <b>Exam 4</b>
+2016-07-18; advanced-relational-design
+2016-07-19; Review
+2016-07-20; <b>Exam 3</b>
+2016-07-21; <b>Exam 3 SQL Queries</b>
 2016-07-22; <b>No Class</b>
 Week 11
-2016-07-25; Project Work Day; <a href="office-hours.html">Extended office hours</a>
-2016-07-26; Project Work Day; <a href="office-hours.html">Extended office hours</a>
+2016-07-25; storage-structures; Project work day for students not taking final
+2016-07-26; index-structures; Project work day for students not taking final
 2016-07-27; Project Demos
 2016-07-28; Project Demos
 2016-07-29; Project Demos; Phase 3 Due
 Finals Week
 2016-08-01;
-2016-08-02;
+2016-08-02; Final Exam, 12:00-15:00
 2016-08-03;
 2016-08-04;
 2016-08-05; Departure

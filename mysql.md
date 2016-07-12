@@ -26,11 +26,23 @@ If you run Linux, you already know how to install MySQL. :-)
 
 1. Download and run the Windows installer from [dev.mysql.com](https://dev.mysql.com/downloads/installer/)
 
+    - Be sure to select the "Developer" option, which installs the MySQL server and various client programs.
+
+2. To be able to run the `mysql` command line client you'll need to add the MySQL installation binaries directory to your `PATH`. Try executing these commands at the Windows command prompt (`C:\>` is the command prompt, which will probably include your current working directory -- don't type it. Substitute your MySQL version if it's newer than 5.7.):
+
+    ```sh
+    C:\> PATH=%PATH%;C:\Program Files\MySQL\MySQL Server 5.7\bin
+    C:\> export PATH
+    ```
+
+
+
+
 ## Running MySQL
 
 MySQL is a client-server database system. To "run MySQL" you need both a server and a client.
 
-1. Run the MySQL server:
+1. Run the MySQL server (will already be running on a standard Windows or Linux installation):
 
     ```bash
     $ mysql.server start
@@ -44,11 +56,13 @@ MySQL is a client-server database system. To "run MySQL" you need both a server 
 
 - `<host_name>` is the name of the computer. Leave blank to connect to the MySQL server runnign on your computer (also known as `localhost`).
 - `<user_name>` is the name of a MySQL user. Leave blank to use the user name of the shell account under which you run 'mysql`.
-- `-p` tells `mysql` to prompt for `<user_name>`'s password before connecting.
+- `-p` tells `mysql` to prompt for `<user_name>`'s password before connecting. If the user specified in `-u` has an empty password, you can leave off `-p`.
 - `<database_name>` is the name of a database to use upon starting the `mysql` client.
 
 
 ## Initial MySQL Setup
+
+Note: this step is optional. For most students you can skip user creation and root user password creation and simply use the root user with no password, which is fine as long as your operating system doesn't allow connections on port 3306, the port on which the MySQL server listens.
 
 ### Setting a root password
 
@@ -89,3 +103,36 @@ After setting a root password it's a good idea to set up MySQL user accounts for
     mysql> grant all on humanedb.* to 'cs4400'@'localhost';
     Query OK, 0 rows affected (0.00 sec)
     ```
+
+## Running The MySQL Interactive Command Line Client
+
+All SQL commands and queries must be terminated with a semicolon. Some MySQL don't need to be terminated with a semicolon but function with a semicolon as well, so get in the habit of using semicolons.
+
+### `show databases`
+
+The MySQL server can store many databases. To list the databases available in your MySQL server, use `show databases`.
+
+```sql
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| company            |
+| dorms              |
+| mysql              |
+| performance_schema |
+| pubs               |
+| sakila             |
+| sys                |
+| teach              |
++--------------------+
+9 rows in set (0.00 sec)
+```
+
+### `use <database>`
+
+To issue SQL commands and queries you'll need to `use` a database, and you can only use one database at a time.
+
+
+### `show tables`

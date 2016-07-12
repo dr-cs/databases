@@ -298,7 +298,7 @@ $<join condition>$ is of the form $A_i \theta B_j$
 
 - $A_i$ is an attribute of $R$, $B_j$ is an attribute of $S$
 - $dom(A_i) = dom(B_j)$
-- $\theta$ is one of $\{ =, \ne, \lt, \le, \gt, \ge \}$
+- $\theta$ is one of `{` $ =, \ne, <>, \lt, \le, \gt, \ge $ `}`
 
 A $<join condition>$ can be a conjunction of simple conditions, e.g.:
 
@@ -410,7 +410,7 @@ Outer join results inlude tuples that matched, and tuples that didn't match the 
 # Left Outer Join
 
 <center>
-$R \unicode{x27d5}_{<join condition>} S$
+$R ⟕_{<join condition>} S$
 </center>
 
 Where
@@ -418,7 +418,7 @@ Where
 - $R$ and $S$ are relations
 - $<join condition>$ is a boolean condition on values of tuples from $R$ and $S$
 
-$R \unicode{x275d5}_{<join condition>} S$ returns the tuples in $R \times S$ that satisfy the $<join condition>$ as well as the tuples from $R$ that don't match the join condition. In the result relation the unmatched tuples from $R$ are null-padded to give them the correct degree in the result.
+$R ⟕_{<join condition>} S$ returns the tuples in $R \times S$ that satisfy the $<join condition>$ as well as the tuples from $R$ that don't match the join condition. In the result relation the unmatched tuples from $R$ are null-padded to give them the correct degree in the result.
 
 # Left Outer Join Example
 
@@ -468,7 +468,7 @@ Return all the authors. For all the authors who are editors, show their books.
 
 Show all the authors. For all the authors who are editors, show their books.
 
-$R \unicode{x27d5}_{author_id = editor} S$
+$R ⟕_{author_id = editor} S$
 
 ```
 +-----------+------------+-----------+---------+------------+----------+------+--------+
@@ -493,7 +493,7 @@ Notice how attribute values are padded to the right in a left outer join.
 # Right Outer Join
 
 <center>
-$R \unicode{x27d6}_{<join condition>} S$
+$R ⟖_{<join condition>} S$
 </center>
 
 Where
@@ -501,13 +501,13 @@ Where
 - $R$ and $S$ are relations
 - $<join condition>$ is a boolean condition on values of tuples from $R$ and $S$
 
-$R \unicode{x275d5}_{<join condition>} S$ returns the tuples in $R \times S$ that satisfy the $<join condition>$ as well as the tuples from $S$ that don't match the join condition. In the result relation the unmatched tuples from $S$ are null-padded to give them the correct degree in the result.
+$R ⟖_{<join condition>} S$ returns the tuples in $R \times S$ that satisfy the $<join condition>$ as well as the tuples from $S$ that don't match the join condition. In the result relation the unmatched tuples from $S$ are null-padded to give them the correct degree in the result.
 
 # Right Outer Join Example
 
 Show all the books. For books with editors, show their editors.
 
-$R \unicode{x27d6}_{author_id = editor} S$
+$R ⟖_{author_id = editor} S$
 
 ```
 +-----------+------------+-----------+---------+------------+----------+------+--------+
@@ -529,7 +529,7 @@ Notice how attribute values are padded to the left in a right outer join.
 # Full Outer Join
 
 <center>
-$R \unicode{x27d7}_{<join condition>} S$
+$R ⟗_{<join condition>} S$
 </center>
 
 Where
@@ -537,14 +537,14 @@ Where
 - $R$ and $S$ are relations
 - $<join condition>$ is a boolean condition on values of tuples from $R$ and $S$
 
-$R \unicode{x275d5}_{<join condition>} S$ returns the tuples in $R \times S$ that satisfy the $<join condition>$ as well as the tuples from both $R$ and $S$ that don't match the join condition. In the result relation the unmatched tuples are null-padded to give them the correct degree in the result.
+$R ⟗{<join condition>} S$ returns the tuples in $R \times S$ that satisfy the $<join condition>$ as well as the tuples from both $R$ and $S$ that don't match the join condition. In the result relation the unmatched tuples are null-padded to give them the correct degree in the result.
 
 
 # Full Outer Join Example
 
 Show all authors and books, matching editors with their books.
 
-$R \unicode{x27d7}_{author_id = editor} S$
+$R ⟗_{author_id = editor} S$
 
 ```
 +-----------+------------+-----------+---------+------------+----------+------+--------+

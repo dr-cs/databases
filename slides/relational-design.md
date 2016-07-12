@@ -28,15 +28,18 @@
 - The should be few or no NULL values in tuples
 - It should be impossible to generate spurious (invalid) tuples
 
-<!--
-
-# Clear Semantics of Relation Schemas
-
-
 # Guideline 1: Convey cohesive meaning in relational schemas
 
+Example:
 
-# Redundant Information in Tuples
+EMP(Ename, Ssn, Bdate, Address, Dno)
+
+DEPT(Dno, Dname, Dmgr_ssn)
+
+- Each EMPT tuple represents a single employee
+- Each DEPT tuple represents a single department
+
+# Redundancy
 
 Redundant information in schemas:
 
@@ -47,23 +50,174 @@ One way to think of schemas with redundancy: they are joined tables from well-de
 
 # Insertion Anomalies
 
++-----+-------+-------+------+----------+-----+-------------+
+| Ssn | Ename | Bdate | Addr | Dmanaged | Dno | Dname       |
++=====+=======+=======+======+==========+=====+=============+
+| 123 | Alice | 1990  | ATL  | 1        | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 124 | Bob   | 1991  | BOS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 125 | Cheng | 1992  | CHS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 126 | Drhuv | 1993  | DET  | 2        | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+| 127 | Earl  | 1994  | EWR  | NULL     | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+
+Every time we insert a new employee, we have to repeat the department information.
+
 # Deletion Anomalies
+
++-----+-------+-------+------+----------+-----+-------------+
+| Ssn | Ename | Bdate | Addr | Dmanaged | Dno | Dname       |
++=====+=======+=======+======+==========+=====+=============+
+| 123 | Alice | 1990  | ATL  | 1        | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 124 | Bob   | 1991  | BOS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 125 | Cheng | 1992  | CHS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 126 | Drhuv | 1993  | DET  | 2        | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+| 127 | Earl  | 1994  | EWR  | NULL     | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+
+If we delete the last member of a department, we lose the information about the department itself. Does it cease to exist?
 
 # Update (Modification) Anomalies
 
++-----+-------+-------+------+----------+-----+-------------+
+| Ssn | Ename | Bdate | Addr | Dmanaged | Dno | Dname       |
++=====+=======+=======+======+==========+=====+=============+
+| 123 | Alice | 1990  | ATL  | 1        | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 124 | Bob   | 1991  | BOS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 125 | Cheng | 1992  | CHS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 126 | Drhuv | 1993  | DET  | 2        | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+| 127 | Earl  | 1994  | EWR  | NULL     | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+
+If we change the name of the Research department to the "Playing with lasers" department, we have to change multiple tuples.
+
 # Guideline 2: Eliminate data manipulation anomalies
 
-# NULL Values in Tuples
+Design relation schemas to minimize data manipulation anomalies.
+
+Achieved by normalization based on functional dependency theory.
+
+# Nulls in Tuples
+
++-----+-------+-------+------+----------+-----+-------------+
+| Ssn | Ename | Bdate | Addr | Dmanaged | Dno | Dname       |
++=====+=======+=======+======+==========+=====+=============+
+| 123 | Alice | 1990  | ATL  | 1        | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 124 | Bob   | 1991  | BOS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 125 | Cheng | 1992  | CHS  | NULL     | 1   | Research    |
++-----+-------+-------+------+----------+-----+-------------+
+| 126 | Drhuv | 1993  | DET  | 2        | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+| 127 | Earl  | 1994  | EWR  | NULL     | 2   | Engineering |
++-----+-------+-------+------+----------+-----+-------------+
+
+Bad design: Dmanaged has many nulls because most employees aren't managers.
 
 # Guideline 3: Minimize the need for NULL values in tuples
 
+- Nulls don't have certain meaning - could be absent, N/A, false
+- Aren't used in joins
+- Aren't counted in aggregate functions
+- Waste space
+
+We reduce NULLS by normalization using functional dependency theory.
+
 # Spurious Tuples
+
+Say some original relation state r(R) is:
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Smith   | Database          | Navathe    |
+| Smith   | Operating Systems | Ammar      |
+| Smith   | Theory            | Schulman   |
+| Wallace | Database          | Mark       |
+| Wallace | Operating Systems | Ahamad     |
+| Wong    | Database          | Omiecinski |
+| Zelaya  | Database          | Navathe    |
+
+# Bad Decomposition
+
+<table>
+<tr>
+<td>
+r(R1) =
+</td>
+<td>
+
+| student | instructor |
+|---------|------------|
+| Narayan | Ammar      |
+| Narayan | Mark       |
+| Smith   | Ammar      |
+| Smith   | Navathe    |
+| Smith   | Schulman   |
+| Wallace | Ahamad     |
+| Wallace | Mark       |
+| Wong    | Omiecinski |
+| Zelaya  | Navathe    |
+
+</td>
+<td> </td>
+
+<td>
+r(R2) =
+</td>
+<td>
+
+| student | course            |
+|---------|-------------------|
+| Narayan | Database          |
+| Narayan | Operating Systems |
+| Smith   | Database          |
+| Smith   | Operating Systems |
+| Smith   | Theory            |
+| Wallace | Database          |
+| Wallace | Operating Systems |
+| Wong    | Database          |
+| Zelaya  | Database          |
+
+</td>
+</tr>
+</table>
+
+We would join on student and end up with ...
+
+# Join with Spurious Tuples
+
+| student | course            | instructor |
+|---------|-------------------|------------|
+| Narayan | Database          | Ammar      |
+| Narayan | Database          | Mark       |
+| Narayan | Operating Systems | Ammar      |
+| Narayan | Operating Systems | Mark       |
+| Smith   | Database          | Ammar      |
+| Smith   | Database          | Navathe    |
+
+... 13 more tuples, which is way more tuples than the original relation due to spurious tuples, so the join is not non-additive.
+
+Lost the association between Instructor and Course. E.g., Mark does not teach Operating Systems.
 
 # Guideline 4: Design relation schemas for natural joins
 
 Design relation schemas to be naturally joined on attributes that are related by foreign key-primary key relationships.
 
--->
+Acheived by normalization based on functional dependency theory.
 
 # Functional Dependencies
 
@@ -138,141 +292,7 @@ $$
 
 are trivial.
 
-# Logically Implied FDs
-
-Given a relation schema $R$, a functional dependency $f$  is logically implied by a set of FDs $F$  if every relation state $r(R)$ that stasifies $F$ also satisfies $f$.
-
-For example, given $R(A, B, C, G, H, I)$ and $F$ =
-
-$$
-A \rightarrow B\\
-A \rightarrow C\\
-CG \rightarrow H\\
-CG \rightarrow I\\
-B \rightarrow H
-$$
-
-The functional dependency $A \rightarrow H$ also holds on R.
-
-# Closure of a Set of FDs
-
-The closure $F^+$ of $F$ is the set of all FDs logically implied by $F$. We can use a set if inference rules known as **Armstrong's Axioms** to derive new FDs.
-
-- **Reflexivity**. If $Y \subseteq X$, then $X \rightarrow Y$
-- **Augmentation**. If $X \rightarrow Y$ holds, then $XZ \rightarrow YZ$
-- **Transitivity**. If $X \rightarrow Y$ holds and $Y \rightarrow Z$ holds, then $X \rightarrow Z$ holds
-
-Note that $XY$ is shorhand for $X \cup Y$.
-
-Armostrong's axioms are **sound** because they do not produce new FDs that don't hold, and **complete** becuase applying them repeatedly finds $F^+$, i.e., all FDs that are logically implied by $F$.
-
-# Algorithm for Finding $F^+$
-
-The following algorithm applies Armstrong's Axioms repeatedly to find $F^+$.
-
-- Let $F^+ = F$
-- **repeat**:
-    - **for each** FD $f$ in $F^+$:
-        - add results of applying reflexivity and augmentation rules on $f$ to $F^+$
-    - **for each** pair of FDs $X \rightarrow Y$ and $Y \rightarrow Z$ in $F^+$:
-        - add $X \rightarrow Z$ to $F^+$
-- **until** $F^+$ does not change any further
-
-This algorithm is instructive, but tedious and expensive. There's a better way ...
-
-# Attribute Closure
-
-The normal forms we consider in this class (1NF through BCNF) are based on keys, so we need a way to use FDs to determine the keys of a relation.
-
-If $X$ is a superkey of $R$ then $X \rightarrow R$. In other words, all the attributes of $R$ are determined by $X$.
-
-The set of attributes functionally determined by $X$ under $F$ is the *closure* of $X$ under $F$, denoted $X^+$.
-
-# Computing Attribute Closure
-
-**Algorithm 15.1** Determining $X^+$, the closure of $X$ under $F$
-
-**Input:** A set $F$ of FDs on relation schema $R$, and a set of attributes $X \subseteq R$
-
-- $X^+$ := $X$
-- **repeat**:
-    - $oldX^+$ := $X^+$
-    - **for each** functional dependency $Y \rightarrow Z$:
-        - if $Y \subseteq X^+$ then $X^+$ := $X^+ \cup Z$
-- **until** $X^+$ = $oldX^+$
-
-# Uses of Attribute Closure
-
-- Test whether $X$ is a superkey of $R$.
-    - If $X^+$ contains all attributes in $R$, then $X$ is a superkey of $R$.
-
-- Checking whether an FD $X \rightarrow Y$ holds on $R$ under $F$.
-    - Compute $X^+$. If $Y \subseteq X^+$ then $X \rightarrow Y$ holds.
-
-- An alternate way to compute $F^+$.
-    - For each $Z \subseteq R$, compute $Z^+$
-        - For each $S \subseteq Z^+$ add FD $Z \rightarrow S$ to $F^+$
-
-# Superkey Test Using Attribute Closure
-
-Given $R(A, B, C, G, H, I)$ and $F = \{A \rightarrow B, A \rightarrow C, CG \rightarrow H, CG \rightarrow I, B \rightarrow H\}$,
-
-compute $\{AG\}^+$.
-
-The first time we execute the outer loop:
-
-- $A \rightarrow B$ adds $B$ to $\{AG\}^+$, making $\{AG\}^+$ = $\{ABG\}$.
-- $A \rightarrow C$ adds $C$, making $\{AG\}^+$ = $\{ABCG\}$.
-- $CG \rightarrow H$ adds $H$, making $\{AG\}^+$ = $\{ABCGH\}$.
-- $CG \rightarrow I$ adds $I$, making $\{AG\}^+$ = $\{ABCGHI\}$.
-
-Since $\{AG\}^+$ now includes all attributes in $R$, the second iteration of the outer loop adds no new attributes, so the algorithm terminates. $\{AG\}^+$ is a superkey of $R$.
-
-# Finding A Candidate Key
-
-**Algorithm 15.2(a):** Finding a key $K$ for $R$ given a set $F$ of functional dependenceis on $R$
-
-**Input**: A relation $R$ and FDs $F$ on $R$
-
-1. set $K := R$
-2. **for each** attribute $A$ in $K$:
-    - compute $(K - \{A\})^+$ with respect to $F$
-    - **if** $R \subseteq (K - \{A\})^+$, **then** set $K := K - \{A\}$
-
-This algorithm finds a single candidate key depending on the order in which attributes are removed.
-
-# Cover and Equivalence
-
-A set of FDs $F$ **covers** a set of FDs $E$ if every FD in $E$ is in $F^+$, that is, every FD in $E$ can be inferred from $F$.
-
-To test whether some $F$ covers some $E$:
-
-- **for each** FD $X \rightarrow Y$ in $E$:
-    - compute $X^+$ with respect to $F$
-        - **if** $Y \subseteq X^+$ for every FD in $E$, then $F$ covers $E$
-
-If $F$ covers $E$ and $E$ covers $F$, then $E$ and $F$ are **equivalent**.
-
-# Extraneous Attributes in FDs
-
-An attribute of an FD in $F$ is **extraneous** if we can remove it without changing the closure set $F^+$
-
-Formally, given $X \rightarrow A$ in $F$,
-
-- Attribute $Y$ is extraneous in $X$ if $Y \subset X$ and $F$ logically implies $(F - (X \rightarrow A) \cup \{(X - Y) \rightarrow A\})$.
-
-
-# Minimal Cover FD Sets
-
-$F$ is a **minimal cover** of $E$ if every FD in $E$ is in $F^+$ and $F$ is **minimal** (in standard/canonical form with no redundancies).
-
-A set of FDs $F$ is minimal if:
-
-1. Every dependency in F has a single attribute on the right side (canonical form).
-2. We cannot replace any FD $X \rightarrow A$ in $F$ with an FD $Y \rightarrow A$ where $Y \subset X$ and have set of FDs that is equivalent to $F$.
-3. We cannot remove any dependency from F and still have a set of FDs that is equivalent to F.
-
-Note: in this class you will not need to compute the minimal cover set of FDs. They will always be given when needed.
+We don't write trivial functional dependencies when we enumerate a set of functional dependencies that hold on a schema for the purposes of normalization or normal form testing.
 
 # Normal Forms
 
@@ -470,7 +490,7 @@ LOTS1B(<u>Area</u>, Price)
 
 # Straight to 3NF
 
-Though we present a progression through 2NF to 3NF for historical reasons it's not necessary. Given our origial LOTS
+Though we present a progression through 2NF to 3NF for historical reasons, it's not necessary. Given our origial LOTS
 
 LOTS(<u>Property_id</u>, County_name, Lot#, Area, Price, Tax_rate)
 
@@ -577,192 +597,4 @@ A decomposition of $R$ into $R_1$ and $R_2$ must preserve attributes, that is, $
 
 Dependencies can be preserved in all 3NF decompositions, but not in all BCNF decompositions. **In all decompositions we must have non-additive join property.**
 
-# Non-Additive Join Test
-
-A Decomposition $D = \{R_1, R_2\}$ of $R$ has the lossless (nonadditive) join property with repect to FDs $F$ on $R$ if and only if either
-
-- The FD $((R_1 \cap R_2) \rightarrow (R_1 - R_2))$ is in $F^+$, or
-- The FD $((R_1 \cap R_2) \rightarrow (R_2 - R_1))$ is in $F^+$
-
-Important note: the non-additive join property assumes that **no null values are allowed for join attributes**.
-
-# Test of Decomposition # 1
-
-For
-
-1. R1(<u>Student</u>, <u>Instructor</u>) and R2(<u>Student</u>, <u>Course</u>)
-
-- $(R_1 \cap R_2)$ = Student
-- $(R_1 - R_2)$ = Instructor
-- $(R_2 - R_1)$ = Course
-
-So either
-
-- Student $\rightarrow$ Instructor, or
-- Student $\rightarrow$ Course
-
-must be in $F^+$. But they aren't.
-
-# Visualizing Nonadditive Join
-
-Say some original relation state r(R) is:
-
-| student | course            | instructor |
-|---------|-------------------|------------|
-| Narayan | Database          | Mark       |
-| Narayan | Operating Systems | Ammar      |
-| Smith   | Database          | Navathe    |
-| Smith   | Operating Systems | Ammar      |
-| Smith   | Theory            | Schulman   |
-| Wallace | Database          | Mark       |
-| Wallace | Operating Systems | Ahamad     |
-| Wong    | Database          | Omiecinski |
-| Zelaya  | Database          | Navathe    |
-
-# Decomposition 1
-
-Then
-<table>
-<tr>
-<td>
-r(R1) =
-</td>
-<td>
-
-| student | instructor |
-|---------|------------|
-| Narayan | Ammar      |
-| Narayan | Mark       |
-| Smith   | Ammar      |
-| Smith   | Navathe    |
-| Smith   | Schulman   |
-| Wallace | Ahamad     |
-| Wallace | Mark       |
-| Wong    | Omiecinski |
-| Zelaya  | Navathe    |
-
-</td>
-<td> </td>
-
-<td>
-r(R2) =
-</td>
-<td>
-
-| student | course            |
-|---------|-------------------|
-| Narayan | Database          |
-| Narayan | Operating Systems |
-| Smith   | Database          |
-| Smith   | Operating Systems |
-| Smith   | Theory            |
-| Wallace | Database          |
-| Wallace | Operating Systems |
-| Wong    | Database          |
-| Zelaya  | Database          |
-
-</td>
-</tr>
-</table>
-
-We would join on student and end up with ...
-
-# Join with Spurious Tuples
-
-| student | course            | instructor |
-|---------|-------------------|------------|
-| Narayan | Database          | Ammar      |
-| Narayan | Database          | Mark       |
-| Narayan | Operating Systems | Ammar      |
-| Narayan | Operating Systems | Mark       |
-| Smith   | Database          | Ammar      |
-| Smith   | Database          | Navathe    |
-
-... 13 more tuples, which is way more tuples than the original relation due to spurious tuples, so the join is not non-additive.
-
-The information that has been lost is the association between Instructor and Course. For example, note from the original table that Mark does not teach Operating Systems.
-
-# Test of Decomposition # 2
-
-For
-
-2. R1(<u>Instructor</u>, Course) and R2(<u>Student</u>, <u>Course</u>)
-
-- $(R_1 \cap R_2)$ = Course
-- $(R_1 - R_2)$ = Instructor
-- $(R_2 - R_1)$ = Student
-
-So either
-
-- Course $\rightarrow$ Instructor, or
-- Course $\rightarrow$ Student
-
-must be in $F^+$. But they aren't.
-
-# Test of Decomposition # 3
-
-For
-
-3. R1(<u>Instructor</u>, Course) and R2(<u>Instructor</u>, <u>Student</u>)
-
-- $(R_1 \cap R_2)$ = Instructor
-- $(R_1 - R_2)$ = Course
-- $(R_2 - R_1)$ = Student
-
-So either
-
-- Instructor $\rightarrow$ Course, or
-- Instructor $\rightarrow$ Student
-
-must be in $F^+$. Instructor $\rightarrow$ Course is in $F^+$, so this decomposition is the right one.
-
-# Bottom-Up Design Approaches
-
-Bottom-up approaches start with one **universl relation** which contains all attributes in the database. 3NF or BCNF relation schemas are *synthesized* from this universal relation schema.
-
-- Algorithm 15.4 sythesizes univeral relation $R$ into 3NF schemas that have the nonadditive join property *and* preserve dependencies.
-- Algorithm 15.5 converts univeral relation $R$ into BCNF schemas that have the nonadditive join property (but not necessarily preserving dependencies) by iterative decomposition.
-
-In this class you only need to know Algorithm 15.5, BCNF decomposition.
-
-# Informal 3NF Synthesis
-
-Informally, Algorithm 15.4 for 3NF synthesis does this:
-
-1. Find a minimal cover set of FDs for $R$.
-2. For each FD in the minimal cover create a relation schema with each attribute in the FD. The left-hand side of the FD is the key.
-3. If none of the schemas above contains a key of $R$, create one more relation schema with attributes that form a key of $R$ (the previously created schemas will contain foreign keys to this relation schema).
-4. Elminate redundant schemas.
-
-Easy to understand conceptually, but many details which we don't require you to know.
-
-# Informal BCNF Decomposition
-
-Before diving into the much simpler BCNF decomposition algorithm, here's an informal decription of the process it follows.
-
-Let
-
-- $R$ be a relation schema not in BCNF,
-- $X \subseteq R$, and
-- $X \rightarrow A$ be the FD that violates BCNF.
-
-Decompose $R$ into
-
-- $R - A$, and
-- $XA$
-
-If either of these relations is not in BCNF, repeat the process.
-
-# BCNF Decomposition Algorithm
-
-**Algorithm 15.5:** Relational Decomposition into BCNF with Nonadditive Join Property
-
-**Input:** A universal relation $R$ and a set of FDs $F$ on $R$
-
-1. **set** $D := \{R\}$
-2. **while** there is a relation schema $Q$ in $D$ that is not in BCNF:
-    - choose a relation schema $Q$ in $D$ that is not in BCNF
-    - find a functional dependency $X \rightarrow Y$ in $Q$ that violates BCNF
-    - replace $Q$ in $D$ by two schemas $(Q - Y)$ jand $(X \cup Y)$
-
-**Output:** $D$, a set of relation schemas in BCNF with the non-additive join property such that $D = \bigcup_1^n D_i$
+In the next lecture we'll learn more theory which enables us to test these conditions.

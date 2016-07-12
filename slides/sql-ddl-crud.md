@@ -1,7 +1,7 @@
-% Basic SQL
+% SQL Data Definition
 % CS 4400
 
-# Sturctured Query Language
+# Structured Query Language
 
 - Practical implementation of the relational model
 - Originally SEQUEL (Structured English QEUry Language) at IBM research
@@ -57,27 +57,45 @@ CREATE TABLE pub (
 
 By convention, SQL keywords are in ALL CAPS in instructional examples but not when typing.
 
-Note: see [pubs-schema.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/resources/pubs-schema.sql) and [pubs-data.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/resources/pubs-dta.sql) for examples of SQL database creation and population commands.
+Note: see [pubs-schema.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/resources/pubs-schema.sql) and [pubs-data.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/resources/pubs-data.sql) for examples of SQL database creation and population commands.
 
-# Attribute Types
+# Column Types
 
-- Numeric data types
-    - Integer numbers: INTEGER, INT, and SMALLINT
-    - Floating-point (real) numbers: FLOAT or REAL, and DOUBLE PRECISION
-- Character-string data types
-    - Fixed length: CHAR(n), CHARACTER(n)
-    - Varying length: VARCHAR(n), CHAR VARYING(n), CHARACTER VARYING(n)
+Each column, or attribute, is given a data type (domain in the relational model). MySQL has
 
-# Bits and Booleans
+- Numeric data types,
+- String data types, and
+- Temporal data types.
 
-- Bit-string data types
-    - Fixed length: BIT(n)
-    - Varying length: BIT VARYING(n)
-- Boolean data type
-    - Values of TRUE or FALSE or NULL
-- Dates and Timestamps
-    - YEAR, MONTH, and DAY in the form YYYY-MM-DD
-    - Multiple mapping functions available in RDBMSs to change date formats
+Get comprehensive doucmentation at [http://dev.mysql.com/doc/refman/5.7/en/data-types.html](http://dev.mysql.com/doc/refman/5.7/en/data-types.html). We'll cover the most commonly used data types.
+
+# Numeric Data Types
+
+- `INT`
+
+- `FLOAT` or `DOUBLE`
+
+- `DECIMAL`
+
+# String Data Types
+
+- `CAR`
+
+- `VARCHAR`
+
+- `TEXT`
+
+- `ENUM`
+
+# Temporal Dta Types
+
+- `DATE`
+
+- `DATETIME`
+
+- `TIMESTAMP`
+
+- `TIME`
 
 # Constraints
 
@@ -124,7 +142,6 @@ CREATE TABLE bartender (
 ```
 
 Note: MySQL does not enforce `CHECK` constraints. We'll learn about triggers in Advanced SQL.
-
 
 # INSERT Command
 
@@ -261,140 +278,3 @@ CREATE TABLE pub (
     ON DELETE SET NULL
 );
 ```
-
-# Retrieval: The SELECT-FROM-WHERE Structure
-
-```sql
-SELECT <attributes>
-FROM <tables>
-WHERE <conditions>
-```
-
-From relational algebra:
-- `SELECT <attributes>` corresponds to projection
-- `FROM <tables>` specifies the table in parentheses in a relational algebra expression and joins
-- `WHERE <conditions>` corresponds to selection
-
-# Projection
-
-$\pi_{first\_name, last\_name}(author)$
-
-```sql
-mysql> select first_name, last_name from author;
-+------------+-----------+
-| first_name | last_name |
-+------------+-----------+
-| John       | McCarthy  |
-| Dennis     | Ritchie   |
-| Ken        | Thompson  |
-| Claude     | Shannon   |
-| Alan       | Turing    |
-| Alonzo     | Church    |
-| Perry      | White     |
-| Moshe      | Vardi     |
-| Roy        | Batty     |
-+------------+-----------+
-9 rows in set (0.00 sec)
-```
-
-# Asterisk
-
-```sql
-mysql> select * from author;
-+-----------+------------+-----------+
-| author_id | first_name | last_name |
-+-----------+------------+-----------+
-|         1 | John       | McCarthy  |
-|         2 | Dennis     | Ritchie   |
-|         3 | Ken        | Thompson  |
-|         4 | Claude     | Shannon   |
-|         5 | Alan       | Turing    |
-|         6 | Alonzo     | Church    |
-|         7 | Perry      | White     |
-|         8 | Moshe      | Vardi     |
-|         9 | Roy        | Batty     |
-+-----------+------------+-----------+
-9 rows in set (0.00 sec)
-```
-
-Notice that with no condition on select, all rows returned.
-
-# Select
-
-$\sigma_{year = 2012}(book)$
-
-```sql
-mysql> select * from book where year = 2012;
-+---------+------------+-------+------+--------+
-| book_id | book_title | month | year | editor |
-+---------+------------+-------+------+--------+
-|       7 | AAAI       | July  | 2012 |      9 |
-|       8 | NIPS       | July  | 2012 |      9 |
-+---------+------------+-------+------+--------+
-2 rows in set (0.00 sec)
-```
-
-# Simple Database: Dorms
-
-1. Download [dorms.sql](../resources/dorms.sql)
-2. On the command line, go to the directory where you downloaded dorms.sql
-3. Make sure your MySQL server is running:
-    ```sh
-    $ mysql.server start
-    Starting MySQL
-    SUCCESS!
-    ```
-4. Run the `dorms.sql` script like this:
-    ```sh
-    $ mysql -u root -p < dorms.sql
-    Enter password:
-    ```
-
-# Running Queries on the Dorms Database
-
-Start MySQL's client and `use` the `dorms` database.
-
-    ```sh
-    $ mysql -u root -p
-    Enter password:
-    Welcome to the MySQL monitor.  Commands end with ; or \g.
-    ...
-    mysql> use dorms
-    ...
-    Database changed
-    mysql>
-    ```
-
-# Exploring the Database
-
-Get a list of the tables:
-
-```sql
-mysql> show tables;
-+-----------------+
-| Tables_in_dorms |
-+-----------------+
-| dorm            |
-| student         |
-+-----------------+
-2 rows in set (0.00 sec)
-```
-
-See the structure of a table:
-
-```sql
-mysql> describe dorm;
-+---------+---------+------+-----+---------+-------+
-| Field   | Type    | Null | Key | Default | Extra |
-+---------+---------+------+-----+---------+-------+
-| dorm_id | int(11) | NO   | PRI | NULL    |       |
-| name    | text    | YES  |     | NULL    |       |
-| spaces  | int(11) | YES  |     | NULL    |       |
-+---------+---------+------+-----+---------+-------+
-3 rows in set (0.00 sec)
-```
-
-# Simple Queries on Dorms Database
-
-- What are the names of all the dorms?
-- Which students are in Armstrong?

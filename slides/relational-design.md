@@ -533,7 +533,7 @@ Two types of problematic FDs:
 
 A relation schema $R$ is in BCNF if whenever a *nontrivial* functional dependency $X \rightarrow A$ holds in $R$, then $X$ is a superkey of $R$
 
-Note that this is the same as 3NF except that it doesn't allow any attributes (even prime attributes) to be determnined by non-keys.
+Note that this is the same as 3NF except that it doesn't allow any attributes (even prime attributes) to be determined by non-keys.
 
 General non-BCNF pattern: given $R(A, B, C)$
 

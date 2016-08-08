@@ -1,8 +1,6 @@
 % Advanced Relational Design
 % CS 4400
 
-
-
 # Closure of a Set of FDs
 
 The closure $F^+$ of $F$ is the set of all FDs logically implied by $F$. We can use a set if inference rules known as **Armstrong's Axioms** to derive new FDs.
@@ -13,13 +11,13 @@ The closure $F^+$ of $F$ is the set of all FDs logically implied by $F$. We can 
 
 Note that $XY$ is shorhand for $X \cup Y$.
 
-Armostrong's axioms are **sound** because they do not produce new FDs that don't hold, and **complete** becuase applying them repeatedly finds $F^+$, i.e., all FDs that are logically implied by $F$.
+Armstrong's axioms are **sound** because they do not produce new FDs that don't hold, and **complete** because applying them repeatedly finds $F^+$, i.e., all FDs that are logically implied by $F$.
 
 Note that $F^+$ includes **all** FDs, including trivial FDs.
 
 # Algorithm for Finding $F^+$
 
-The following algorithm applies Armstrong's Axioms repeatedly to find $F^+$.
+Apply Armstrong's Axioms repeatedly.
 
 - Let $F^+ = F$
 - **repeat**:
@@ -29,7 +27,7 @@ The following algorithm applies Armstrong's Axioms repeatedly to find $F^+$.
         - add $X \rightarrow Z$ to $F^+$
 - **until** $F^+$ does not change any further
 
-This algorithm is instructive, but tedious and expensive and we present it mainly for conceptual understanding. Two sets of FDs are equivalent if they imply the same closure set of FDs.
+This algorithm is instructive, but tedious and expensive and mainly for conceptual understanding. Important concept: two sets of FDs are equivalent if they imply the same closure set of FDs.
 
 # Attribute Closure
 
@@ -53,12 +51,15 @@ The set of attributes functionally determined by $X$ under $F$ is the *closure* 
 
 - Checking whether an FD $X \rightarrow Y$ holds on $R$ under $F$.
     - Compute $X^+$. If $Y \subseteq X^+$ then $X \rightarrow Y$ holds.
+    - This is equivalent to saying that $X \rightarrow Y$ is in $F^+$
 
 - An alternate way to compute $F^+$.
     - For each $Z \subseteq R$, compute $Z^+$
         - For each $S \subseteq Z^+$ add FD $Z \rightarrow S$ to $F^+$
 
-# Superkey Test Using Attribute Closure
+Note: you never actually need to compute $F^+$, you just need to be able to determine if some FD is in $F^+$.
+
+# Superkey Test
 
 Given $R(A, B, C, G, H, I)$ and $F = \{A \rightarrow B, A \rightarrow C, CG \rightarrow H, CG \rightarrow I, B \rightarrow H\}$,
 
@@ -75,7 +76,7 @@ Since $\{AG\}^+$ now includes all attributes in $R$, the second iteration of the
 
 # Finding A Candidate Key
 
-**Algorithm 15.2(a):** Finding a key $K$ for $R$ given a set $F$ of functional dependenceis on $R$
+**Algorithm 15.2(a):** Finding a key $K$ for $R$ given a set $F$ of functional dependencies on $R$
 
 **Input**: A relation $R$ and FDs $F$ on $R$
 
@@ -85,62 +86,6 @@ Since $\{AG\}^+$ now includes all attributes in $R$, the second iteration of the
     - **if** $R \subseteq (K - \{A\})^+$, **then** set $K := K - \{A\}$
 
 This algorithm finds a single candidate key depending on the order in which attributes are removed.
-
-# Cover and Equivalence
-
-A set of FDs $F$ **covers** a set of FDs $E$ if every FD in $E$ is in $F^+$, that is, every FD in $E$ can be inferred from $F$.
-
-To test whether some $F$ covers some $E$:
-
-- **for each** FD $X \rightarrow Y$ in $E$:
-    - compute $X^+$ with respect to $F$
-        - **if** $Y \subseteq X^+$ for every FD in $E$, then $F$ covers $E$
-
-If $F$ covers $E$ and $E$ covers $F$, then $E$ and $F$ are **equivalent**.
-
-# Extraneous Attributes in FDs
-
-An attribute of an FD in $F$ is **extraneous** if we can remove it without changing the closure set $F^+$
-
-Formally, given $X \rightarrow A$ in $F$,
-
-- Attribute $Y$ is extraneous in $X$ if $Y \subset X$ and $F$ logically implies $(F - (X \rightarrow A) \cup \{(X - Y) \rightarrow A\})$.
-
-
-# Minimal Cover FD Sets
-
-$F$ is a **minimal cover** of $E$ if every FD in $E$ is in $F^+$ and $F$ is **minimal** (in standard/canonical form with no redundancies).
-
-A set of FDs $F$ is minimal if:
-
-1. Every dependency in F has a single attribute on the right side (canonical form).
-2. We cannot replace any FD $X \rightarrow A$ in $F$ with an FD $Y \rightarrow A$ where $Y \subset X$ and have set of FDs that is equivalent to $F$.
-3. We cannot remove any dependency from F and still have a set of FDs that is equivalent to F.
-
-
-# Computing Minimal Cover FDs
-
-**Input:** $T$, a set of FDs
-
-- **while** there is an FD $F$ in $T$ that is implied by other FDs in $T$:
-    - remove $F$ from $T$
-- **repeat**
-    - **for each** FD $Y \rightarrow B$ in $T$ such that $|Y| > 1$:
-        - let $Z$ be $Y$ minus one attribute in $Y$
-        - **if** $Z \rightarrow B$ follows from the FDs in $T$ (including $Y \rightarrow B$), **then** replace $Y \rightarrow B$ with $Z \rightarrow B$
-
-- **until** no more changes to $T$ can be made
-
-# Normal Forms
-
-A *normal form* is a set of conditions based on functional dependencies that acts as a set of tests for a relation schema.
-
-Normalization is the process of decomposing relation schemas into new relation schemas that satisfy normal forms with the goals of:
-
-- minimizing redundancy, and
-- minimizing insertion, deletion, and update anomalies
-
-We will consider first, second, third, and Boyce-Codd normal forms in this class. Each higher normal form subsumes the normal forms below it. The normal form of a relation schema is the highest normal form it satisfies.
 
 # Schema Decomposition
 
@@ -153,6 +98,18 @@ Where $R = A \cup B$
 
 To find the functional dependencies that hold on $R_1$ and $R_2$ we project the functional dependencies that hold on $R$ into sets of FDs for $R_1$ and $R_2$.
 
+# Minimal Cover Sets of FDs
+
+A set of FDs $F$ is a minimal cover set if removing any FD changes $F^+$. To transform $F$ into a minimal cover set:
+
+- **while** there is an FD `F` in $F$ that is implied by other FDs in $F$:
+    - remove `F` from $F$
+- **repeat**
+    - **for each** FD $Y \rightarrow B$ in $F$ with two or more attributes in $Y$:
+        - let $Z$ be $Y$ minus one attribute in $Y$
+        - **if** $Z \rightarrow B$ follows from the FDs in $F$ (including $Y \rightarrow B$), **then** replace $Y \rightarrow B$ with $Z \rightarrow B$
+- **until** no more changes to $F$ can be made
+
 # Projection of FDs
 
 **Input:** A relation $R$, a relation $R_1$ computed by the projection $\pi_L(R)$, and a set of FDs $S$ that hold on $R$.
@@ -160,17 +117,10 @@ To find the functional dependencies that hold on $R_1$ and $R_2$ we project the 
 1. **set** $T = \{\}$ (the empty set)
 2. **for each** subset of attributes $X$ in $R_1$:
     - compute $X^+$ with respect to $S$. Note that there may be attributes in $X^+$ that are in $R$ but not in $R_1$.
-    - Add to $T$ on nontrivial FDs $X \rightarrow A$ for which $A$ is in $X^+$ and $R_1$.
-3. Optional: transform $T$ into a minimal cover of the FDs that hold on $R_1$ by the follosing procedure:
-    - **while** there is an FD $F$ in $T$ that is implied by other FDs in $T$:
-        - remove $F$ from $T$
-    - **repeat**
-        **for each** FD $Y \rightarrow B$ in $T$ with two or more attributes in $Y$:
-            - let $Z$ be $Y$ minus one attribute in $Y$
-            - **if** $Z \rightarrow B$ follows from the FDs in $T$ (including $Y \rightarrow B$), **then** replace $Y \rightarrow B$ with $Z \rightarrow B$
-    - **until** no more changes to $T$ can be made
+    - Add to $T$ nontrivial FDs $X \rightarrow A$ for which $A$ is in $X^+$ and $R_1$.
+3. Optional: transform $T$ into a minimal cover set of FDs.
 
-**Output:** $T$, a minimal set of functional dependencies that hold on $R_1$
+**Output:** $T$, a (minimal) set of functional dependencies that hold on $R_1$
 
 # Bottom-Up Design Approaches
 
@@ -219,7 +169,7 @@ If either of these relations is not in BCNF, repeat the process.
 2. **while** there is a relation schema $Q$ in $D$ that is not in BCNF:
     - choose a relation schema $Q$ in $D$ that is not in BCNF
     - find a functional dependency $X \rightarrow Y$ in $Q$ that violates BCNF
-    - replace $Q$ in $D$ by two schemas $(Q - X^+ + X)$ jand $X^+$
+    - replace $Q$ in $D$ by two schemas $(Q - X^+ + X)$ and $X^+$
     - project the functional dependencies from $Q$ into the new schemas.
 
 **Output:** $D$, a set of relation schemas in BCNF with the non-additive join property such that $D = \bigcup_1^n D_i$
@@ -259,7 +209,7 @@ A Decomposition $D = \{R_1, R_2\}$ of $R$ has the lossless (nonadditive) join pr
 
 Important note: the non-additive join property assumes that **no null values are allowed for join attributes**.
 
-How to text if $X \rightarrow Y$ is in $F^+$: $Y$ is in $X^+$ under $F$.
+Remember how to test if $X \rightarrow Y$ is in $F^+$? -- $Y$ is in $X^+$ under $F$.
 
 # Test of Decomposition # 1
 

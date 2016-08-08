@@ -1,0 +1,80 @@
+\documentclass[10pt]{article}
+
+\usepackage{verbatim, multicol, tabularx, graphicx, float, xcolor, colortbl}
+\usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=1mm,
+  belowskip=0mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numbers=none,
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true
+}
+
+\textwidth = 6.5 in
+\textheight = 9 in
+\oddsidemargin = 0.0 in
+\evensidemargin = 0.0 in
+\topmargin = -0.25 in
+\headheight = 0.0 in
+\headsep = 0.0 in
+\parskip = 0.0in
+\parindent = 0.0in
+
+\def\ojoin{\setbox0=\hbox{$\bowtie$}%
+  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+\def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+\def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+\def\fullouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
+
+\title{BCNF Decomposition Exercise}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+Given the universal relation schema:
+
+\[
+R(eid, pid, hours, ename, city, did, dname, mgrid, pname, ploc)
+\]
+
+the FDs:
+
+\begin{minipage}{7cm}
+
+\begin{eqnarray}
+eid, pid & \rightarrow & hours\\
+eid, pid & \rightarrow & dname\\
+eid      & \rightarrow & ename, city, did, mgrid\\
+did      & \rightarrow & dname, mgrid\\
+pid      & \rightarrow & pname, ploc
+\end{eqnarray}
+
+\end{minipage}\\
+
+and the data:\\
+
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}\hline
+\rowcolor{lightgray}eid & pid & hours & ename & city & did & dname & mgrid & pname & ploc \\\hline
+101 & 1   & 20    & smith & atl & 10  & toy   & 103   & acme  & atl \\\hline
+101 & 2   & 25    & smith & atl & 10  & toy   & 103   & ajax  & chi \\\hline
+102 & 1   & 40    & jones & mac & 15  & shoe  & 105   & acme  & atl \\\hline
+103 & 2   & 25    & brown & mar & 10  & toy   & 103   & ajax  & chi \\\hline
+103 & 3   & 25    & brown & mar & 10  & toy   & 103   & aaa   & mia \\\hline
+104 & 1   & 40    & green & mac & 15  & shoe  & 105   & acme  & atl \\\hline
+105 & 2   & 40    & black & atl & 15  & shoe  & 105   & ajax  & chi \\\hline
+\end{tabular}\\
+
+\begin{itemize}
+\item Is the set of functional dependencies above a minimal cover set?
+\item What is the key of $R$?
+\item Decompose the universal relation schema $R$ into BCNF relation schemas and show how the data above would be stored in states of the new set of relation schemas.
+\end{itemize}
+\end{document}

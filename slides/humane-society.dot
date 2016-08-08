@@ -30,15 +30,15 @@ graph humane_society {
   node [shape=circle, peripheries=1]; sub_worker [label="d"];
 
   WORKER -- sub_worker [color="black:invis:black"];
-  sub_worker -- VOLUNTEER [headlabel=<&#x222a;>, labeldistance=5, labelangle=0];
-  sub_worker -- EMPLOYEE [headlabel=<&#x222a;>, labeldistance=3, labelangle=0];
-  EMPLOYEE -- MANAGER [headlabel=<&#x222a;>, labeldistance=2, labelangle=0];
+  sub_worker -- VOLUNTEER [dir="back", arrowhead="empty"];
+  sub_worker -- EMPLOYEE [dir="back", arrowhead="empty"];
+  EMPLOYEE -- MANAGER [dir="back", arrowhead="empty"];
 
   rankdir=LR
   node [shape=diamond]; WORKS_FOR;
   node [shape=ellipse, peripheries=2]; days;
   WORKS_FOR -- days;
-  WORKS_FOR -- SHELTER [label="1", color="black:invis:black"];
+  WORKS_FOR -- SHELTER [label="M", color="black:invis:black"];
   WORKER -- WORKS_FOR [label="N", color="black:invis:black"];
 
   node [shape=diamond, peripheries=1]; MANAGES;

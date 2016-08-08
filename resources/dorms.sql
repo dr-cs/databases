@@ -4,22 +4,24 @@ use dorms;
 
 drop table if exists dorm;
 create table dorm (
-    dorm_id integer primary key,
+    dorm_id integer primary key autoincrement,
     name text,
     spaces integer
 );
+
+drop table if exists student;
+create table student (
+    student_id integer primary key autoincrement,
+    name text,
+    gpa float(3,2),
+    dorm_id integer not null,
+    foreign key (dorm_id) references dorm(dorm_id)
+);
+
 insert into dorm values(1, 'Armstrong', 124);
 insert into dorm values(2, 'Brown', 158);
 insert into dorm values(3, 'Caldwell', 158);
 
-drop table if exists student;
-create table student (
-    student_id integer primary key,
-    name text,
-    gpa float(3,2),
-    dorm_id integer,
-    foreign key (dorm_id) references dorm(dorm_id)
-);
 insert into student values (1, 'Alice', 3.6, 1);
 insert into student values (2, 'Bob', 2.7, 1);
 insert into student values (3, 'Cheng', 3.9, 1);

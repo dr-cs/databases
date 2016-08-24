@@ -17,8 +17,6 @@
 
 # A Possible Solution ([dot source](humane-society.dot))
 
-
-
 <center>
-<img src="humane-society.svg" />
+<img src="humane-society.svg" height="90%" />
 </center>

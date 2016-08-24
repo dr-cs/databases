@@ -1,103 +1,133 @@
 {
     "intro-cs4400": {
         "topic": "<a href=\"slides/intro-cs4400.html\">Intro to CS 4400</a>",
-        "readings": ["<a href=\"syllabus.html\">Syllabus</a>",
-                    "<a href=\"project.html\">Project</a>"],
-        "resources": [""]
+        "materials": [""],
+        "order": [1]
     },
     "intro-databases": {
         "topic": "<a href=\"slides/intro-databases.html\">Intro to Databases</a>",
-        "readings": ["FoDS 1"],
-        "resources": [""]
+        "materials": ["FoDS 1"],
+        "order": [2]
     },
     "database-concepts": {
         "topic": "<a href=\"slides/database-concepts.html\">Database Concepts</a>",
-        "readings": ["FoDS 2"],
-        "resources": [""]
+        "materials": ["FoDS 2"],
+        "order": [3]
     },
     "er-models": {
         "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-ae1a-73e5-5c31-9a91-d47ce30ac976/book-slides/simpkins/Chapter03_7ed_simpkins.pdf\">ER Models</a>",
-        "readings": ["FoDS 3.1-3.7.3"],
-        "resources": [""]
+        "materials": ["FoDS 3.1-3.7.3"],
+        "order": [4]
     },
     "eer-models": {
         "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-ae1a-73e5-5c31-9a91-d47ce30ac976/book-slides/Chapter04_7ed_revised.pdf\">EER Models</a>",
-        "readings": ["FoDS 4.1-4.3"],
-        "resources": [""]
+        "materials": ["FoDS 4.1-4.3", "[EER Exercise](slides/eer-exercise.html)"],
+        "order": [5]
     },
     "conceptual-design-process": {
         "topic": "<a href=\"slides/conceptual-design-process.pdf\">Conceptual Design Process</a>",
-        "readings": [""],
-        "resources": [""]
+        "materials": [""],
+        "order": [6]
+    },
+    "review1": {
+        "topic": "Review 1",
+        "materials": [""],
+        "order": [7]
+    },
+    "exam1": {
+        "topic": "**Exam 1**",
+        "materials": [""],
+        "order": [8]
     },
     "relational-model": {
         "topic": "<a href=\"slides/relational-model.html\">Relational Model</a>",
-        "readings": ["FoDS 5"],
-        "resources": [""]
+        "materials": ["FoDS 5"],
+        "order": [9,10]
     },
     "relational-algebra": {
         "topic": "<a href=\"slides/relational-algebra.html\">Relational Algebra</a>",
-        "readings": ["FoDS 8.1 - 8.3.4, 8.4.4"],
-        "resources": [""]
+        "materials": ["FoDS 8.1 - 8.3.4, 8.4.4"],
+        "order": [11,12]
     },
     "relational-calculus": {
         "topic": "<a href=\"slides/relational-calculus.html\">Relational Calculus</a>",
-        "readings": ["FoDS 8.5"],
-        "resources": [""]
+        "materials": ["FoDS 8.5"],
+        "order": [13]
     },
-    "basic-sql": {
-        "topic": "<a href=\"slides/basic-sql.html\">Basic SQL</a>",
-        "readings": ["FoDS 6"],
-        "resources": [""]
+    "review2": {
+        "topic": "Review 2",
+        "materials": [""],
+        "order": [14]
     },
-    "advanced-sql": {
-        "topic": "<a href=\"slides/advanced-sql.html\">Advanced SQL</a>",
-        "readings": ["FoDS 7"],
-        "resources": [""]
-    },
-    "sql-ddl-crud": {
-        "topic": "<a href=\"slides/sql-ddl-crud.html\">SQL DDL and CRUD</a>",
-        "readings": ["FoDS 6"],
-        "resources": [""]
-    },
-    "sql-queries": {
-        "topic": "<a href=\"slides/sql-queries.html\">SQL Queries</a>",
-        "readings": ["FoDS 6"],
-        "resources": [""]
-    },
-    "sql-advanced": {
-        "topic": "<a href=\"slides/sql-advanced.html\">Advanced SQL</a>",
-        "readings": ["FoDS 6"],
-        "resources": [""]
+    "exam2": {
+        "topic": "**Exam 2**",
+        "materials": [""],
+        "order": [15]
     },
     "er-relational-mapping": {
         "topic": "<a href=\"slides/er-relational-mapping.html\">ER - Relational Mapping</a>",
-        "readings": ["FoDS 9"],
-        "resources": [""]
+        "materials": ["FoDS 9"],
+        "order": [16]
     },
     "basic-relational-design": {
         "topic": "<a href=\"slides/basic-relational-design.html\">Basic Relational Design</a>",
-        "readings": ["FoDS 14.1-14.3"],
-        "resources": [""]
+        "materials": ["FoDS 14.1-14.3"],
+        "order": [100]
+    },
+    "sql-ddl-crud": {
+        "topic": "<a href=\"slides/sql-ddl-crud.html\">SQL DDL and CRUD</a>",
+        "materials": ["FoDS 6"],
+        "order": [17]
+    },
+    "sql-queries": {
+        "topic": "<a href=\"slides/sql-queries.html\">SQL Queries</a>",
+        "materials": ["FoDS 6"],
+        "order": [18]
+    },
+    "sql-advanced": {
+        "topic": "<a href=\"slides/sql-advanced.html\">Advanced SQL</a>",
+        "materials": ["FoDS 6", "[Sakila Queries Exercise](sakila-queries.sql)"],
+        "order": [19,20]
+    },
+    "review3": {
+        "topic": "Review 3",
+        "materials": [""],
+        "order": [21]
+    },
+    "exam3": {
+        "topic": "**Exam 3**",
+        "materials": [""],
+        "order": [22]
     },
     "relational-design": {
         "topic": "<a href=\"slides/relational-design.html\">Relational Design</a>",
-        "readings": ["FoDS 14.1-14.5"],
-        "resources": [""]
+        "materials": ["FoDS 14.1-14.5"],
+        "order": [23]
     },
     "advanced-relational-design": {
         "topic": "<a href=\"slides/advanced-relational-design.html\">Advanced Relational Design</a>",
-        "readings": ["FoDS 15.1-15.3"],
-        "resources": [""]
+        "materials": ["FoDS 15.1-15.3",
+                      "[BCNF Decomposition Exercise](exercises/bcnf-decomposition.pdf)" ],
+        "order": [24]
     },
     "storage-structures": {
         "topic": "<a href=\"slides/storage-structures.html\">Storage Structures</a><br/>T-Square slides: <a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-6170-2d0c-557c-837e-a9ff09efa298/Prof.%20Omiecinski/Prof%20O%20Revisions/Ch17_Ed.pdf\">Ch17_Ed.pdf</a>",
-        "readings": ["FoDS 16.1-16.7"],
-        "resources": [""]
+        "materials": ["FoDS 16.1-16.7"],
+        "order": [25]
     },
     "index-structures": {
         "topic": "<a href=\"slides/index-structures.html\">Indexing Structures</a>",
-        "readings": ["FoDS 17"],
-        "resources": [""]
+        "materials": ["FoDS 17"],
+        "order": [26]
+    },
+    "review4": {
+        "topic": "Review 3",
+        "materials": [""],
+        "order": [27]
+    },
+    "exam4": {
+        "topic": "**Exam 3**",
+        "materials": [""],
+        "order": [28]
     }
 }

@@ -15,12 +15,12 @@
         "order": [3]
     },
     "er-models": {
-        "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-ae1a-73e5-5c31-9a91-d47ce30ac976/book-slides/simpkins/Chapter03_7ed_simpkins.pdf\">ER Models</a>",
+        "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-5eeb-a71f-51ee-a271-91248713e208/book-slides/Chapter03_7ed_simpkins.pdf\">ER Models</a>",
         "materials": ["FoDS 3.1-3.7.3"],
         "order": [4]
     },
     "eer-models": {
-        "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-ae1a-73e5-5c31-9a91-d47ce30ac976/book-slides/Chapter04_7ed_revised.pdf\">EER Models</a>",
+        "topic": "<a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-5eeb-a71f-51ee-a271-91248713e208/book-slides/Chapter04_7ed_simpkins.pdf\">EER Models</a>",
         "materials": ["FoDS 4.1-4.3", "[EER Exercise](slides/eer-exercise.html)"],
         "order": [5]
     },

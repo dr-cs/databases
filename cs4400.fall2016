@@ -1,12 +1,12 @@
 Week 1
-2016-08-23;intro-cs4400
-2016-08-25;intro-databases
+2016-08-23;intro-databases
+2016-08-25;database-concepts
 Week 2
-2016-08-30;database-concepts
-2016-09-01;er-models
+2016-08-30;er-models
+2016-09-01;eer-models
 Week 3
-2016-09-06;eer-models
-2016-09-08;conceptual-design-process
+2016-09-06;conceptual-design-process
+2016-09-08;[EER Exercise](slides/eer-exercise.html)
 Week 4
 2016-09-13;review1
 2016-09-15;exam1
@@ -15,7 +15,7 @@ Week 5
 2016-09-22;relational-model
 Week 6
 2016-09-27;relational-algebra
-2016-09-29;relational-algebra
+2016-09-29;relational-algebra;Project Phase 1 Due
 Week 7
 2016-10-04;relational-calculus
 2016-10-06;review2
@@ -27,7 +27,7 @@ Week 9
 2016-10-20;sql-ddl-crud
 Week 10
 2016-10-25;sql-queries
-2016-10-27;sql-advanced
+2016-10-27;sql-advanced;Project Phase 2 Due
 Week 11
 2016-11-01;sql-advanced
 2016-11-03;review3
@@ -42,6 +42,6 @@ Week 14
 2016-11-24;Thanksgiving - No Class
 Week 15
 2016-11-29;exam4
-2016-12-01;storage-structures
+2016-12-01;storage-structures;Project Phase 3 Due 2012-12-04
 Week 16
 2016-12-06;index-structures

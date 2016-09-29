@@ -5,7 +5,7 @@ title: CS 4400 - Peer Evaluation
 
 # Peer Evaluation
 
-At the end of each phase, each team member should send me an email with the subject "CS 4400 Team N Phase M Peer Eval," where N is your team number and M is the project phase. The body of the email should list each team member with a grade adjustment factor in increments of .05 which indicates the proportion of a team member's fair share of the work that the team member actually did. If each team member contributed their fari share, each team member would get 1.0. The sum of the project contribution factors for each tem member must be equal to the number of team members. For example, if one team membercontributed 110% of her fair share and gets 1.1, some other team member must must have done 90% of their fair share and gets 0.9 (or two team members get 0.95, etc). If any team member gets more than 1.1 or less than 0.9, please include a brief justification.
+At the end of each phase, each team member should send me an email with the subject "CS 4400 Team N Phase M Peer Eval," where N is your team number and M is the project phase. The body of the email should list each team member with a grade adjustment factor in increments of .05 which indicates the proportion of a team member's fair share of the work that the team member actually did. If each team member contributed their fair share, each team member would get 1.0. The sum of the project contribution factors for each tem member must be equal to the number of team members. For example, if one team member contributed 110% of her fair share and gets 1.1, some other team member must must have done 90% of their fair share and gets 0.9 (or two team members get 0.95, etc). If any team member gets more than 1.1 or less than 0.9, please include a brief justification.
 
 Here's an example email for a fictitious Team 0, with five members:
 
@@ -25,4 +25,4 @@ Total: 5.0
 
 If an individual did no work at all, give them a 0.0 and subtract 1.0 from your team's total.
 
-A grade adjustment for a team member will occur only if all other team members concur that that team member should get a grade adjustment. In the above example, if all team members agree that Steve Lemme's project contribution factor is 0.9, then Steve Lemme's final course grade will be the team's overall grade multiplied by 0.9.
+For each project grade for which there is a peer evaluation, each student's grade will be adjusted by multiplying their team's grade by a composite of their team mates' evaluation of their project contributions.

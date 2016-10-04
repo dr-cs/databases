@@ -550,7 +550,6 @@ $R \fullouterjoin_{author_id = editor} S$
 |      NULL | NULL       | NULL      |       6 | AMS        | Month    | 1941 |   NULL |
 +-----------+------------+-----------+---------+------------+----------+------+--------+
 
-
 ** Review Question 1
 
 Given the $r(book)$:

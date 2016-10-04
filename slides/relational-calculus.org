@@ -1,0 +1,53 @@
+#+TITLE:     Relational Calculus
+#+AUTHOR:
+#+EMAIL:
+#+DATE:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS: H:2 toc:nil num:t
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [smaller]
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_HEADER: \def\ojoin{\setbox0=\hbox{$\bowtie$}\rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+#+LaTeX_HEADER: \def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+#+LaTeX_HEADER: \def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+#+LaTeX_HEADER: \def\fullouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
+
+* Relational Calculus
+
+** Tuple Relational Calculus
+
+Tuple relational calculus is a declarative retrieval language based on mathematical logic
+
+  - Relational algebra is procedural -- order of operations matters
+
+- Relational algebra and relational calculus have equivalent expressive power
+
+- A query language $L$ is *relationally complete* if one can express in $L$ any query that can be expressed in relational calculus
+
+In this course we cover *tuple relational calculus* which, along with relational algebra, forms the theoretical basis of SQL. Another variant, *domain relational calculus* is the theoretical basis of Query by Example (QBE), which is far less common than SQL.
+
+** Basic Tuple Relational Caclulus Expressions
+
+\[
+\{t | COND(t)\}
+\]
+
+Where
+
+- $t$ is a tuple variable
+- $COND(t)$ is a boolean expression involving $t$
+
+The result of the expression is all tuples $t$ for which $COND(t)$ evaluates to $true$.
+
+** Range Relations
+
+To find all employees whose salary is above \$50,000:
+
+\[
+\{t | EMPLOYEE(t) AND t.Salary > 50000\}
+\]
+
+- $EMPLOYEE(t)$ is a *range relation*. It ...

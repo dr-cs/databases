@@ -46,7 +46,7 @@
     },
     "relational-algebra": {
         "topic": "<a href=\"slides/relational-algebra.html\">Relational Algebra</a>",
-        "materials": ["FoDS 8.1 - 8.3.4, 8.4.4"],
+        "materials": ["FoDS 8.1 - 8.3.4, 8.4.4", "[Relational Algebra Exercises](exercises/relational-algebra-exercises.pdf)", "[Answers](exercises/relational-algebra-exercises-answers.pdf)"],
         "order": [11,12]
     },
     "relational-calculus": {

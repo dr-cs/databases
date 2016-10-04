@@ -47,7 +47,36 @@ The result of the expression is all tuples $t$ for which $COND(t)$ evaluates to 
 To find all employees whose salary is above \$50,000:
 
 \[
-\{t | EMPLOYEE(t) AND t.Salary > 50000\}
+\{t | EMPLOYEE(t) \text{ AND } t.Salary > 50000\}
 \]
 
-- $EMPLOYEE(t)$ is a *range relation*. It ...
+- $EMPLOYEE(t)$ is a *range relation*. All tuples $t$ come from the $EMPLOYEE$ relation.
+- $t.Salary$ is the value of attribute $Salary$ for tuple $t$
+
+\[
+\{t.Fname, t.Lname | EMPLOYEE(t) \text{ AND } t.Salary > 50000\}
+\]
+
+returns only the $Fname$ and $Lname$ attributes of.
+
+** General Form of Tuple Relational Calculus Expressions
+
+\begin{align*}
+\{t.Bdate, t.Address | & EMPLOYEE(t)\\
+                       & \text{ AND } t.Fname = 'John'\\
+                       & \text{ AND } t.Minit = 'B'\\
+                       & \text{ AND } t.Lname = 'Smith'\}
+\end{align*}
+
+- Tuple variable, $t$
+- Range relation, $R(t)$. Without a range relation, $t$ ranges over all tuples in the universe
+
+  - $EMPLOYEE(t)
+
+- A condition to select tuples from the range
+
+  - $t.Fname = 'John' & \text{ AND } t.Minit = 'B' \text{ AND } t.Lname = 'Smith'$
+
+- A set of attributes to be returned in the result
+
+  - $t.Bdate, t.Address$

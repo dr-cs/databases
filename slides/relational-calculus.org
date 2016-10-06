@@ -59,7 +59,7 @@ To find all employees whose salary is above \$50,000:
 
 returns only the $Fname$ and $Lname$ attributes of.
 
-** General Form of Tuple Relational Calculus Expressions
+** Typical Tuple Relational Calculus Expressions
 
 \begin{align*}
 \{t.Bdate, t.Address | & EMPLOYEE(t)\\
@@ -71,7 +71,7 @@ returns only the $Fname$ and $Lname$ attributes of.
 - Tuple variable, $t$
 - Range relation, $R(t)$. Without a range relation, $t$ ranges over all tuples in the universe
 
-  - $EMPLOYEE(t)
+  - $EMPLOYEE(t)$
 
 - A condition to select tuples from the range
 
@@ -80,3 +80,27 @@ returns only the $Fname$ and $Lname$ attributes of.
 - A set of attributes to be returned in the result
 
   - $t.Bdate, t.Address$
+
+** Universal and Existential Quantification
+
+
+
+** Example Company Database
+
+Employee
+| Fname | Minit | Lname | Ssn |      Bdate | Address     | Sex | Salary | Super_ssn | Dno |
+| John  | B     | Smit  | 123 | 1965-01-09 | 731 Fondren | M   |  30000 |       333 |   5 |
+
+
+** Complicated Example
+
+List the names of exmployees who work on all the projects in Department 5.
+
+\begin{align*}
+\{e.Lname, e.Fname | & EMPLOYEE(e) & &\\
+                     & \text{ AND } ((\forall x) ( & NOT(PROJECT(x)) &\\
+                                                 & & \text{ OR NOT } (x.Dnum=5) \\
+                                                 & \text{ OR } & ((\exists w)(WORKS\_ON(w) \\
+                                                 &  \text{ AND } w.Essn = e.Ssn\\
+                                                 &  \text{ AND } x.Pnumber = w.Pno))))\}
+\end{align*}

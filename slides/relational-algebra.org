@@ -550,6 +550,21 @@ $R \fullouterjoin_{author_id = editor} S$
 |      NULL | NULL       | NULL      |       6 | AMS        | Month    | 1941 |   NULL |
 +-----------+------------+-----------+---------+------------+----------+------+--------+
 
+** Division
+
+Let $R(Z)$ and $S(X)$ be relations where
+
+- $Z$ is the set of attributes in $R$,
+- $X$ is the set of attributes in $S$ and
+- $Y = Z - X$, i.e., the set of attributes in $R$ but not $S$.
+
+$R \div S = T(Y)$ includes tuple $t$ if
+
+- $t_R$ is in $R$ with $T_r[Y] = t$ and
+- $t_R[X] = t_S$ for every tuple $t_s$ in $S$
+
+In plain english: tuples in $R \div S$ includes atributes from tuples in $R$ that appear in combination with every tuple in $S$.
+
 ** Review Question 1
 
 Given the $r(book)$:

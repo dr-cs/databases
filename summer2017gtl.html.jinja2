@@ -1,0 +1,62 @@
+---
+layout: default
+title: CS 2316 - Summer 2017 GTL
+---
+
+<h1>Summer 2017 - Georgia Tech Lorraine</h1>
+
+<h2>Weekly Schedule</h2>
+
+<ul>
+  <li>Lecture: 4 days per week from 8:30 - 9:30</li>
+</ul>
+
+<h2>Lecture Schedule</h2>
+
+<p>
+  Topics link to slides, where available.
+</p>
+
+<ul>
+<li>FoDS means <a href="http://www.amazon.com/Fundamentals-Database-Systems-7th-Edition/dp/0133970779" target="_blank">Fundamentals of Database Systems</a>, the course textbook.
+</ul>
+
+
+<div class="table-responsive">
+  <table class="table table-bordered table-hover">
+
+    <tr class="table-header active">
+      <th>Date</th>
+      <th>Topics</th>
+      <th>Reading and Resources</th>
+      <th>Reminders</th>
+    </tr>
+    {% for row in table %}
+    {% if "internal_header" in row %}
+    <tr class="active"><td colspan="4">{{row["internal_header"]}}</td></tr>
+    {% else %}
+    <tr>
+      <td>{{row["date"]}}</td>
+      <td>
+        {% for item in row["topics"][:-1] %}
+        {{(item|markdown).replace("<p>","").replace("</p>","")}}<br/>
+        {% endfor %}
+        {{(row["topics"][-1]|markdown).replace("<p>","").replace("</p>","")}}
+      </td>
+      <td>
+        {% for item in row["materials"][:-1] %}
+        {{(item|markdown).replace("<p>","").replace("</p>","")}}<br/>
+        {% endfor %}
+        {{(row["materials"][-1]|markdown).replace("<p>","").replace("</p>","")}}
+      </td>
+      <td>
+        {% for item in row["reminders"][:-1] %}
+        {{(item|markdown).replace("<p>","").replace("</p>","")}}<br/>
+        {% endfor %}
+        {{(row["reminders"][-1]|markdown).replace("<p>","").replace("</p>","")}}
+      </td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+  </table>
+</div>

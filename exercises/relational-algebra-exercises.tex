@@ -1,0 +1,203 @@
+\documentclass{exam}
+
+\usepackage{verbatim, multicol, tabularx, graphicx, float, xcolor, colortbl}
+\usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=1mm,
+  belowskip=0mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  numbers=none,
+  frame=single,
+  breaklines=true,
+  breakatwhitespace=true
+}
+
+%% \textwidth = 6.5 in
+%% \textheight = 9 in
+%% \oddsidemargin = 0.0 in
+%% \evensidemargin = 0.0 in
+%% \topmargin = -0.25 in
+%% \headheight = 0.0 in
+%% \headsep = 0.0 in
+%% \parskip = 0.0in
+%% \parindent = 0.0in
+
+\def\ojoin{\setbox0=\hbox{$\bowtie$}%
+  \rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
+\def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
+\def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
+\def\fullouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie\mkern-5.8mu\ojoin}}
+
+\title{Relational Algebra Exercises}
+\date{}
+
+\begin{document}
+\begin{center}
+\LARGE{Relational Algebra Exercises}
+\end{center}
+%\normalsize
+
+\begin{figure}[H]
+
+\section*{Pubs Database Schema}
+
+$author(\underline{author\_id}, first\_name, last\_name)$\\
+
+$author\_pub(\underline{author\_id}, \underline{pub\_id}, author\_position)$\\
+
+$book(\underline{book\_id}, book\_title, month, year, editor)$\\
+
+$pub(\underline{pub\_id}, title, book\_id)$
+
+\begin{itemize}
+\item $author\_id$ in $author\_pub$ is a foreign key referencing $author$
+\item $pub\_id$ in $author\_pub$ is a foreign key referencing $pub$
+\item $book\_id$ in $pub$ is a foreign key referencing $book$
+\item $editor$ in $book$ is a foreign key referencing $author(author\_id)$
+\item Primary keys are underlined
+\end{itemize}
+
+\section*{Pubs Database State}
+
+\begin{multicols}{2}
+
+$r(author)$\\
+\begin{tabular}{|l|l|l|}\hline
+\rowcolor{lightgray} author\_id & first\_name & last\_name \\\hline
+1 & John       & McCarthy  \\\hline
+2 & Dennis     & Ritchie   \\\hline
+3 & Ken        & Thompson  \\\hline
+4 & Claude     & Shannon   \\\hline
+5 & Alan       & Turing    \\\hline
+6 & Alonzo     & Church    \\\hline
+7 & Perry      & White     \\\hline
+8 & Moshe      & Vardi     \\\hline
+9 & Roy        & Batty     \\\hline
+\end{tabular}
+
+\columnbreak
+
+$r(author\_pub)$\\
+\begin{tabular}{|l|l|l|}\hline
+\rowcolor{lightgray} author\_id & pub\_id & author\_position \\\hline
+1 &      1 &      1 \\\hline
+2 &      2 &      1 \\\hline
+3 &      2 &      2 \\\hline
+4 &      3 &      1 \\\hline
+5 &      4 &      1 \\\hline
+5 &      5 &      1 \\\hline
+6 &      6 &      1 \\\hline
+\end{tabular}
+\end{multicols}
+
+\begin{multicols}{2}
+
+$r(book)$\\
+\begin{tabular}{|l|l|l|l|l|}\hline
+\rowcolor{lightgray} book\_id & book\_title & month    & year & editor \\\hline
+       1 & CACM       & April    & 1960 &      8 \\\hline
+       2 & CACM       & July     & 1974 &      8 \\\hline
+       3 & BST        & July     & 1948 &      2 \\\hline
+       4 & LMS        & November & 1936 &      7 \\\hline
+       5 & Mind       & October  & 1950 &   NULL \\\hline
+       6 & AMS        & Month    & 1941 &   NULL \\\hline
+       7 & AAAI       & July     & 2012 &      9 \\\hline
+       8 & NIPS       & July     & 2012 &      9 \\\hline
+\end{tabular}
+
+\columnbreak
+
+$r(pub)$\\
+\begin{tabular}{|l|l|l|}\hline
+\rowcolor{lightgray} pub\_id & title           & book\_id \\\hline
+     1 & LISP            &       1 \\\hline
+     2 & Unix            &       2 \\\hline
+     3 & Info Theory     &       3 \\\hline
+     4 & Turing Machines &       4 \\\hline
+     5 & Turing Test     &       5 \\\hline
+     6 & Lambda Calculus &       6 \\\hline
+\end{tabular}
+
+\end{multicols}
+
+
+
+\caption{Relational Database Schema}
+\label{fig:db-schema}
+\end{figure}
+
+\begin{questions}
+
+  \newpage
+
+\question How many tuples will be returned by the following relational algebra query?
+
+\[
+\pi_{book\_title}(book)
+\]
+
+\begin{solution}[2in]
+2
+\end{solution}
+
+
+\question What question does the following expression answer?
+
+\[
+|\pi_{author\_id}(author)  -  \pi_{editor}(book)|
+\]
+
+\begin{solution}[2in]
+How many authors are not book editors.
+\end{solution}
+
+\question Write a relational algebra expression that returns the names of all authors who are book editors.
+
+\begin{solution}
+$\pi_{first\_name, last\_name}(author \bowtie_{author\_id = editor} book)$
+\end{solution}
+
+\newpage
+
+\question Write a relational algebra expression that returns the names of all authors who are {\bf not} book editors.
+
+\begin{solution}[2in]
+$\pi_{first\_name, last\_name}((\pi_{author\_id}(author)  -  \pi_{editor}(book)) * author)$
+\end{solution}
+
+
+\question Write a relational algebra expression that returns the names of all authors who have at least one publication in the database.
+
+\begin{solution}[2in]
+$\pi_{first\_name, last\_name}(author * author\_pub)$
+\end{solution}
+
+\question How many tuples are returned by the following relational algebra expression?
+
+\[
+author \leftouterjoin_{author\_id = editor} book
+\]
+
+\begin{solution}[2in]
+11
+\end{solution}
+
+\question What question does the following relational algebra expression answer?
+
+\[
+author * (author\_pub * (\sigma_{month = 'July'}(book) * pub))
+\]
+
+
+\begin{solution}
+Which authors authored a pub that was published in July?
+\end{solution}
+
+
+\end{questions}
+
+\end{document}

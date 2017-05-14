@@ -86,7 +86,7 @@
     },
     "sql-advanced": {
         "topic": "<a href=\"slides/sql-advanced.html\">Advanced SQL</a>",
-        "materials": ["FoDS 6", "[Sakila Queries Exercise](sakila-queries.sql)"],
+        "materials": ["FoDS 6", "[Sakila Queries Exercise](exercises/sakila-queries.sql)"],
         "order": [19,20]
     },
     "review3": {

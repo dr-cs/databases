@@ -5,7 +5,7 @@ title: CS 4400 - Movie Rental ER Exercise
 
 # Movie Rental ER Exercise
 
-- A **store** has an an address
+- A **store** a name and an an address. The name is unique.
 - A **staff** (member) has a first name, a last name, an address, and an email
 - A **store** employs at least one **staff**
 - A **staff** must work at a store

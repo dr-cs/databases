@@ -11,6 +11,7 @@ title: CS 4400 - Movie Rental ER Exercise
 - A **staff** must work at a store
 - A **store** is managed by one **staff**
 - A **film** has a title, release year, a rating, a rental rate, and a rental duration
+- An **actor** has a name, a birthdate, and a set of specialties, e.g. comedy, action
 - An **actor** appears in many films
 - A **film** features many actors
 - A **store** has one or more **film**s in its inventory

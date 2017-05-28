@@ -1,0 +1,48 @@
+#+TITLE: Introduction to CS 4400
+#+AUTHOR:
+#+EMAIL:
+#+DATE:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS: H:2 toc:nil num:t
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [smaller]
+#+LaTeX_HEADER: \usepackage{verbatim, multicol, tabularx,}
+#+LaTeX_HEADER: \usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, columns=flexible, basicstyle={\scriptsize\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
+
+* Introduction to CS 4400
+
+
+** Course Overview
+
+- Syllabus
+- Schedule
+- Software
+- Project
+
+** Team Project Ideal
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:team-ideal.png]]
+#+END_CENTER
+
+** Team Project Reality
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:team-reality.png]]
+#+END_CENTER
+
+** Team Formation Considerations
+
+- Technology preferences (OS, language, etc.)
+- Expertise (build management, VCS, UI design)
+- Personal factors (schedule compatibility, personalities)

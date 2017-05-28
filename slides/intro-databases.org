@@ -1,0 +1,83 @@
+#+TITLE: Introduction to Databases
+#+AUTHOR:
+#+EMAIL:
+#+DATE:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS: H:2 toc:nil num:t
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [smaller]
+#+LaTeX_HEADER: \usepackage{verbatim, multicol, tabularx,}
+#+LaTeX_HEADER: \usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, columns=flexible, basicstyle={\scriptsize\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
+
+* Introduction to Databases
+
+** A database is ...
+
+- a logically coherent collection of data,
+- representing some aspect of the world known as a *miniworld* or *universe of discourse*, which is
+- created for a specific purpose and group of users.
+
+A database management system (DBMS) allows us to create and maintain databases on a computer.
+
+** Data and Metadata
+
+- Data
+
+    - Records
+    - Data elements
+
+- Metadata -- "data about data"
+
+    - Types of data elements
+    - Structure of records
+    - Constraints
+
+** Database Development
+
+1. Requirements analysis
+2. Conceptual design
+3. Logical design
+4. Physical design
+
+** The Database Approach
+
+- Self-describing data - metadata stored with data
+- Insulation between data and programs, and data abstraction
+- Multiple views of the data
+- Shared data and multiuser transaction processing
+
+** Database Users
+
+- Database administrators
+- Database designers
+- End users
+- System analysts and programmers
+
+** Capabilities of a DBMS
+
+- Controlling Redundancy
+- Restricting unauthorized access
+- Providing persistent storage for data objects
+- Providing efficient query processing
+- Providing backup and recovery
+- Providing multiple user interfaces
+- Reperesenting relationships among data
+- Enforcing integrity constraints
+- Permitting inference and action through rules and triggers
+
+** History of Database Technology
+
+- Hierarchical and network systems
+- Relational databases (focus of this course)
+- Object-oriented databases
+- XML
+- New applications: media storage (e.g., video, images), data mining, spatial/GIS, time series
+- Big data and NOSQL

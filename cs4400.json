@@ -1,16 +1,16 @@
 {
     "intro-cs4400": {
-        "topic": "<a href=\"slides/intro-cs4400.html\">Intro to CS 4400</a>",
+        "topic": "[Introduction to CS 4400](slides/intro-cs4400.pdf)",
         "materials": [""],
         "order": [1]
     },
     "intro-databases": {
-        "topic": "<a href=\"slides/intro-databases.html\">Intro to Databases</a>",
+        "topic": "[Introduction to Databases](slides/intro-databases.pdf)",
         "materials": ["FoDS 1"],
         "order": [2]
     },
     "database-concepts": {
-        "topic": "<a href=\"slides/database-concepts.html\">Database Concepts</a>",
+        "topic": "[Database Concepts](slides/database-concepts.pdf)",
         "materials": ["FoDS 2"],
         "order": [3]
     },

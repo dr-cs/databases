@@ -1,8 +1,8 @@
 {
     "intro-cs4400": {
         "topic": "[Introduction to CS 4400](slides/intro-cs4400.pdf)",
-        "materials": [""],
-        "order": [1]
+        "materials": ["[Meet the Teacher](http://cs1331.gatech.edu/slides/meet-simpkins.html)"],
+       "order": [1]
     },
     "intro-databases": {
         "topic": "[Introduction to Databases](slides/intro-databases.pdf)",

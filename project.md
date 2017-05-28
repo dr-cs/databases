@@ -3,11 +3,11 @@ layout: default
 title: CS 4400 - Project
 ---
 
-[Summer 2016 Project Description](project-summer2016.html)
-
 # General Project Information
 
 You will design and implement a database application using the MySQL relational database system available via CoC (College of Computing). The Project must be done in groups of 3 - 5 students. Groups of more than 5 or less than 3 will not be allowed. The project will consist of 3 phases (deliverables) as well as a final demonstration to the TA.
+
+At the end of each phase, each team member should submit a [peer evaluation](peer-eval.html). See [peer evaluation instructions ](peer-eval.html) for details.
 
 ## Phase 1
 
@@ -28,6 +28,3 @@ Given the problem specification and your (corrected) relational database schema 
 Submit your Phase 3 deliverable as two SQL files: (remember to substitute your team number for N) `teamN-data.sql` with SQL `insert` statements to populate the database you created in Phase 2, and `teamN-queries.sql` with SQL queries to answer the questions provided in the project description for your semester.
 
 Heavyweight option: in addition to the items above, create an application that provides an interface to the database for a database user as specified in the project desctiption.
-
-
-[Peer Evaluation](peer-eval.html)

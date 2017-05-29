@@ -10,6 +10,9 @@
 #+LaTeX_CLASS_OPTIONS: [smaller]
 #+BEAMER_FRAME_LEVEL: 2
 #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
 #+LaTeX_HEADER: \def\ojoin{\setbox0=\hbox{$\bowtie$}\rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
 #+LaTeX_HEADER: \def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
 #+LaTeX_HEADER: \def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
@@ -166,6 +169,7 @@ $\pi_{name}(\sigma_{breed='Mix'}(pet))$
 becomes:
 #+BEGIN_CENTER
 $MIXES \leftarrow \sigma_{breed='Mix'}(pet)$
+
 $RESULT \leftarrow \pi_{name}(MIXES)$
 #+END_CENTER
 
@@ -254,7 +258,7 @@ pet
 +-----+---------+------------+-----+--------+-----------+
 
 
-Note that we've also done a ~RENAME~ to disambiguate ~name~s and ~id~s:
+Note that we've also done a ~RENAME~ to disambiguate ~name~ and ~id~:
 
 $\rho_{(sid, sname, shelter\_id, pid, pname, breed)}(shelter \times pet)$
 
@@ -304,7 +308,7 @@ $<join condition>$ is of the form $A_i \theta B_j$
 
 - $A_i$ is an attribute of $R$, $B_j$ is an attribute of $S$
 - $dom(A_i) = dom(B_j)$
-- $\theta$ is one of { =, $\ne$, <>, $\lt$, $\le$, $\gt$, $\ge$ }
+- $\theta$ is one of { =, $\ne$, $<>$, $<$, $\le$, $>$, $\ge$ }
 
 A $<join condition>$ can be a conjunction of simple conditions, e.g.:
 
@@ -379,7 +383,6 @@ Where
 Recall the first join example. If we rename the ~id~ attribute to ~shelter_id~ we can use a natural join:
 
 $\rho_{(shelter\_id, sname)}(shelter) * worker$
-
 
 +------------+---------+----+--------+---------------+
 | shelter_id | sname   | id | name   | supervisor_id |

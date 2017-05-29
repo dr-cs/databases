@@ -43,17 +43,17 @@
         "order": [8]
     },
     "relational-model": {
-        "topic": "<a href=\"slides/relational-model.html\">Relational Model</a>",
+        "topic": "[Relational Model](slides/relational-model.pdf)</a>",
         "materials": ["FoDS 5"],
         "order": [9,10]
     },
     "relational-algebra": {
-        "topic": "<a href=\"slides/relational-algebra.html\">Relational Algebra</a>",
+        "topic": "[Relational Algebra](slides/relational-algabra.pdf)",
         "materials": ["FoDS 8.1 - 8.3.4, 8.4.4", "[Relational Algebra Exercises](exercises/relational-algebra-exercises.pdf)", "[Answers](exercises/relational-algebra-exercises-answers.pdf)"],
         "order": [11,12]
     },
     "relational-calculus": {
-        "topic": "<a href=\"slides/relational-calculus.html\">Relational Calculus</a>",
+        "topic": "[Relational Calculus](slides/relational-calculus.pdf)",
         "materials": ["FoDS 8.5"],
         "order": [13]
     },
@@ -68,27 +68,27 @@
         "order": [15]
     },
     "er-relational-mapping": {
-        "topic": "<a href=\"slides/er-relational-mapping.html\">ER - Relational Mapping</a>",
+        "topic": "[ER - Relational Mapping](slides/er-relational-mapping.pdf)</a>",
         "materials": ["FoDS 9"],
         "order": [16]
     },
     "basic-relational-design": {
-        "topic": "<a href=\"slides/basic-relational-design.html\">Basic Relational Design</a>",
+        "topic": "[Basic Relational Design](slides/basic-relational-design.pdf)",
         "materials": ["FoDS 14.1-14.3"],
         "order": [100]
     },
     "sql-ddl-crud": {
-        "topic": "<a href=\"slides/sql-ddl-crud.html\">SQL DDL and CRUD</a>",
+        "topic": "[SQL DDL and CRUD](slides/sql-ddl-crud.html)",
         "materials": ["FoDS 6"],
         "order": [17]
     },
     "sql-queries": {
-        "topic": "<a href=\"slides/sql-queries.html\">SQL Queries</a>",
+        "topic": "[SQL Queries](slides/sql-queries.html)",
         "materials": ["FoDS 6"],
         "order": [18]
     },
     "sql-advanced": {
-        "topic": "<a href=\"slides/sql-advanced.html\">Advanced SQL</a>",
+        "topic": "[Advanced SQL](slides/sql-advanced.html)",
         "materials": ["FoDS 6", "[Sakila Queries Exercise](exercises/sakila-queries.sql)"],
         "order": [19,20]
     },
@@ -103,23 +103,23 @@
         "order": [22]
     },
     "relational-design": {
-        "topic": "<a href=\"slides/relational-design.html\">Relational Design</a>",
+        "topic": "[Relational Design](slides/relational-design.html)",
         "materials": ["FoDS 14.1-14.5"],
         "order": [23]
     },
     "advanced-relational-design": {
-        "topic": "<a href=\"slides/advanced-relational-design.html\">Advanced Relational Design</a>",
+        "topic": "[Advanced Relational Design](slides/advanced-relational-design.html)",
         "materials": ["FoDS 15.1-15.3",
                       "[BCNF Decomposition Exercise](exercises/bcnf-decomposition.pdf)" ],
         "order": [24]
     },
     "storage-structures": {
-        "topic": "<a href=\"slides/storage-structures.html\">Storage Structures</a><br/>T-Square slides: <a href=\"https://files.t-square.gatech.edu/access/content/group/gtc-6170-2d0c-557c-837e-a9ff09efa298/Prof.%20Omiecinski/Prof%20O%20Revisions/Ch17_Ed.pdf\">Ch17_Ed.pdf</a>",
+        "topic": "[Storage Structures](slides/storage-structures.html)<br/>T-Square slides: [Ch17_Ed.pdf](https://files.t-square.gatech.edu/access/content/group/gtc-6170-2d0c-557c-837e-a9ff09efa298/Prof.%20Omiecinski/Prof%20O%20Revisions/Ch17_Ed.pdf)",
         "materials": ["FoDS 16.1-16.7"],
         "order": [25]
     },
     "index-structures": {
-        "topic": "<a href=\"slides/index-structures.html\">Indexing Structures</a>",
+        "topic": "[Indexing Structures](slides/index-structures.html)",
         "materials": ["FoDS 17"],
         "order": [26]
     },

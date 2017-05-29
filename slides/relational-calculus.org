@@ -10,6 +10,9 @@
 #+LaTeX_CLASS_OPTIONS: [smaller]
 #+BEAMER_FRAME_LEVEL: 2
 #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
 #+LaTeX_HEADER: \def\ojoin{\setbox0=\hbox{$\bowtie$}\rule[-.02ex]{.25em}{.4pt}\llap{\rule[\ht0]{.25em}{.4pt}}}
 #+LaTeX_HEADER: \def\leftouterjoin{\mathbin{\ojoin\mkern-5.8mu\bowtie}}
 #+LaTeX_HEADER: \def\rightouterjoin{\mathbin{\bowtie\mkern-5.8mu\ojoin}}
@@ -88,9 +91,12 @@ returns only the $Fname$ and $Lname$ attributes of.
 ** Example Company Database
 
 Employee
-| Fname | Minit | Lname | Ssn |      Bdate | Address     | Sex | Salary | Super_ssn | Dno |
-| John  | B     | Smit  | 123 | 1965-01-09 | 731 Fondren | M   |  30000 |       333 |   5 |
 
++-------+-------+-------+-----+------------+-------------+-----+--------+-----------+-----+
+| Fname | Minit | Lname | Ssn |      Bdate | Address     | Sex | Salary | Super_ssn | Dno |
++-------+-------+-------+-----+------------+-------------+-----+--------+-----------+-----+
+| John  | B     | Smit  | 123 | 1965-01-09 | 731 Fondren | M   |  30000 |       333 |   5 |
++-------+-------+-------+-----+------------+-------------+-----+--------+-----------+-----+
 
 ** Complicated Example
 

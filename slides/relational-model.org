@@ -10,6 +10,9 @@
 #+LaTeX_CLASS_OPTIONS: [bigger]
 #+BEAMER_FRAME_LEVEL: 2
 #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
 
 * Relational Data Model
 
@@ -57,14 +60,14 @@ A *database* is a set of relations.
 
 A *tuple* is an **ordered list** of values that is part of a relation
 
-- Example: $t_1 =$ `<1, 'John', 'McCarthy'>`
+- Example: $t_1 =$ <1, 'John', 'McCarthy'>
 
 Each value in the tuple is that tuple's value for the corresponding attribute of the relation schema.
 
 Example: (these are equivalent notations):
 
-- $t_1[first\_name] =$ `'John'` (bracket notation)
-- $t_1.first\_name =$ `'John'` (object notation)
+- $t_1[first\_name] =$ 'John' (bracket notation)
+- $t_1.first\_name =$ 'John' (object notation)
 - $t_1[2] =$ `'John'` (positional notation)
 
 The *degree* or *arity* of a relation schema is the number of attributes it has.
@@ -83,7 +86,7 @@ Each attribute has a name and a *domain*
 
 - A *logical definition* of a domain specifies a simple type such as integer or string, and a *data type* or *format*
 
-  - Example: `USA_phone_number` as $(ddd) ddd-dddd$, where $d$ is a digit
+  - Example: ~USA_phone_number~ as $(ddd) ddd-dddd$, where $d$ is a digit
 
 ** Mathematical Definition of Relation
 
@@ -203,7 +206,7 @@ Example: salary of an employee cannot exceed the salary of the employee's superv
 
 - Referential integrity constraints
 
-    - Insert a tuple in a refferring relation whose FK does not appear as a PK value in any tuple of the referenced relation
+    - Insert a tuple in a referring relation whose FK does not appear as a PK value in any tuple of the referenced relation
 
 ** Constraint Violations on Update
 

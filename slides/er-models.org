@@ -1,0 +1,225 @@
+#+TITLE: Entity-Relationship Models
+#+AUTHOR:
+#+EMAIL:
+#+DATE:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS: H:2 toc:nil num:t
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [smaller]
+#+LaTeX_HEADER: \usepackage{verbatim, multicol, tabularx,}
+#+LaTeX_HEADER: \usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, columns=flexible, basicstyle={\scriptsize\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
+
+* Entity-Relationship Models
+
+** Entity-Relationship Models
+
+- Entities
+- Attributes
+- Relationships
+
+
+** The Role of Conceptual Models
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[https://i.chzbgr.com/maxW500/6474992896/h503A45A5/][file:people-skills.jpg]]
+#+END_CENTER
+
+High-level but concrete view of data understandable by end users and database developers
+
+** Database Design Process
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:fig3_1-design-process.png]]
+#+END_CENTER
+
+ER modeling is the box labeled "Conceptual Design."
+
+** Entities and Entity Types
+
+An entity is a real or abstract thing with an independent existence in the world.
+
+- Person (real)
+- Building (real)
+- Job (abstract)
+- Course (abstract)
+
+In ER models we often say "entity" when we mean "entity type."
+
+An entity type is a set of entities (instances) with the same attributes, i.e., properties of entities
+
+** Atomic and Composite Attributes
+
+- Atomic attributes, e.g., ~Birthdate~
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+- Composite attributes, e.g., ~Name~
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+
+** Attributes (2)
+
+- Single-valued, e.g.,
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+- Multi-valued, e.g.,
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+
+** Attributes (3)
+
+- Stored, e.g.,
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+- Derived, e.g.,
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+
+** Attributes (4)
+
+- Complex attributes
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+- NULL values
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:]]
+#+END_CENTER
+
+
+** Entity Sets
+
+
+
+** Keys
+
+
+** Domains/Value Sets
+
+
+
+** First Draft of Department ER Model
+
+Specification:
+
+-
+
+ER Model:
+
+
+** First Draft of Project ER Model
+
+Specification:
+
+-
+
+ER Model:
+
+
+** First Draft of Employee ER Model
+
+Specification:
+
+-
+
+ER Model:
+
+
+** First Draft of Dependent ER Model
+
+Specification:
+
+-
+
+ER Model:
+
+
+
+** Relationship Types
+
+A.K.A. Relationship sets
+
+
+** Relationship Instances
+
+
+** Relationship Degree
+
+
+** Relationships as Attributes
+
+
+** Recursive Relationships
+
+
+** Binary Relationship Constraints
+
+- Cardinality ratios
+
+- Participation constraints
+
+
+** Cardinality Ratios
+
+
+** Participation Constraints
+
+- Total (existence): every entity in an entity set participates in a relationship
+
+- Partial: some of the entities in an entity set participate in a relationship
+
+
+** Attributes of Relationship Types
+
+
+** Weak Entity Types
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:bro-weak-entity.jpg]]
+#+END_CENTER
+
+** Weak Entity Types
+
+- Don't have keys
+- Has partial keys
+- Must have total participation with identifying entity type
+- Identifiable by a composite key: identifying entity's key + weak entity's partial key

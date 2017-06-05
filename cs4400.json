@@ -34,7 +34,8 @@
     },
     "review1": {
         "topic": "Review 1",
-        "materials": [""],
+        "materials": ["[cs4400-exam1-practice.pdf](cs4400-exam1-practice.pdf)",
+                     "[cs4400-exam1-practice-answers.pdf](cs4400-exam1-practice-answers.pdf)"],
         "order": [7]
     },
     "exam1": {

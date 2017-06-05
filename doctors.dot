@@ -1,0 +1,79 @@
+graph trip_planner {
+        node [shape=box]; USER;
+
+  node [shape=ellipse]; License [label=<<u>LicenseNumber</u>>]; Name, FirstName, LastName, Type;
+  License -- DOCTOR;
+  FirstName -- Name;
+  LastName -- Name;
+  Name -- DOCTOR;
+  Type -- DOCTOR;
+
+  node [shape=box] SURGEON; GENERAL_PRACTITIONER;
+  node [shape=ellipse, peripheries=1]; Specialty;
+  Specialty -- SURGEON;
+
+  node [shape=circle, peripheries=1]; sub_doctor [label="d"];
+
+  DOCTOR -- sub_doctor [label="Type", color="black:invis:black"];
+  # sub_doctor -- SURGEON [label="'Surgeon'", headlabel=<&#x222a;>, labeldistance=10, labelangle=0];
+  #sub_doctor -- GENERAL_PRACTITIONER [label="'GP'", headlabel=<&#x222a;>, labeldistance=4, labelangle=0];
+  sub_doctor -- SURGEON [dir="back", arrowhead="empty", label="'Surgeon'"];
+  sub_doctor -- GENERAL_PRACTITIONER [dir="back", arrowhead="empty", label="'GP'"];
+
+  node [shape=box]; OFFICE;
+  node [shape=ellipse]; OfficeName [label=<<u>OfficeName</u>>]; Address; Number; Street; City; State; Zip;
+  Number -- Address;
+  Street -- Address;
+  City -- Address;
+  State -- Address;
+  Zip -- Address;
+  Address -- OFFICE;
+  OfficeName -- OFFICE;
+
+  node [shape=diamond]; PRACTICES_AT;
+  DOCTOR --  PRACTICES_AT [label="N", color="black:invis:black"];
+  PRACTICES_AT -- OFFICE [label="1"];
+
+  {rank=same; DOCTOR; OFFICE}
+
+  node [shape=box]; HOSPITAL;
+  node [shape=ellipse]; HName [label=<<u>HospitalName</u>>]; HAddress [label="Address"]; HNumber [label="Number"]; HStreet [label="Street"]; HCity [label="City"]; HState [label="State"]; HZip [label="Zip"];
+  HOSPITAL -- HAddress;
+  HAddress -- HNumber;
+  HAddress -- HStreet;
+  HAddress -- HCity;
+  HAddress -- HState;
+  HAddress -- HZip;
+  HOSPITAL -- HName;
+
+  node [shape=diamond, peripheries=1]; AFFILIATED_WITH;
+  SURGEON --  AFFILIATED_WITH [label="M", color="black:invis:black"];
+  AFFILIATED_WITH -- HOSPITAL [label="N", color="black:invis:black"];
+
+  node [shape=box, peripheries=2] SURGERY;
+  node [shape=ellipse, peripheries=1, style=solid]; Date [label=<<u>Date</u>>];
+  node [shape=ellipse, peripheries=1, style=solid]; SurgeryType;
+  SURGERY -- Date [style=solid];
+  SURGERY -- SurgeryType [style=solid];
+
+  node [shape=diamond, peripheries=2]; LEADS;
+  LEADS -- SURGERY [label="N", color="black:invis:black"];
+  SURGEON -- LEADS [label="1"];
+
+  node [shape=diamond, peripheries=1]; PERFORMS;
+  SURGEON -- PERFORMS [label="M"];
+  PERFORMS -- SURGERY [label="N"];
+
+  node [shape=box, peripheries=1]; PATIENT;
+  node [shape=ellipse, peripheries=1]; SSN [label=<<u>SSN</u>>]; PName [label="Name"];
+  PATIENT -- SSN;
+  PATIENT -- PName;
+
+  node [shape=diamond, peripheries=1]; RECEIVES;
+  SURGERY -- RECEIVES [label="N", color="black:invis:black"];
+  RECEIVES -- PATIENT [label="1"];
+
+  node [shape=diamond, peripheries=1]; PCP;
+  GENERAL_PRACTITIONER -- PCP [label="1"];
+  PCP -- PATIENT [label="N", color="black:invis:black"];
+}

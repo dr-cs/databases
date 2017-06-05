@@ -3,6 +3,8 @@ layout: default
 title: CS 4400 - Project
 ---
 
+[Project description for Summer 2017 GTL](project-summer2017gtl/sncf.html).
+
 # General Project Information
 
 You will design and implement a database application using the MySQL relational database system available via CoC (College of Computing). The Project must be done in groups of 3 - 5 students. Groups of more than 5 or less than 3 will not be allowed. The project will consist of 3 phases (deliverables) as well as a final demonstration to the TA.

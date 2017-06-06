@@ -9,7 +9,7 @@ You are a database developer at [SNCF](http://www.sncf.com/), the French nationa
 
 ## User Interface (UI) Mock-up
 
-Following is a list of mockups of the screens that make up the database application (the user documents, using terminology from our [conceptual design process](../slides/conceptual-design-process.pdf)), with UI flow arrows and textual descriptions. You can derive an EER diagram, semantic constraints, relational model, SQL statements, and the application itself from these diagrams and descriptions.
+Following is a list of mockups of the screens that make up the database application (the user documents, using terminology from our [conceptual design process](../slides/conceptual-design-process.pdf)), with UI flow arrows and textual descriptions. You can derive an EER diagram, semantic constraints, information flow diagram, relational model, SQL statements, and the application itself from these mock-ups and descriptions. Please note that these are low-fidelity mock-ups. Your UI will likely (and probobly should) look different.
 
 ### Login
 
@@ -29,10 +29,11 @@ A user account is required to access the system, so the database must maintain u
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="registration.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
+Items marked with a * are required.
+Email is unique. Credit card is unique.
 </td>
 </tr>
 </table>
@@ -42,7 +43,7 @@ A user account is required to access the system, so the database must maintain u
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="admin-dashboard.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 
@@ -55,7 +56,7 @@ A user account is required to access the system, so the database must maintain u
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="edit-train.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 Dates of cancellation due to strikes.
@@ -68,7 +69,7 @@ Dates of cancellation due to strikes.
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="passenger-manifest.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 
@@ -81,7 +82,7 @@ Dates of cancellation due to strikes.
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="customer-dashboard.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 
@@ -94,7 +95,7 @@ Dates of cancellation due to strikes.
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="search-trips.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 
@@ -107,7 +108,7 @@ Dates of cancellation due to strikes.
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="book-trip.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 
@@ -120,7 +121,7 @@ Dates of cancellation due to strikes.
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="passenger.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 
@@ -133,7 +134,7 @@ Dates of cancellation due to strikes.
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="pay-trip.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 
@@ -146,7 +147,7 @@ Dates of cancellation due to strikes.
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="" alt="" width="100%" />
+<img src="trip-status.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 

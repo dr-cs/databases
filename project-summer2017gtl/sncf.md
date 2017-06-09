@@ -3,7 +3,7 @@ layout: exercise
 title: CS 4400 - Summer 2017 Project
 ---
 
-# Super Nouveaux Chemins pour la France (SNCF)
+# Super Nouveaux Chemins de Fer Français (SNCF)
 
 You are a database developer at [SNCF](http://www.sncf.com/), the French national rail company. Management has decided to implement a new train reservation system for customers that not only allows customers to book trips and administrators to edit routes, but allows management to enter trains that are cancelled due to strikes by the [CGT](http://www.cgt.fr/) and have customers' trips automatically rerouted.
 
@@ -51,12 +51,12 @@ Email is unique. Credit card is unique.
 </tr>
 </table>
 
-### Edit Train (Route)
+### New Train (Route)
 
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="edit-train.png" alt="" width="100%" />
+<img src="new-train.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
 Dates of cancellation due to strikes.

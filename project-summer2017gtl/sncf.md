@@ -5,6 +5,10 @@ title: CS 4400 - Summer 2017 Project
 
 # Super Nouveaux Chemins de Fer Français (SNCF)
 
+<center>
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Carte_TGV.svg" height="400px" />
+</center>
+
 You are a database developer at [SNCF](http://www.sncf.com/), the French national rail company. Management has decided to implement a new train reservation system for customers that not only allows customers to book trips and administrators to edit routes, but allows management to enter trains that are cancelled due to strikes by the [CGT](http://www.cgt.fr/) and have customers' trips automatically rerouted.
 
 ## User Interface (UI) Mock-up
@@ -46,7 +50,7 @@ Email is unique. Credit card is unique.
 <img src="admin-dashboard.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
+Admin can create new train routes, see passenger manifests, and set the status of a train. When the CGT strikes they cancel particular trains for particular dates. The administrator can set the status of certain trains as cancelled due to strike for specific dates, which will be reflected on all affected customer trip reports.
 </td>
 </tr>
 </table>
@@ -59,7 +63,7 @@ Email is unique. Credit card is unique.
 <img src="new-train.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Dates of cancellation due to strikes.
+Train number is unique. Note that train number is like a flight number -- it identifies a route, not a specific physical train. Each train runs daily. For simplicity we will stipulate that all trains begin and end their routes within a single day. A train originates at a station at a time, makes zero or more stops at other stations, and terminates at a station. Passengers may embark or disembark at any stop.
 </td>
 </tr>
 </table>
@@ -72,7 +76,7 @@ Dates of cancellation due to strikes.
 <img src="passenger-manifest.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
+Admin can select legs of a route and see passenger manifest for those legs.
 </td>
 </tr>
 </table>
@@ -85,7 +89,7 @@ Dates of cancellation due to strikes.
 <img src="customer-dashboard.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
+Profile information and list of all future trips currently booked. Status of each trip shows OK or Cancellations if an legs of the trip are affected by a strike. Viewing trips details shows all legs of trip and which legs are cancelled due to strike, if applicable. Trip can then be re-routed at no additional charge.
 </td>
 </tr>
 </table>
@@ -98,7 +102,7 @@ Dates of cancellation due to strikes.
 <img src="search-trips.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
+Search trips is where you search for and select the outbound and (optionally) return portion of a trip. A trip may be direct or may include one change of train.
 </td>
 </tr>
 </table>
@@ -111,7 +115,7 @@ Dates of cancellation due to strikes.
 <img src="book-trip.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
+Book trip is where you add passenger information and pay.
 </td>
 </tr>
 </table>
@@ -124,7 +128,7 @@ Dates of cancellation due to strikes.
 <img src="passenger.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
+The first passenger must be the user who is booking the trip. Other passengers don't need to have accounts.
 </td>
 </tr>
 </table>

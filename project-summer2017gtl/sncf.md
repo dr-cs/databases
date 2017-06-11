@@ -63,7 +63,7 @@ Admin can create new train routes, see passenger manifests, and set the status o
 <img src="new-train.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Train number is unique. Note that train number is like a flight number -- it identifies a route, not a specific physical train. Each train runs daily. For simplicity we will stipulate that all trains begin and end their routes within a single day. A train originates at a station at a time, makes zero or more stops at other stations, and terminates at a station. Passengers may embark or disembark at any stop.
+Train number is unique. Note that train number is like a flight number -- it identifies a route, not a specific physical train. Each train runs daily. For simplicity we will stipulate that all trains begin and end their routes within a single day. Each train runs daily. A train originates at a station at a time, makes zero or more stops at other stations, and terminates at a station. Passengers may embark or disembark at any stop.
 </td>
 </tr>
 </table>
@@ -89,7 +89,7 @@ Admin can select legs of a route and see passenger manifest for those legs.
 <img src="customer-dashboard.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Profile information and list of all future trips currently booked. Status of each trip shows OK or Cancellations if an legs of the trip are affected by a strike. Viewing trips details shows all legs of trip and which legs are cancelled due to strike, if applicable. Trip can then be re-routed at no additional charge.
+Profile information, list of all future trips currently booked, and list of previous trips with prices paid. Status of each upcoming trip shows OK or Cancellations if any legs of the trip are affected by a strike. Viewing trip details shows all legs of trip and which legs are cancelled due to strike, if applicable. Trip can then be re-routed at no additional charge.
 </td>
 </tr>
 </table>
@@ -107,6 +107,20 @@ Search trips is where you search for and select the outbound and (optionally) re
 </tr>
 </table>
 
+### Search Results
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<img src="search-results.png" alt="" width="100%" />
+</td>
+<td width="50%" valign="top">
+Customer selects outbound trip and optionally the return trip, weach of which may include one change of train.
+</td>
+</tr>
+</table>
+
+
 ### Book Trip
 
 <table>
@@ -115,7 +129,7 @@ Search trips is where you search for and select the outbound and (optionally) re
 <img src="book-trip.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Book trip is where you add passenger information and pay.
+Book trip is where you add passenger information and pay. Clicking "Book" cahrges the credit card on file for the customer. Base price is .1 € per kilometer. The price is reduced by 10% for 18-25 year old passengers and 15% for passengers under 18.
 </td>
 </tr>
 </table>
@@ -133,28 +147,15 @@ The first passenger must be the user who is booking the trip. Other passengers d
 </tr>
 </table>
 
-### Pay for Trip
+### Trip Details
 
 <table>
 <tr>
 <td width="50%" valign="top">
-<img src="pay-trip.png" alt="" width="100%" />
+<img src="trip-details.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-
-</td>
-</tr>
-</table>
-
-### Check Trip Status
-
-<table>
-<tr>
-<td width="50%" valign="top">
-<img src="trip-status.png" alt="" width="100%" />
-</td>
-<td width="50%" valign="top">
-
+If any of the legs are cancelled due to a strike, the trip may be rerouted.
 </td>
 </tr>
 </table>

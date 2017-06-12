@@ -71,7 +71,6 @@ $\sigma_{breed='mix'}(pet)$ returns:
 |          2 |  1 | Bailey | Mix       |
 +------------+----+--------+-----------+
 
-
 ** Properties of ~SELECT~
 
 - Result of $\sigma_{<condition>}(R)$ has same schema as $R$, i.e., same attributes
@@ -157,7 +156,6 @@ $\pi_{name}(\sigma_{breed='Mix'}(pet))$ produces:
 | Bailey |
 +--------+
 
-
 ** Intermediate Results
 
 Previous *in-line expression* could be split up into multiple steps with named intermediate results.
@@ -235,7 +233,6 @@ pet
 |          2 |  2 | Sophie | Lab       |
 |          2 |  3 | Heidi  | Dachshund |
 +------------+----+--------+-----------+
-
 
 ** Cross Product Example
 
@@ -340,7 +337,6 @@ shelter
 |  2 | Mansell |
 +----+---------+
 
-
 ** Join Example
 
 $worker \Join_{shelter\_id = sid} \rho_{(sid, sname)}(shelter)$
@@ -364,7 +360,6 @@ $worker \Join_{shelter\_id = sid} \rho_{(sid, sname)}(shelter)$
 Notice that we had to use renaming of attributes in $shelter$.
 
 A join operation in which the comparison operator $\theta$ is $=$ is called an *equijoin*.
-
 
 ** Natural Join
 
@@ -396,7 +391,6 @@ $\rho_{(shelter\_id, sname)}(shelter) * worker$
 |          2 | Mansell |  7 | Xaoxi  |             6 |
 |          2 | Mansell |  8 | Rohan  |             6 |
 +------------+---------+----+--------+---------------+
-
 
 ** Outer Joins
 
@@ -527,7 +521,6 @@ Where
 
 $R \fullouterjoin{<join condition>} S$ returns the tuples in $R \times S$ that satisfy the $<join condition>$ as well as the tuples from both $R$ and $S$ that don't match the join condition. In the result relation the unmatched tuples are null-padded to give them the correct degree in the result.
 
-
 ** Full Outer Join Example
 
 Show all authors and books, matching editors with their books.
@@ -645,7 +638,6 @@ $\sigma_{year < 1960}(book) \cup \sigma_{year > 2000}(book)$
 |       8 | NIPS       | July     | 2012 |      9 |
 +---------+------------+----------+------+--------+
 
-
 ** Review Question 3
 
 Given:
@@ -675,7 +667,6 @@ shelter
 +----+---------+
 
 How would we find the names of all the workers who work at Mansell?
-
 
 ** Review Question 3 Answer
 

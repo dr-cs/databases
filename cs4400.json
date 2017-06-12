@@ -49,7 +49,7 @@
         "order": [9,10]
     },
     "relational-algebra": {
-        "topic": "[Relational Algebra](slides/relational-algabra.pdf)",
+        "topic": "[Relational Algebra](slides/relational-algebra.pdf)",
         "materials": ["FoDS 8.1 - 8.3.4, 8.4.4", "[Relational Algebra Exercises](exercises/relational-algebra-exercises.pdf)", "[Answers](exercises/relational-algebra-exercises-answers.pdf)"],
         "order": [11,12]
     },
@@ -60,7 +60,8 @@
     },
     "review2": {
         "topic": "Review 2",
-        "materials": [""],
+        "materials": ["[cs4400-exam2-practice.pdf](cs4400-exam2-practice.pdf)",
+                     "[cs4400-exam2-practice-answers.pdf](cs4400-exam2-practice-answers.pdf)"],
         "order": [14]
     },
     "exam2": {

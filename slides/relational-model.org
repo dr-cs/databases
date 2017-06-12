@@ -50,12 +50,6 @@ A *relation*, or *relation state*, $r(R)$ is a **set** of tuples that conform to
 
 A *database* is a set of relations.
 
-** An Example Relation
-
-#+BEGIN_CENTER
-[[file:student-relation.png]]
-#+END_CENTER
-
 ** Tuples
 
 A *tuple* is an **ordered list** of values that is part of a relation
@@ -73,6 +67,12 @@ Example: (these are equivalent notations):
 The *degree* or *arity* of a relation schema is the number of attributes it has.
 
 - Example: $AUTHOR$ has degree 3.
+
+** An Example Relation
+
+#+BEGIN_CENTER
+[[file:student-relation.png]]
+#+END_CENTER
 
 ** Attributes and Domains
 
@@ -92,13 +92,13 @@ Each attribute has a name and a *domain*
 
 Given $R(A_1, ..., A_n)$,
 
-- $r(R) \subseteq (dom(A_1) \times dom(A_2) \times ... \times dom(A_n)$
+- $r(R) \subseteq (dom(A_1) \times dom(A_2) \times ... \times dom(A_n))$
 
 The total number of values, or *cardinality*, of a domain $D$ is $|D|$.
 
 So the maximum number of tuples that could possibly be in $r(R)$ is
 
-- $|dom(A_1)| \times |dom(A_2)| \times ... \times |dom(A_n)|$
+- $|dom(A_1)| * |dom(A_2)| * ... * |dom(A_n)|$
 
 ** Properties of Relations
 
@@ -114,7 +114,7 @@ So the maximum number of tuples that could possibly be in $r(R)$ is
 
     - Facts not asserted explicitly are assumed to be false
 
-** Constraints
+** Kinds of Constraints
 
 - Inherent model-based (or *implicit*) constraints
 
@@ -125,7 +125,6 @@ So the maximum number of tuples that could possibly be in $r(R)$ is
     - keys, referential integrity
 
 - Application-based (or semantic constraints), a.k.a., business rules
-
 
 ** Superkeys
 

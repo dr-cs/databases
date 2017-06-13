@@ -142,7 +142,7 @@ By the definition of the relational model, the full attribute set of a relation 
 
 ** Keys
 
-A *minimal superkey* is a superkey removing an attribute would make it no longer unique, and thus no longer a superkey.
+A *minimal superkey* is a superkey for which removing an attribute would make it no longer a superkey.
 
 We call a minimal superkey a *key*.
 
@@ -224,12 +224,63 @@ Example: salary of an employee cannot exceed the salary of the employee's superv
 - Referential integrity constraints
 
     - Update a tuple in a refferring relation with a FK does not appear as a PK value in any tuple of the referenced relation
+    - Update the primary key for a tuple in a referenced relation for which there are tuples in referring relationships. The tuples in referring relationships would be orphaned or end up referring to the wrong parent tuple.
 
 ** Constraint Violations on Delete
 
 - Referential integrity
 
-** Employee - Department Example
+  - Delete a tuple in a referenced relationship for which there are tuples in referring relationships. The tuples in referring relationships would be orphaned.
+
+
+** Domain Integrity Violation Examples
+
+    +-----------+------------+-----------+
+    | author_id | first_name | last_name |
+    +-----------+------------+-----------+
+    |         1 | John       | McCarthy  |
+    |         4 | Claude     | Shannon   |
+    |         5 | Alan       | Turing    |
+    |         6 | Alonzo     | Church    |
+    +-----------+------------+-----------+
+
+$dom(author_id) = integer, dom(first_name) = string, dom(last_name) = string$
+
+- Insert $<"Two", "Jenny", "McCarthy">$ -- $"Two"$ is not in $dom(author_id)$
+- Update $<1, "John", "McCarthy">$ to $<1, "John", 1>$-- $1$ is not in $dom(last_name)$
+
+** Key Integrity Violation Examples
+
+
+    +-------------+------------+-----------+
+    | _author_id_ | first_name | last_name |
+    +-------------+------------+-----------+
+    |           1 | John       | McCarthy  |
+    |           4 | Claude     | Shannon   |
+    |           5 | Alan       | Turing    |
+    |           6 | Alonzo     | Church    |
+    +-------------+------------+-----------+
+
+- Insert $<1, "Jenny", "McCarthy">$ -- $1$ is an existing primary key
+- Update $<6, "John", "McCarthy">$ to $<1, "John", 1>$-- $6$ is an existing primary key
+
+** Entity Integrity Violation Examples
+
+
+    +-------------+------------+-----------+
+    | _author_id_ | first_name | last_name |
+    +-------------+------------+-----------+
+    |           1 | John       | McCarthy  |
+    |           4 | Claude     | Shannon   |
+    |           5 | Alan       | Turing    |
+    |           6 | Alonzo     | Church    |
+    +-------------+------------+-----------+
+
+- Insert $<NULL, "Jenny", "McCarthy">$ -- $NULL$ not allowed for primary key
+- Update $<NULL, "John", "McCarthy">$ to $<1, "John", 1>$-- $NULL$ not allowed for primary key
+
+
+** Referential Integrity Violations -- Employee - Department Example
 
 #+BEGIN_CENTER
 [[file:employee-department.png]]

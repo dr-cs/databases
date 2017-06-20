@@ -262,7 +262,7 @@ $dom(author_id) = integer, dom(first_name) = string, dom(last_name) = string$
     +-------------+------------+-----------+
 
 - Insert $<1, "Jenny", "McCarthy">$ -- $1$ is an existing primary key
-- Update $<6, "John", "McCarthy">$ to $<1, "John", 1>$-- $6$ is an existing primary key
+- Update $<1, "John", "McCarthy">$ to $<6, "John", "McCarthy">$-- $6$ is an existing primary key
 
 ** Entity Integrity Violation Examples
 

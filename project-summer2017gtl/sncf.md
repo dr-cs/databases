@@ -9,11 +9,11 @@ title: CS 4400 - Summer 2017 Project
 <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Carte_TGV.svg" height="400px" />
 </center>
 
-You are a database developer at [SNCF](http://www.sncf.com/), the French national rail company. Management has decided to implement a new train reservation system for customers that not only allows customers to book trips and administrators to edit routes, but allows management to enter trains that are cancelled due to strikes by the [CGT](http://www.cgt.fr/) and have customers' trips automatically rerouted.
+You are a database developer at [SNCF](http://www.sncf.com/), the French national rail company. Management has decided to implement a new train reservation system for customers that not only allows customers to book trips and administrators to edit routes, but allows management to enter trains that are canceled due to strikes by the [CGT](http://www.cgt.fr/) and have customers' trips automatically rerouted.
 
 ## User Interface (UI) Mock-up
 
-Following is a list of mockups of the screens that make up the database application (the user documents, using terminology from our [conceptual design process](../slides/conceptual-design-process.pdf)), with UI flow arrows and textual descriptions. You can derive an EER diagram, semantic constraints, information flow diagram, relational model, SQL statements, and the application itself from these mock-ups and descriptions. Please note that these are low-fidelity mock-ups. Your UI will likely (and probobly should) look different.
+Following is a list of mockups of the screens that make up the database application (the user documents, using terminology from our [conceptual design process](../slides/conceptual-design-process.pdf)), with UI flow arrows and textual descriptions. You can derive an EER diagram, semantic constraints, information flow diagram, relational model, SQL statements, and the application itself from these mock-ups and descriptions. Please note that these are low-fidelity mock-ups. Your UI will likely (and probably should) look different.
 
 ### Login
 
@@ -50,7 +50,7 @@ Email is unique. Credit card is unique.
 <img src="admin-dashboard.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Admin can create new train routes, see passenger manifests, and set the status of a train. When the CGT strikes they cancel particular trains for particular dates. The administrator can set the status of certain trains as cancelled due to strike for specific dates, which will be reflected on all affected customer trip reports.
+Admin can create new train routes, see passenger manifests, and set the status of a train. When the CGT strikes they cancel particular trains for particular dates. The administrator can set the status of certain trains as canceled due to strike for specific dates, which will be reflected on all affected customer trip reports.
 </td>
 </tr>
 </table>
@@ -63,7 +63,7 @@ Admin can create new train routes, see passenger manifests, and set the status o
 <img src="new-train.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Train number is unique. Note that train number is like a flight number -- it identifies a route, not a specific physical train. Each train runs daily. For simplicity we will stipulate that all trains begin and end their routes within a single day. Each train runs daily. A train originates at a station at a time, makes zero or more stops at other stations, and terminates at a station. Passengers may embark or disembark at any stop.
+Train number is unique. Note that train number is like a flight number -- it identifies a route, not a specific physical train. Each train runs daily. For simplicity we will stipulate that all trains begin and end their routes within a single day. A train originates at a station at a time, makes zero or more stops at other stations, and terminates at a station. Passengers may embark or disembark at any stop. Distance may be modeled as distance between stations or distance of a stop from origin (think about which approach simplifies calculations).
 </td>
 </tr>
 </table>
@@ -76,7 +76,7 @@ Train number is unique. Note that train number is like a flight number -- it ide
 <img src="passenger-manifest.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Admin can select legs of a route and see passenger manifest for those legs.
+Admin can select legs of a route and see passenger manifest for those legs. A leg is a segment of a train's route between two stops.
 </td>
 </tr>
 </table>
@@ -89,7 +89,7 @@ Admin can select legs of a route and see passenger manifest for those legs.
 <img src="customer-dashboard.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Profile information, list of all future trips currently booked, and list of previous trips with prices paid. Status of each upcoming trip shows OK or Cancellations if any legs of the trip are affected by a strike. Viewing trip details shows all legs of trip and which legs are cancelled due to strike, if applicable. Trip can then be re-routed at no additional charge.
+Profile information, list of all future trips currently booked, and list of previous trips with prices paid. Status of each upcoming trip shows OK or Cancellations if any legs of the trip are affected by a strike. Viewing trip details shows all legs of trip and which legs are canceled due to strike, if applicable. Trip can then be re-routed at no additional charge.
 </td>
 </tr>
 </table>
@@ -102,7 +102,7 @@ Profile information, list of all future trips currently booked, and list of prev
 <img src="search-trips.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Search trips is where you search for and select the outbound and (optionally) return portion of a trip. A trip may be direct or may include one change of train.
+Search trips is where you search for and select the out-bound and (optionally) return portion of a trip. A trip may be direct or may include one change of train.
 </td>
 </tr>
 </table>
@@ -115,7 +115,7 @@ Search trips is where you search for and select the outbound and (optionally) re
 <img src="search-results.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Customer selects outbound trip and optionally the return trip, weach of which may include one change of train.
+Customer selects out-bound trip and optionally the return trip, each of which may include one change of train.
 </td>
 </tr>
 </table>
@@ -129,12 +129,12 @@ Customer selects outbound trip and optionally the return trip, weach of which ma
 <img src="book-trip.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Book trip is where you add passenger information and pay. Clicking "Book" cahrges the credit card on file for the customer. Base price is .1 € per kilometer. The price is reduced by 10% for 18-25 year old passengers and 15% for passengers under 18.
+Book trip is where you add passenger information and pay. Clicking "Book" charges the credit card on file for the customer. Base price is .1 € per kilometer. The price is reduced by 10% for 18-25 year old passengers and 15% for passengers under 18.
 </td>
 </tr>
 </table>
 
-### Enter Passenger Infomation
+### Enter Passenger Information
 
 <table>
 <tr>
@@ -155,7 +155,13 @@ The first passenger must be the user who is booking the trip. Other passengers d
 <img src="trip-details.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-If any of the legs are cancelled due to a strike, the trip may be rerouted.
+If any of the legs are canceled due to a strike, the trip may be rerouted.
 </td>
 </tr>
 </table>
+
+## Phase 1 Deliverables
+
+A single PDF named
+- EER Diagram
+- Information

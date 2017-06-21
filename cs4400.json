@@ -50,7 +50,8 @@
     },
     "relational-algebra": {
         "topic": "[Relational Algebra](slides/relational-algebra.pdf)",
-        "materials": ["FoDS 8.1 - 8.3.4, 8.4.4", "[Relational Algebra Exercises](exercises/relational-algebra-exercises.pdf)", "[Answers](exercises/relational-algebra-exercises-answers.pdf)"],
+        "materials": ["FoDS 8.1 - 8.3.4, 8.4.4", "[Relational Algebra Exercises](exercises/relational-algebra-exercises.pdf)", "[Answers](exercises/relational-algebra-exercises-answers.pdf)",
+                     "[Relational Algebra Masterclass](resources/relational-algebra-masterclass.pdf)"],
         "order": [11,12]
     },
     "relational-calculus": {

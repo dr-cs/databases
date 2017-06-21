@@ -159,9 +159,3 @@ If any of the legs are canceled due to a strike, the trip may be rerouted.
 </td>
 </tr>
 </table>
-
-## Phase 1 Deliverables
-
-A single PDF named
-- EER Diagram
-- Information

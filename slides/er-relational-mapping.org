@@ -12,7 +12,7 @@
 #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
 #+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
 #+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
-#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
+
 
 
 * ER to Relational Mapping
@@ -34,7 +34,7 @@
 A strong entity type is modeled as a relation schema.
 
 - Each simple attribute of the entity type becomes an attribute of the relation schema
-    - For composite attributes, only the simple component attributes are present in the relation schema
+  - For composite attributes, only the simple component attributes are present in the relation schema
 - Choose a key of the entity type to be the primary key of the relation schema
 
 A tuple of a relation is an entity instance.
@@ -43,9 +43,11 @@ A tuple of a relation is an entity instance.
 
 Map the attributes of the weak entity type to a relation schema as you wold do for a strong entity type.
 
-Add the primary key attribute(s) of the identifying relationship to the attributes of the weak entity type's relation schema. These attributes should be foreign keys to the identifying relation's primary key.
+- Add the primary key attribute(s) of the identifying relationship to the attributes of the weak entity type's relation schema.
+  - These attributes should be foreign keys to the identifying relation's primary key.
 
-The primary key of the weak entity types relation schema is a combination of the foreign keys to the identifying relation schema and the weak entity's partial key. If no partial key, then the whole attribute list is the primary key.
+- The primary key of the weak entity types relation schema is a combination of the foreign keys to the identifying relation schema and the weak entity's partial key.
+  - If no partial key, then the whole attribute list is the primary key.
 
 ** Step 3: Mapping Binary 1:1 Relationship Types
 
@@ -59,7 +61,11 @@ Favor the foreign key approach
 
 ** Binary 1:1 Relationships - Foreign Key Approach
 
-Include the primary key of one relation schema as a foreign key of the other relation schema, as well as all the simple attributes of the relationship type. If there is a total participation constraint on only one entity type, that entity type's relation schema should be the one with the foreign key (otherwise relation states with the foreign key could have many NULLs).
+Include the primary key of one relation schema as a foreign key of the other relation schema, as well as all the simple attributes of the relationship type.
+
+- If there is a total participation constraint on only one entity type, that entity type's relation schema should be the one with the foreign key (otherwise relation states with the foreign key could have many NULLs).
+
+This is the approach you should use.
 
 ** Binary 1:1 Relationships - Merged Relation Schema Approach
 
@@ -67,7 +73,11 @@ If the relationship type has a total participation constraint with both entity t
 
 ** Binary 1:1 Relationships - Cross-reference or Relationship Relation Schema Approach
 
-Set up a third relation schema to represent the relationship, with foreign keys to both participating relation schemas' primary keys. One foreign key becomes the primary key of the relationship schema and the other is a unique key. This approach isn't necessary in 1:1 relationships but is required for M:N relationships.
+Set up a third relation schema to represent the relationship, with foreign keys to both participating relation schemas' primary keys.
+
+- One foreign key becomes the primary key of the relationship schema and the other is a unique key.
+
+This approach isn't necessary in 1:1 relationships but is required for M:N relationships.
 
 ** Step 4: Mapping Binary 1:N Relationship Types
 
@@ -78,7 +88,10 @@ Two approaches:
 
 ** Binary 1:N Relationships - Foreign Key Approach
 
-Give the relation schema on the N side of the relationship a foreign key to the primary key of the relation schema on the 1 side of the relationship. The relation schema on the N side of the relationship should also include all the simple attributes of the relationship.
+Give the relation schema on the N side of the relationship a foreign key to the primary key of the relation schema on the 1 side of the relationship.
+- The relation schema on the N side of the relationship should also include all the simple attributes of the relationship.
+
+This is the approach you should use for binary 1:N relationships.
 
 ** Binary 1:N Relationships - Relationship Relation Schema Approach
 
@@ -86,14 +99,16 @@ Create a relationship relation schema whose attributes are the primary keys of t
 
 This option avoids excessive NULL values if few of the tuples on the N side of the relationship participate in the relationship.
 
-
 ** Step 5: Mapping Binary M:N Relationship Types
 
-Create a relationship relation schema with foreign keys that are the primary keys of the participating entity types. The combination of these foreign keys is the primary key of the relationship relation. Also include any simple attributes of the relationship.
+Create a relationship relation schema with foreign keys that are the primary keys of the participating entity types.
+- The combination of these foreign keys is the primary key of the relationship relation.
+- Also include any simple attributes of the relationship.
 
 ** Step 6: Mapping Multivalued Attributes
 
-Create a relation schema for each multivalued attribute which includes the multivalued attribute, A, and a foreign key, K, which is the primary key of the relation schema which represents the entity type from which the multivalued attribute comes. The primary key of the relation schema is the combination of A and K.
+Create a relation schema for each multivalued attribute which includes the multivalued attribute, A, and a foreign key, K, which is the primary key of the relation schema which represents the entity type from which the multivalued attribute comes.
+- The primary key of the relation schema is the combination of A and K.
 
 ** Step 8: Mapping Superclasses and Subclasses
 
@@ -109,9 +124,12 @@ Two options:
 
 ** Step 8A: Multiple relation schemas -- all classes
 
-Map the superclass and all subclasses to their own relation schemas. Each relation schema includes all the attributes that are part of their entity type, plus the same primary key, which comes from the superclass. In the subclass relation schemas the primary key is also a foreign key to the superclass's relation schema.
+Map the superclass and all subclasses to their own relation schemas.
 
-This approach that works for any class hierarchy but will result in single-attribute relation schemas for subclasses with no specialized attributes.
+- Each relation schema includes all the attributes that are part of their entity type, plus the same primary key, which comes from the superclass.
+- In the subclass relation schemas the primary key is also a foreign key to the superclass's relation schema.
+
+This approach works for any class hierarchy but will result in single-attribute relation schemas for subclasses with no specialized attributes.
 
 ** Step 8B: Multiple relation schemas -- subclasses
 

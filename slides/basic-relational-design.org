@@ -5,9 +5,9 @@
 #+DESCRIPTION:
 #+KEYWORDS:
 #+LANGUAGE:  en
-#+OPTIONS: H:2 toc:nil num:t
+#+OPTIONS: H:2 toc:nil num:t ^:{}
 #+LaTeX_CLASS: beamer
-#+LaTeX_CLASS_OPTIONS: [bigger]
+#+LaTeX_CLASS_OPTIONS: [smaller]
 #+BEAMER_FRAME_LEVEL: 2
 #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
 #+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
@@ -116,13 +116,13 @@ Every attribute value is atomic, which is effectively guaranteed by most RDBMS s
 The following relation is not in 1NF:
 
 #+ATTR_LATEX: :align |c|c|c|c|
-|----------+----------------+-----------+--------------------------------|
-| Dname    | _Dnumber_      | Dmgr_ssn  | Dlocations                     |
-|----------+----------------+-----------+--------------------------------|
-| Research | 5              | 333445555 | {Bellaire, Sugarland, Houston} |
-| Admin    | 4              | 987654321 | {Stafford}                     |
-| HQ       | 1              | 888665555 | {Houston}                      |
-|----------+----------------+-----------+--------------------------------|
+|----------+-----------+------------+--------------------------------|
+| Dname    | _Dnumber_ | ~Dmgr_ssn~ | Dlocations                     |
+|----------+-----------+------------+--------------------------------|
+| Research |         5 |  333445555 | {Bellaire, Sugarland, Houston} |
+| Admin    |         4 |  987654321 | {Stafford}                     |
+| HQ       |         1 |  888665555 | {Houston}                      |
+|----------+-----------+------------+--------------------------------|
 
 Because Dlocations values are not atomic.
 
@@ -131,13 +131,13 @@ Because Dlocations values are not atomic.
 Many ways to fix (see book). Best way is to decompose into two schemas:
 
 #+ATTR_LATEX: :align |c|c|c|
-|----------+----------------+-----------|
-| Dname    | _Dnumber_      | Dmgr_ssn  |
-|----------+----------------+-----------|
-| Research | 5              | 333445555 |
-| Admin    | 4              | 987654321 |
-| HQ       | 1              | 888665555 |
-|----------+----------------+-----------|
+|----------+-----------+------------|
+| Dname    | _Dnumber_ | ~Dmgr_ssn~ |
+|----------+-----------+------------|
+| Research |         5 |  333445555 |
+| Admin    |         4 |  987654321 |
+| HQ       |         1 |  888665555 |
+|----------+-----------+------------|
 
 #+ATTR_LATEX: :align |c|c|c|
 |----------------+------------------|
@@ -160,7 +160,7 @@ A relation is in 2NF if it is in 1NF and no nonprime attribute has a partial dep
 
 Given
 
-EMP_PROJ(_Ssn_, _Pnumber_, Hours, Ename, Pname, Plocation)
+EMP_PROJ( _Ssn_, _Pnumber_, Hours, Ename, Pname, Plocation)
 
 and
 
@@ -176,15 +176,15 @@ EMP_PROJ is also not in 2NF due to FD3. Nonprime attributes Pname and Plocation 
 
 Move the nonprime attributes that are dependent on part of the primary key to their own schemas with the part of the primary key on which they are fully dependent.
 
-EMP_PROJ(_Ssn_, _Pnumber_, Hours, Ename, Pname, Plocation)
+EMP_PROJ( _Ssn_, _Pnumber_, Hours, Ename, Pname, Plocation)
 
 Becomes
 
-EMP(_Ssn_, Ename)
+EMP( _Ssn_, Ename)
 
-EMP_PROJ(_Ssn_, _Pnumber_, Hours)
+EMP_PROJ( _Ssn_, _Pnumber_, Hours)
 
-PROJ(_Pnumber_, Pname, Plocation)
+PROJ( _Pnumber_, Pname, Plocation)
 
 ** Third Normal Form (3NF)
 
@@ -192,7 +192,7 @@ A schema is in 3NF if it is in 2NF and no nonprime attribute is transitively dep
 
 Given
 
-EMP_DEPT(_Ssn_, Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn)
+EMP_DEPT( _Ssn_, Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn)
 
 and
 
@@ -205,13 +205,13 @@ EMP_DEPT is not in 3NF because Dname and Dmgr_ssn are transitively dependent on 
 
 Move the nonprime attributes that are transitively dependent on the primary key through another attribute to a separate schema along with the attribute through which they are transitively dependent on the PK.
 
-EMP_DEPT(_Ssn_, Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn)
+EMP_DEPT( _Ssn_, Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn)
 
 becomes
 
-EMP(_Ssn_, Ename, Bdate, Address, Dnumber)
+EMP( _Ssn_, Ename, Bdate, Address, Dnumber)
 
-DEPT(_Dnumber_, Dname, Dmgr_ssn)
+DEPT( _Dnumber_, Dname, Dmgr_ssn)
 
 Note that a natural join on Dnumber will recover the original relation.
 

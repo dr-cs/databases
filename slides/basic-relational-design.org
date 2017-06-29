@@ -61,11 +61,12 @@ In other words, whenever the attributes on the left side of a functional depende
 |-------+-------+-------+-------|
 
 
-$A \rightarrow C$ is satisfied because no two tuples with the same $A$ value have different $C$ values.
+$A \rightarrow C$ is satisfied because no two tuples with the same $A$ value have different $C$ values.\\
 
-$C \rightarrow A$ is not satisfied because we find a
-$t_1 = (a_2, b_3, c_2, d_3)$ and
-$t_2 = (a_3, b_3, c_2, d_4)$
+$C \rightarrow A$ is not satisfied because\\
+
+$t_4 = (a_2, b_3, c_2, d_3)$ and\\
+$t_5 = (a_3, b_3, c_2, d_4)$
 
 ** Satisfying vs. Holding
 

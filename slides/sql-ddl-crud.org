@@ -1,5 +1,5 @@
-#+TITLE:     SQL
-#+AUTHOR:    Data Definition Language
+#+TITLE:     SQL DDL and CRUD
+#+AUTHOR:
 #+EMAIL:
 #+DATE:
 #+DESCRIPTION:
@@ -12,9 +12,14 @@
 #+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
 #+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
 #+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \usepackage{verbatim, multicol, tabularx,}
+#+LaTeX_HEADER: \usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, columns=flexible, basicstyle={\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
 #+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
 
-* Structured Query Language
+* SQL DDL and CRUD
+
+** Structured Query Language
 
 - Practical implementation of the relational model
 - Originally SEQUEL (Structured English QEUry Language) at IBM research
@@ -68,9 +73,9 @@ CREATE TABLE pub (
 );
 #+END_SRC
 
-By convention, SQL keywords are in ALL CAPS in instructional examples but not when typing.
+By convention, SQL keywords are in ALL CAPS in instructional examples but not when typing.\\
 
-Note: see [pubs-schema.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/resources/pubs-schema.sql) and [pubs-data.sql](http://www.cc.gatech.edu/~simpkins/teaching/gatech/cs4400/resources/pubs-data.sql) for examples of SQL database creation and population commands.
+Note: see [[http://csimpkins.github.io/databases/resources/pubs-schema.sql][pubs-schema.sql]] and [[http://csimpkins.github.io/dtabases/resources/pubs-data.sql][pubs-data.sql]] for examples of SQL database creation and population commands.
 
 ** Column Types
 
@@ -80,7 +85,7 @@ Each column, or attribute, is given a data type (domain in the relational model)
 - String data types, and
 - Temporal data types.
 
-Get comprehensive doucmentation at [http://dev.mysql.com/doc/refman/5.7/en/data-types.html](http://dev.mysql.com/doc/refman/5.7/en/data-types.html). We'll cover the most commonly used data types.
+Get comprehensive doucmentation at [[http://dev.mysql.com/doc/refman/5.7/en/data-types.html][http://dev.mysql.com/doc/refman/5.7/en/data-types.html]]. We'll cover the most commonly used data types.
 
 ** Numeric Data Types
 
@@ -92,7 +97,7 @@ Get comprehensive doucmentation at [http://dev.mysql.com/doc/refman/5.7/en/data-
 
 ** String Data Types
 
-- ~CAR~
+- ~CHAR~
 
 - ~VARCHAR~
 
@@ -117,7 +122,7 @@ Get comprehensive doucmentation at [http://dev.mysql.com/doc/refman/5.7/en/data-
 - Primary key
 - Foreign key
 
-We'll also learn named constraints, assertions and triggers when in Advanced SQL.
+We'll also learn named constraints, assertions and triggers in Advanced SQL.
 
 ** Key and Primary Key Constraints
 
@@ -142,7 +147,6 @@ A primary key is implicitly ~UNIQUE~
 #+END_SRC
 
 Notice also that we don't allow ~book_id~ to be ~NULL~. So ~pub~ totally participates in its relationship with ~book~.
-
 
 ** CHECK Constraints
 
@@ -234,7 +238,7 @@ Means that if the row from the ~book~ table containing ~book_id~ is deleted, the
 
 Notice that if you choose ~SET NULL~ as your ~ON DELETE~ action your column definition must allow nulls.
 
-** Referential Integrity in MySQL
+** Referential Integrity Constraints in MySQL
 
 MySQL will only enforce referential integrity contraints that are specfied separately from column definitions as above. The following syntax:
 

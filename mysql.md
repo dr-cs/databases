@@ -28,14 +28,12 @@ If you run Linux, you already know how to install MySQL. :-)
 
     - Be sure to select the "Developer" option, which installs the MySQL server and various client programs.
 
-2. To be able to run the `mysql` command line client you'll need to add the MySQL installation binaries directory to your `PATH`. Try executing these commands at the Windows command prompt (`C:\>` is the command prompt, which will probably include your current working directory -- don't type it. Substitute your MySQL version if it's newer than 5.7.):
+2. To be able to run the `mysql` command line client you'll need to add the MySQL installation binaries directory to your `PATH`. Copy the following path element to your clipboard:
 
-    ```sh
-    C:\> PATH=%PATH%;C:\Program Files\MySQL\MySQL Server 5.7\bin
-    C:\> export PATH
-    ```
-
-
+```
+C:\Program Files\MySQL\MySQL Server 5.7\bin
+```
+Now open your control panel, search for the "set environment variables" option, click the "Environment Variables" button, select the Path environment variable, and add the text you just copied to the clipboard. Here's a document explaining how to set environment variables in Windows: [environment variables](http://cs1331.gatech.edu/environment-variables.html). After you add the MySQL bin directory to your path, close the Windows command shell and re-open it so it re-reads the environment variables.
 
 
 ## Running MySQL
@@ -59,6 +57,17 @@ MySQL is a client-server database system. To "run MySQL" you need both a server 
 - `-p` tells `mysql` to prompt for `<user_name>`'s password before connecting. If the user specified in `-u` has an empty password, you can leave off `-p`.
 - `<database_name>` is the name of a database to use upon starting the `mysql` client.
 
+So running the MySQL client as thr root user would look like this:
+
+```sh
+$ mysql -u root -p
+Enter password:
+Welcome to MySQL ...
+...
+mysql>
+```
+
+The password is either empty, if you installed on macOS with HomeBrew or some linux package managers, or it's some value you chose when you ran the MySQL installer.
 
 ## Initial MySQL Setup
 
@@ -79,7 +88,13 @@ Query OK, 0 rows affected (0.01 sec)
 
 ```
 
-### Creating a User
+In the example above `rootpassword` is the root user's password. You should choose something other than the literal string `rootpassword`, or if you set a password during installation and wish to set the password to the empty string to save yourself some typing, you can set the root user's password to nothing like this:
+
+```bash
+mysql> alter user 'root'@'localhost' identified by '';
+```
+
+### Creating a User (Optional)
 
 After setting a root password it's a good idea to set up MySQL user accounts for different purposes. For example, you can create a MySQL user account for CS 4400 example databases and another user for your project work. To set up a user (assuming `mysql.server` has already been started):
 

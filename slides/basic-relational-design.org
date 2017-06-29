@@ -160,7 +160,9 @@ A relation is in 2NF if it is in 1NF and no nonprime attribute has a partial dep
 
 Given
 
+#+BEGIN_VERSE
 EMP_PROJ( _Ssn_, _Pnumber_, Hours, Ename, Pname, Plocation)
+#+END_VERSE
 
 and
 
@@ -176,15 +178,19 @@ EMP_PROJ is also not in 2NF due to FD3. Nonprime attributes Pname and Plocation 
 
 Move the nonprime attributes that are dependent on part of the primary key to their own schemas with the part of the primary key on which they are fully dependent.
 
+#+BEGIN_VERSE
 EMP_PROJ( _Ssn_, _Pnumber_, Hours, Ename, Pname, Plocation)
+#+END_VERSE
 
 Becomes
 
+#+BEGIN_VERSE
 EMP( _Ssn_, Ename)
 
 EMP_PROJ( _Ssn_, _Pnumber_, Hours)
 
 PROJ( _Pnumber_, Pname, Plocation)
+#+END_VERSE
 
 ** Third Normal Form (3NF)
 
@@ -192,7 +198,9 @@ A schema is in 3NF if it is in 2NF and no nonprime attribute is transitively dep
 
 Given
 
+#+BEGIN_VERSE
 EMP_DEPT( _Ssn_, Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn)
+#+END_VERSE
 
 and
 
@@ -205,13 +213,19 @@ EMP_DEPT is not in 3NF because Dname and Dmgr_ssn are transitively dependent on 
 
 Move the nonprime attributes that are transitively dependent on the primary key through another attribute to a separate schema along with the attribute through which they are transitively dependent on the PK.
 
+#+BEGIN_VERSE
 EMP_DEPT( _Ssn_, Ename, Bdate, Address, Dnumber, Dname, Dmgr_ssn)
+#+END_VERSE
 
 becomes
 
+
+#+BEGIN_VERSE
 EMP( _Ssn_, Ename, Bdate, Address, Dnumber)
 
 DEPT( _Dnumber_, Dname, Dmgr_ssn)
+#+END_VERSE
+
 
 Note that a natural join on Dnumber will recover the original relation.
 

@@ -105,15 +105,17 @@ Get comprehensive doucmentation at [[http://dev.mysql.com/doc/refman/5.7/en/data
 
 - ~ENUM~
 
-** Temporal Dta Types
+** Temporal Data Types
 
-- ~DATE~
+- ~DATE~ - ~'YYYY-MM-DD'~
 
-- ~DATETIME~
+- ~DATETIME~ - ~'YYYY-MM-DD HH:MM:SS'~ - stored in "local time"
 
-- ~TIMESTAMP~
+- ~TIMESTAMP~ - ~'YYYY-MM-DD HH:MM:SS'~ - converted to UTC based on client's time zone, converted to local time based on client's time zone
 
-- ~TIME~
+- ~TIME~ - ~'HH:MM:SS'~ -- be sure to include the colons if you abbreviate
+
+See the [[MySQL reference manual section on date and time types][https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html]].
 
 ** Constraints
 

@@ -5,7 +5,7 @@ title: CS 4400 - MySQL Guide
 
 # MySQL Guide
 
-This guide walks you through installation, intitial setup, and general use of MySQL on your computer.
+This guide walks you through installation, intitial setup, and general use of MySQL on your computer. After using this guide to install MySQL and become comfortable with the command-line client, you should bookmark the [MySQL online reference manual](https://dev.mysql.com/doc/refman/5.7/en/) to learn details.
 
 ## Installing MySQL
 

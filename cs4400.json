@@ -80,10 +80,15 @@
         "materials": ["FoDS 14.1-14.3"],
         "order": [100]
     },
-    "sql-ddl-crud": {
-        "topic": "[SQL DDL and CRUD](slides/sql-ddl-crud.html)",
+    "sql-ddl": {
+        "topic": "[SQL DDL](slides/sql-ddl.pdf)",
         "materials": ["FoDS 6"],
         "order": [17]
+    },
+    "sql-crud": {
+        "topic": "[SQL CRUD](slides/sql-crud.pdf)",
+        "materials": ["FoDS 6"],
+        "order": [18]
     },
     "sql-queries": {
         "topic": "[SQL Queries](slides/sql-queries.html)",

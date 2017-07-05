@@ -1,0 +1,219 @@
+#+TITLE:     SQL DDL
+#+AUTHOR:    Data Definition Language
+#+EMAIL:
+#+DATE:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+LANGUAGE:  en
+#+OPTIONS: H:2 toc:nil num:t
+#+LaTeX_CLASS: beamer
+#+LaTeX_CLASS_OPTIONS: [smaller]
+#+BEAMER_FRAME_LEVEL: 2
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+#+LaTeX_HEADER: \setbeamertemplate{footline}[frame number]
+#+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
+#+LaTeX_HEADER: \usepackage{verbatim, multicol, tabularx,}
+#+LaTeX_HEADER: \usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
+#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, columns=flexible, basicstyle={\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
+#+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
+
+* SQL DDL and CRUD
+
+** Structured Query Language
+
+- Practical implementation of the relational model
+- Originally SEQUEL (Structured English QEUry Language) at IBM research
+- SQL became standard in 1986
+- Supported by all major RDBMS vendors, with minor (and sometimes major) differences
+
+SQL's big advantage: if you stick to ANSI SQL, your database code is portable between RDBMS systems.
+
+** SQL Relational Model
+
+- Relations are *tables*
+- Tuples are *rows*
+- Attributes are *columns*
+
+For the most part these terms are interchangeable.
+
+- Important difference: tables allow duplicate rows
+
+** Schemas and Catalogs
+
+A *schema* (database in the relational model) is a collection of related tables and constructs. A schema has:
+
+- a schema name
+- an authorization identifier (user who owns the schema)
+
+In MySQL ~create schema~ is a synonym for ~create database~.
+
+A catalog is a named collection of schemas. MySQL includes a ~table_catalog~ column in its ~information_schema.tables~ table for compatibility with the SQL standard, but does not use catalogs.
+
+** CREATE TABLE
+
+The ~CREATE TABLE~ command creates a *base table* (~CREATE VIEW~ creates a *virtual* or *derived* table):
+
+General form:
+#+BEGIN_SRC sql
+CREATE TABLE <table_name> (
+ <column_name> <column_type> <column_constraints>...,
+ [... ,]
+ <table_constraints>,
+ [...]
+);
+#+END_SRC
+
+** CREATE TABLE Example
+
+#+BEGIN_SRC sql
+CREATE TABLE pub (
+  pub_id INT PRIMARY KEY,
+  title VARCHAR(16) NOT NULL,
+  book_id INT NOT NULL REFERENCES book(book_id)
+);
+#+END_SRC
+
+By convention, SQL keywords are in ALL CAPS in instructional examples but not when typing.\\
+
+Note: see [[http://csimpkins.github.io/databases/resources/pubs-schema.sql][pubs-schema.sql]] and [[http://csimpkins.github.io/dtabases/resources/pubs-data.sql][pubs-data.sql]] for examples of SQL database creation and population commands.
+
+** Column Types
+
+Each column, or attribute, is given a data type (domain in the relational model). MySQL has
+
+- Numeric data types,
+- String data types, and
+- Temporal data types.
+
+Get comprehensive doucmentation at [[http://dev.mysql.com/doc/refman/5.7/en/data-types.html][http://dev.mysql.com/doc/refman/5.7/en/data-types.html]]. We'll cover the most commonly used data types.
+
+** Numeric Data Types
+
+- ~INT~
+
+- ~FLOAT~ or ~DOUBLE~
+
+- ~DECIMAL~
+
+** String Data Types
+
+- ~CHAR~
+
+- ~VARCHAR~
+
+- ~TEXT~
+
+- ~ENUM~
+
+** Temporal Data Types
+
+- ~DATE~ - 'YYY-MM-DD'
+
+- ~DATETIME~ - 'YYYY-MM-DD HH:MM:SS' - stored in "local time"
+
+- ~TIMESTAMP~ - 'YYYY-MM-DD HH:MM:SS' - converted to UTC based on client's time zone, converted to local time based on client's time zone
+
+- ~TIME~ - 'HH:MM:SS' -- be sure to include the colons if you abbreviate
+
+See the [[https://dev.mysql.com/doc/refman/5.7/en/date-and-time-types.html][MySQL reference manual section on date and time types]].
+
+** Constraints
+
+- Attribute (a.k.a. column) constraints
+- Key (a.k.a. unique)
+- Primary key
+- Foreign key
+
+We'll also learn named constraints, assertions and triggers in Advanced SQL.
+
+** Key and Primary Key Constraints
+
+Key:
+
+#+BEGIN_SRC sql
+  name CHAR(10) UNIQUE,
+#+END_SRC
+
+
+Primary key:
+#+BEGIN_SRC sql
+  pub_id INT PRIMARY KEY,
+#+END_SRC
+
+A primary key is implicitly ~UNIQUE~
+
+** Foreign Key Constratins
+
+#+BEGIN_SRC sql
+  book_id INT NOT NULL REFERENCES book(book_id)
+#+END_SRC
+
+Notice also that we don't allow ~book_id~ to be ~NULL~. So ~pub~ totally participates in its relationship with ~book~.
+
+** CHECK Constraints
+
+#+BEGIN_SRC sql
+CREATE TABLE bartender (
+  id INT PRIMARY KEY,
+  name VARCHAR(10) NOT NULL,
+  age INT CHECK (age > 20)
+);
+#+END_SRC
+
+Note: MySQL does not enforce ~CHECK~ constraints. We'll learn about triggers in Advanced SQL.
+
+** SQL Scripts
+
+Common practice to create scrtipts for creation of a database and insertion of initial data.
+
+[[../resources/dorms-schema.sql][dorms-schema.sql]]:
+
+#+BEGIN_SRC sql
+create database dorms;
+use dorms;
+
+drop table if exists dorm;
+create table dorm (
+    dorm_id integer primary key autoincrement,
+    name text,
+    spaces integer
+);
+...
+#+END_SRC
+
+[[../resources/dorms-data.sql][dorms-data.sql]]:
+
+#+BEGIN_SRC sql
+insert into dorm values(1, 'Armstrong', 124);
+...
+insert into student values (1, 'Alice', 3.6, 1);
+...
+#+END_SRC
+
+** MySQL Batch Mode
+
+Two ways to run an SQL script:
+
+1. From OS shell:
+
+#+BEGIN_SRC sql
+$ mysql -u root < dorms-schema.sql
+#+END_SRC
+
+2. From MySQL shell:
+
+#+BEGIN_SRC sql
+mysql> source dorms-schema.sql
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 1 row affected (0.00 sec)
+
+Database changed
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+#+END_SRC

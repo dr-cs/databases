@@ -193,7 +193,6 @@ mysql> select * from pub, book limit 3;
 #+END_SRC
 The general form of the ~LIMIT~ clause is ~LIMIT~ *start*, *count*, where *start* is the first row returned and *count* is the number of rows returned. If a single value is given, *start* assumes the value 0.
 
-
 ** Inner Joins
 
 A simple inner join uses an ~ON~ condition.
@@ -250,7 +249,6 @@ CREATE TABLE IF NOT EXISTS author_pub (
 - ~author_id~ and ~pub_id~ are foreign keys to ~author~ and ~pub~ tables
 - ~(author_id, pub_id) is composite key for the table
 
-
 ** Joining Multiple Tables
 
 We can join all three tables by chaining join clauses:
@@ -292,7 +290,6 @@ elect * from pub where title like 'Turing%';
 #+END_SRC
 
 Note that strings are not case-sensitive.
-
 
 ** Simple Database: Dorms
 

@@ -91,19 +91,25 @@ Get comprehensive doucmentation at [[http://dev.mysql.com/doc/refman/5.7/en/data
 
 - ~INT~
 
-- ~FLOAT~ or ~DOUBLE~
+- ~FLOAT~ or ~DOUBLE~ - IEEE floating point number. Use ~DOUBLE~ to avoid problems, since MySQL does double-precision calculations.
 
-- ~DECIMAL~
+  - ~DOUBLE(5,2)~ means a number width of 5 with exactly 2 decimal places
+
+- ~DECIMAL~ "exact" fixed point decimal. Use for monetary values.
+
+  - ~DECIMAL(5,2)~ means a number width of 5 with exactly 2 decimal places
 
 ** String Data Types
 
-- ~CHAR~
+- ~CHAR~ - strings stored with fixed length
 
-- ~VARCHAR~
+- ~VARCHAR(M)~ - strings stored with variable length, up to ~M~ characters.
 
-- ~TEXT~
+- ~TEXT~ - large strings
 
-- ~ENUM~
+- ~ENUM('value1, 'value2', ..., 'valueN')~ - enumerated type with ~N~ possible values whose elements are strings
+
+Note: MySQL allows use of single or double quotes in string literals, but the SQL standard specifies single quotes.
 
 ** Temporal Data Types
 

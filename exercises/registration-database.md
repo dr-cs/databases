@@ -3,6 +3,24 @@ layout: exercise
 title: Registration Database Exercise
 ---
 
+<style>
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    border: 2px solid;
+}
+
+th{
+    border: 2px solid #000000;
+    padding: 2px;
+}
+
+td{
+    border: 1px solid #000000;
+    padding: 2px;
+}
+</style>
+
 # Registration Database
 
 ## Introduction
@@ -24,13 +42,13 @@ You work for the registrar of a major university and have been tasked with creat
 
 Write a SQL script named `registration-schema.sql` that creates a database with the following tables:
 
-- $$student(\underline{student_id}, name, gpa)$$
+- student(<u>student_id</u>, name, gpa)
 
-- $dept(\underline{dept_id}, name, dean, building, room)$
+- dept(<u>dept_id</u>, name, dean, building, room)
 
-- course(\underline{dept_id}, \underline{course_id}, name, hours), where dept_id is a foreign key referencing the dept(dept_id)
+- course(<u>dept_id</u>, <u>course_id</u>, name, hours), where dept_id is a foreign key referencing the dept(dept_id)
 
-- enrolled(\underline{dept_id}, \underline{course_id}, \underline{student_id}), where (dept_id, course_id) is a foreign key referencing course(dept_id, course_id) and student_id is a foreign key referencing student(student_id)
+- enrolled(<u>dept_id</u>, <u>course_id</u>, <u>student_id</u>), where (dept_id, course_id) is a foreign key referencing course(dept_id, course_id) and student_id is a foreign key referencing student(student_id)
 
 ### Part 2: Populating the database
 

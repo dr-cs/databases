@@ -24,9 +24,9 @@ You work for the registrar of a major university and have been tasked with creat
 
 Write a SQL script named `registration-schema.sql` that creates a database with the following tables:
 
-- student(\underline{student_id}, name, gpa)
+- $$student(\underline{student_id}, name, gpa)$$
 
-- dept(\underline{dept_id}, name, dean, building, room)
+- $dept(\underline{dept_id}, name, dean, building, room)$
 
 - course(\underline{dept_id}, \underline{course_id}, name, hours), where dept_id is a foreign key referencing the dept(dept_id)
 
@@ -38,49 +38,52 @@ Write a SQL script that populates the following data:
 
 
 
-Student
+#### Student
 
-+------------+---------+-----+
+|------------+---------+-----|
 | student_id | name    | gpa |
-+------------+---------+-----+
+|------------+---------+-----|
 | 11         | Bush    | 3.0 |
 | 12         | Cruz    | 3.2 |
 | 13         | Clinton | 3.9 |
 | 22         | Sanders | 3.0 |
 | 33         | Trump   | 3.8 |
-+------------+---------+-----+
+|------------+---------+-----|
 
 
 
-Enrolled
+#### Enrolled
 
-dept_id | coruse_id | student_id
-CS | 101 | 11
-Math | 101 | 11
-CS | 101 | 12
-CS | 101 | 22
-Math | 103 | 33
-EE | 102 | 33
-CS | 102 | 22
+| dept_id | coruse_id | student_id |
+|---------+-----------+------------|
+| CS | 101 | 11 |
+| Math | 101 | 11 |
+| CS | 101 | 12 |
+| CS | 101 | 22 |
+| Math | 103 | 33 |
+| EE | 102 | 33 |
+| CS | 102 | 22 |
 
 
-Department
+#### Department
 
-dept_id | name | dean | building | room
-CS | Rubio | Ajax | 100
-Math | Carson | Acme | 300
-EE | Kasich | Ajax | 200
-Music | Costello | North | 100
+| dept_id | name | dean | building | room |
+|---------+------+------+----------+------|
+| CS | Computer Science |Rubio | Ajax | 100 |
+| Math | Mathemagics | Carson | Acme | 300 |
+| EE | Electrical Engineering | Kasich | Ajax | 200 |
+| Music | Musicology | Costello | North | 100 |
 
-Course
+#### Course
 
-dept_id | course_id | name | hours
-CS | 101 | Programming | 4
-CS | 102 | Algorithms | 3
-Math | 101 | Algebra | 3
-Math | 103 | Calculus | 4
-Music | 104 | Jazz | 3
-EE | 102 | Circuits | 3
+| dept_id | course_id | name | hours |
+|---------|-----------|------|-------|
+| CS | 101 | Programming | 4 |
+| CS | 102 | Algorithms | 3 |
+| Math | 101 | Algebra | 3 |
+| Math | 103 | Calculus | 4 |
+| Music | 104 | Jazz | 3 |
+| EE | 102 | Circuits | 3 |
 
 
 ### Part 3: Updating the database

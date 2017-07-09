@@ -91,12 +91,12 @@
         "order": [18]
     },
     "sql-queries": {
-        "topic": "[SQL Queries](slides/sql-queries.html)",
+        "topic": "[SQL Queries](slides/sql-queries.pdf)",
         "materials": ["FoDS 6", "[Exercise: Dorms Queries](exercises/dorms-queries.html)"],
         "order": [18]
     },
     "sql-advanced": {
-        "topic": "[Advanced SQL](slides/sql-advanced.html)",
+        "topic": "[Advanced SQL](slides/sql-advanced.pdf)",
         "materials": ["FoDS 6", "[Exercise: Sakila Queries](exercises/sakila-queries.html)"],
         "order": [19,20]
     },

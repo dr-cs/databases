@@ -11,6 +11,8 @@ title: CS 4400 - Summer 2017 Project
 
 You are a database developer at [SNCF](http://www.sncf.com/), the French national rail company. Management has decided to implement a new train reservation system for customers that not only allows customers to book trips and administrators to edit routes, but allows management to enter trains that are canceled due to strikes by the [CGT](http://www.cgt.fr/) and have customers' trips automatically rerouted.
 
+[Possible EER Model](sncf-eer.png)
+
 ## User Interface (UI) Mock-up
 
 Following is a list of mockups of the screens that make up the database application (the user documents, using terminology from our [conceptual design process](../slides/conceptual-design-process.pdf)), with UI flow arrows and textual descriptions. You can derive an EER diagram, semantic constraints, information flow diagram, relational model, SQL statements, and the application itself from these mock-ups and descriptions. Please note that these are low-fidelity mock-ups. Your UI will likely (and probably should) look different.

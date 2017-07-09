@@ -123,3 +123,11 @@ Write a sql script with queries that answer the following questions:
 - What are the course numbers of all the CS courses?
 - What are the course numbers of all the IE courses?
 - What are all the CS and IE courses?
+
+## Sample Solutions
+
+Don't peek until you've tried the exercise on your own!
+
+- [registration-schema.sql](registration-schema.sql)
+- [registration-data.sql](registration-data.sql)
+- [registration-queries.sql](registration-queries.sql)

@@ -77,11 +77,10 @@ Write a SQL script that populates the following data:
 | CS | 101 | 11 |
 | Math | 101 | 11 |
 | CS | 101 | 12 |
-| CS | 101 | 22 |
-| Math | 103 | 33 |
+| CS | 201 | 22 |
+| Math | 201 | 33 |
 | EE | 102 | 33 |
-| CS | 102 | 22 |
-
+| Math | 301 | 22 |
 
 #### Department
 
@@ -90,6 +89,7 @@ Write a SQL script that populates the following data:
 | CS | Computer Science |Rubio | Ajax | 100 |
 | Math | Mathemagics | Carson | Acme | 300 |
 | EE | Electrical Engineering | Kasich | Ajax | 200 |
+| IE | Industrial Engineering | Cruz |  | 200 |
 | Music | Musicology | Costello | North | 100 |
 
 #### Course
@@ -97,32 +97,44 @@ Write a SQL script that populates the following data:
 | dept_id | course_id | name | hours |
 |---------|-----------|------|-------|
 | CS | 101 | Programming | 4 |
-| CS | 102 | Algorithms | 3 |
+| CS | 201 | Algorithms | 3 |
+| CS | 202 | Systems | 3 |
 | Math | 101 | Algebra | 3 |
-| Math | 103 | Calculus | 4 |
+| Math | 201 | Calculus | 4 |
+| Math | 301 | Analysis | 4 |
 | Music | 104 | Jazz | 3 |
 | EE | 102 | Circuits | 3 |
-
+| IE | 101 | Proabability | 3 |
+| IE | 102 | Statistics | 3 |
 
 ### Part 3: Updating the database
 
 Once the database has been populated, make the following updates:
 
-- Change the name of the CS dept to 'College of Computing'
-- Change the dean of the CoC to 'Galil'
-
+- Change the name of the Math dept to 'Mathematics'
+- Change the name of the Music dept to 'Rock n Roll'
+- Add an IE course, IE 202 Simulation, 3 hours.
 
 ### Part 4: Querying the database
 
-Write a sql script with queries that answer the following questions:
+Write a sql script with queries that answer the following questions.
+
+Easy Queries:
 
 - What are all the departments?
 - What are the names of all the department deans?
+- What is the name of the dean of the CS dept?
 - What are all the course numbers, e.g., 'CS 2316'?
 - What are the course numbers of all the first-year courses?
 - What are the course numbers of all the CS courses?
-- What are the course numbers of all the IE courses?
 - What are all the CS and IE courses?
+
+Intermediate queries
+
+- What are the names of the students enrolled in CS 101?
+- What is the total enrollment of each department?
+- What are the names of the deans of departments that have zero enrollment?
+- Which department(s) have the greatest enrollment?
 
 ## Sample Solutions
 

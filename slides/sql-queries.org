@@ -14,7 +14,7 @@
 #+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
 #+LaTeX_HEADER: \usepackage{verbatim, multicol, tabularx,}
 #+LaTeX_HEADER: \usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
-#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, columns=flexible, basicstyle={\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
+#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, basicstyle={\ttfamily\scriptsize}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
 #+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
 
 * SQL Queries
@@ -91,16 +91,6 @@ mysql> select * from book where year = 2012;
 2 rows in set (0.00 sec)
 #+END_SRC
 
-** The FROM Clause
-
-The ~FROM~ clause takes one or more source tables from the database and combines them into one (large) table using the ~JOIN~ operator. Three kinds of joins:
-
-- CROSS JOIN
-- INNER JOIN
-- OUTER JOIN
-
-Sicne DB designs are typically factored into many tables, the join is the most important part of a query.
-
 ** String Matching with ~LIKE~
 
 Our where condition can match a pattern with like. Use a % for wildcard, i.e., matching any character sequence.
@@ -119,6 +109,17 @@ select * from pub where title like 'Turing%';
 #+END_SRC
 
 Note that strings are not case-sensitive.
+
+** Joins
+
+The ~FROM~ clause takes one or more source tables from the database and combines them into one (large) table using the ~JOIN~ operator. Three kinds of joins:
+
+- CROSS JOIN
+- INNER JOIN
+- OUTER JOIN
+
+Since DB designs are typically factored into many tables, the join is the most important part of a query.
+
 ** CROSS JOIN
 
 A CROSS JOIN matches every row of the first table with every row of the second table. Think of a cross join as a cartesian product.
@@ -137,6 +138,7 @@ SELECT <select_header> FROM <table1>, <table2>
 
 ** CROSS JOIN EXAMPLE
 
+#+ATTR_LATEX: :font tiny
 #+BEGIN_SRC sql
 mysql> select * from pub cross join book;
 +--------+-----------------+---------+---------+------------+----------+------+--------+
@@ -194,7 +196,7 @@ mysql> select * from pub cross join book;
 48 rows in set (0.00 sec)
 #+END_SRC
 
-** ~LIMIT~ing Results
+** LIMITing Results
 
 If we don't want many results to scroll past the bottom of the screen we can limit the number of results using a LIMIT clause.
 
@@ -214,6 +216,7 @@ The general form of the ~LIMIT~ clause is ~LIMIT~ *start*, *count*, where *start
 ** Inner Joins
 
 A simple inner join uses an ~ON~ condition.
+
 #+BEGIN_SRC sql
 mysql> select * from pub join book on pub.book_id = book.book_id;
 +--------+-----------------+---------+---------+------------+----------+------+--------+
@@ -275,17 +278,17 @@ We can join all three tables by chaining join clauses:
 mysql> select *
     -> from author join author_pub using (author_id)
     ->   join pub using (pub_id);
-+--------+-----------+------------+-----------+-----------------+-----------------+---------+
-| pub_id | author_id | first_name | last_name | author_position | title           | book_id |
-+--------+-----------+------------+-----------+-----------------+-----------------+---------+
-|      1 |         1 | John       | McCarthy  |               1 | LISP            |       1 |
-|      2 |         2 | Dennis     | Ritchie   |               1 | Unix            |       2 |
-|      2 |         3 | Ken        | Thompson  |               2 | Unix            |       2 |
-|      3 |         4 | Claude     | Shannon   |               1 | Info Theory     |       3 |
-|      4 |         5 | Alan       | Turing    |               1 | Turing Machines |       4 |
-|      5 |         5 | Alan       | Turing    |               1 | Turing Test     |       5 |
-|      6 |         6 | Alonzo     | Church    |               1 | Lambda Calculus |       6 |
-+--------+-----------+------------+-----------+-----------------+-----------------+---------+
++--------+------+------------+-----------+------------+-----------------+---------+
+| pub_id | a_id | first_name | last_name | a_pos      | title           | book_id |
++--------+------+------------+-----------+------------+-----------------+---------+
+|      1 |    1 | John       | McCarthy  |     1      | LISP            |       1 |
+|      2 |    2 | Dennis     | Ritchie   |     1      | Unix            |       2 |
+|      2 |    3 | Ken        | Thompson  |     2      | Unix            |       2 |
+|      3 |    4 | Claude     | Shannon   |     1      | Info Theory     |       3 |
+|      4 |    5 | Alan       | Turing    |     1      | Turing Machines |       4 |
+|      5 |    5 | Alan       | Turing    |     1      | Turing Test     |       5 |
+|      6 |    6 | Alonzo     | Church    |     1      | Lambda Calculus |       6 |
++--------+------+------------+-----------+------------+-----------------+---------+
 7 rows in set (0.01 sec)
 
 #+END_SRC

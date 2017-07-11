@@ -11,7 +11,7 @@ title: CS 4400 - Summer 2017 Project
 
 You are a database developer at [SNCF](http://www.sncf.com/), the French national rail company. Management has decided to implement a new train reservation system for customers that not only allows customers to book trips and administrators to edit routes, but allows management to enter trains that are canceled due to strikes by the [CGT](http://www.cgt.fr/) and have customers' trips automatically rerouted.
 
-[Possible EER Model](sncf-eer.png)
+## Super New! 2017-07-11: [Possible EER Model](sncf-eer.png)
 
 ## User Interface (UI) Mock-up
 

@@ -30,27 +30,33 @@ The special value ~NULL~ could mean:
 ** Three-Valued Logic - AND
 
 
-AND     | TRUE    | FALSE   | UNKNOWN |
---------|---------|---------|---------|
-TRUE    | TRUE    | FALSE   | UNKNOWN |
-FALSE   | FALSE   | FALSE   | FALSE   |
-UNKNOWN | UNKNOWN | FALSE   | UNKNOWN |
++---------+---------+-------+---------+
+| AND     | TRUE    | FALSE | UNKNOWN |
++---------+---------+-------+---------+
+| TRUE    | TRUE    | FALSE | UNKNOWN |
+| FALSE   | FALSE   | FALSE | FALSE   |
+| UNKNOWN | UNKNOWN | FALSE | UNKNOWN |
++---------+---------+-------+---------+
 
 ** Three-Valued Logic - OR
 
-OR      | TRUE    | FALSE   | UNKNOWN  |
---------|---------|---------|----------|
-TRUE    | TRUE    | TRUE    | TRUE     |
-FALSE   | TRUE    | FALSE   | UNKKNOWN |
-UNKNOWN | TRUE    | UNKNOWN | UNKNOWN  |
++----------+-----------+-----------+------------+
+| OR       | TRUE      | FALSE     | UNKNOWN    |
++----------+-----------+-----------+------------+
+| TRUE     | TRUE      | TRUE      | TRUE       |
+| FALSE    | TRUE      | FALSE     | UNKKNOWN   |
+| UNKNOWN  | TRUE      | UNKNOWN   | UNKNOWN    |
++----------+-----------+-----------+------------+
 
 ** Three-Valued Logic - NOT
 
-NOT     | TRUE    |
---------|---------|
-TRUE    | FALSE   |
-FALSE   | TRUE    |
-UNKNOWN | UNKNOWN |
++----------+-----------+
+| NOT      | TRUE      |
++----------+-----------+
+| TRUE     | FALSE     |
+| FALSE    | TRUE      |
+| UNKNOWN  | UNKNOWN   |
++----------+-----------+
 
 ** Comparisons with NULL Values
 
@@ -102,9 +108,7 @@ mysql> select book_title, month
 5 rows in set (0.00 sec)
 #+END_SRC
 
-** Extended Nested Query Example
-
-Which dorms have fewer occupants than Caldwell?
+** Extended Example 1: Which dorms have fewer occupants than Caldwell?
 
 Step 1: how many occupants in Caldwell?
 
@@ -142,7 +146,7 @@ mysql> select dorm.name as dorm_name, count(*) as occupancy
 
 Notice that we couldn't use a where clause here because occupancy is computed from a group, which isn't available at the ~WHERE~ stage of the SQL ~SELECT~ pipeline.
 
-** Extended Example: Which dorm has the highest average GPA?
+** Extended Example 2: Which dorm has the highest average GPA?
 
 - Step 1: Group students and their GPAs by dorm.
 - Step 2: Get the average GPAs of each dorm.

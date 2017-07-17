@@ -14,7 +14,7 @@
 #+LaTeX_HEADER: \hypersetup{colorlinks=true,urlcolor=blue}
 #+LaTeX_HEADER: \usepackage{verbatim, multicol, tabularx,}
 #+LaTeX_HEADER: \usepackage{amsmath,amsthm, amssymb, latexsym, listings, qtree}
-#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, columns=flexible, basicstyle={\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
+#+LaTeX_HEADER: \lstset{frame=tb, aboveskip=1mm, belowskip=0mm, showstringspaces=false, basicstyle={\ttfamily}, numbers=left, frame=single, breaklines=true, breakatwhitespace=true}
 #+LaTeX_HEADER: \logo{\includegraphics[height=.75cm]{GeorgiaTechLogo-black-gold.png}}
 
 * Advanced SQL
@@ -240,6 +240,44 @@ mysql> select dorm_name, max(average_gpa) as max_average_gpa
 
 #+END_SRC
 
+** Semantic Constraints
+
+The relational model can only encode:
+
+- Domain constraints
+- Key constraints
+- Foreign key constraints
+
+We call constraints on arbitrary values in tuples within and between relations *semantic constraints*.
+
+While the relational model has no concept of semantic constraints, SQL can handle semantic constraints with **assertions** and **triggers**.
+
+** Assertions
+
+#+BEGIN_SRC sql
+CREATE ASSERTION <assertion-name>
+CHECK (<condition>)
+#+END_SRC
+
+~<condition>~ can be any SQL staetment that evaluates to TRUE, FALSE or UNKNOWN. Any databases INSERT or UPDATE that couses the ~<condition>~ to be FALSE is rejected by the database engine.
+
+While CREATE ASSERTION is part of the SQL standard, no major DBMS today (including MySQL) implements assertions.
+
+** Triggers
+
+A trigger is a piece of SQL code associated with a table that executes when an event occurs on the table.
+
+A trigger can't directly prevent an INSERT or UPDATE from occuring due to a semantic oncstraint violation, but a trigger can modify values being inserted or pudated to avoid the violation or log the violation in a message table or execute a stored procedure or external program.
+
+** The Three-Schema Architecture
+
+Remember the three-schema architecture?
+
+#+BEGIN_CENTER
+#+ATTR_LaTeX: :height .6\textheight
+[[file:three-schema.png]]
+#+END_CENTER
+
 ** Views
 
 #+BEGIN_SRC sql
@@ -247,7 +285,11 @@ mysql> create view cacm_issues as
     ->   select * from book
     ->   where book_title = 'CACM';
 Query OK, 0 rows affected (0.00 sec)
+#+END_SRC
 
+The ~CREATE VIEW~ statement is the mapping between the internal schema (base tables) and the external schema(s) (derived tables). They're all part of the database:
+
+#+BEGIN_SRC sql
 mysql> show tables;
 +----------------+
 | Tables_in_pubs |
@@ -261,8 +303,10 @@ mysql> show tables;
 5 rows in set (0.00 sec)
 #+END_SRC
 
+
 ** A View is Like a Table
 
+You can get data from the table:
 #+BEGIN_SRC sql
 mysql> select * from cacm_issues;
 +---------+------------+-------+------+--------+
@@ -273,3 +317,9 @@ mysql> select * from cacm_issues;
 +---------+------------+-------+------+--------+
 2 rows in set (0.00 sec)
 #+END_SRC
+
+And you can update data in the view, which modifies the underlying base tables.
+
+** Users and Permissions
+
+The value of external schemas is that they can give specific users customized vies of the database. We do this with permissions:

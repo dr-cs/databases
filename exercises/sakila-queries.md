@@ -1,6 +1,6 @@
 ---
 layout: exercise
-title: Dorms Query Exercise
+title: Sakila Queries Exercise
 ---
 
 ## Introduction
@@ -13,7 +13,7 @@ You're writing software to manage a chain of movie rental stores.
 
 ## Solution Description
 
-Write the SQL statements that implement functions of your rental store management system.
+Write the SQL statements that implement functions of your rental store management system. You may want to use this starter script: [sakila-queries.sql](sakila-queries.sql).
 
 
 1. Download the schema and data scripts for the [Sakila Sample Database](https://dev.mysql.com/doc/sakila/en/).

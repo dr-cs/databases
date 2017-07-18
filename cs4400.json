@@ -97,7 +97,7 @@
     },
     "sql-advanced": {
         "topic": "[Advanced SQL](slides/sql-advanced.pdf)",
-        "materials": ["FoDS 6", "[Exercise: Sakila Queries](exercises/sakila-queries.html)"],
+        "materials": ["FoDS 6,7", "[Exercise: Sakila Queries](exercises/sakila-queries.html)"],
         "order": [19,20]
     },
     "review3": {
@@ -111,12 +111,12 @@
         "order": [22]
     },
     "relational-design": {
-        "topic": "[Relational Design](slides/relational-design.html)",
+        "topic": "[Relational Design](slides/relational-design.pdf)",
         "materials": ["FoDS 14.1-14.5"],
         "order": [23]
     },
     "advanced-relational-design": {
-        "topic": "[Advanced Relational Design](slides/advanced-relational-design.html)",
+        "topic": "[Advanced Relational Design](slides/advanced-relational-design.pdf)",
         "materials": ["FoDS 15.1-15.3",
                       "[BCNF Decomposition Exercise](exercises/bcnf-decomposition.pdf)" ],
         "order": [24]

@@ -48,7 +48,7 @@
 4. It should be impossible to generate spurious (invalid) tuples
 5. It should be easy to join tables
 
-** Design Goal 1: Convey cohesive meaning in relational schemas
+** Design Goal 1: Cohesive meaning in relational schemas
 
 Example:
 
@@ -59,7 +59,7 @@ DEPT(Dno, Dname, Dmgr_ssn)
 - Each EMPT tuple represents a single employee
 - Each DEPT tuple represents a single department
 
-** Guidlene 2: Minimize Redundancy
+** Design Goal 2: Minimize Redundancy
 
 Redundant information in schemas:
 

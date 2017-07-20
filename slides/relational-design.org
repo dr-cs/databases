@@ -50,7 +50,14 @@
 
 ** Design Goal 1: Cohesive meaning in relational schemas
 
-Example:
+Not Cohesive:
+
+EMP(Ename, Ssn, Bdate, Address, Dno, Dno, Dname, Dmgr_ssn)
+
+- Attributes of employees and attributes of departments
+- What does a single tuple represent?
+
+Cohesive:
 
 EMP(Ename, Ssn, Bdate, Address, Dno)
 
@@ -128,7 +135,7 @@ Bad design: Dmanaged has many nulls because most employees aren't managers.
 
 ** Design Goal 3: Minimize the need for NULL values in tuples
 
-- Nulls don't have certain meaning - could be absent, N/A, false
+- Nulls don't have definite meaning - could be absent, N/A, false
 - Aren't used in joins
 - Aren't counted in aggregate functions
 - Waste space
@@ -222,7 +229,15 @@ Lost the association between Instructor and Course. E.g., Mark does not teach Op
 
 Design relation schemas to be naturally joined on attributes that are related by foreign key-primary key relationships.
 
-Acheived by normalization based on functional dependency theory - foreign keys reference primary keys.
+#+BEGIN_VERSE
+EMP(Ename, Ssn, Bdate, Address, Dno)
+
+DEPT(Dno, Dname, Dmgr_ssn)
+#+END_VERSE
+
+- Join on Dno tells us an employee's department
+
+- Acheived by normalization based on functional dependency theory - foreign keys reference primary keys.
 
 ** Functional Dependencies
 
@@ -303,9 +318,9 @@ A *normal form* is a set of conditions based on functional dependencies that act
 Normalization is the process of decomposing existing relation schemas into new relation schemas that satisfy normal forms for the purpose of:
 
 - minimizing redundancy, and
-- minimizing insertion, deletion, and update anomalies (we'll learn later)
+- minimizing insertion, deletion, and update anomalies
 
-We cover first, second, third, and Boyce-Codd normal forms in this class (only 3NF for today). Each higher normal form subsumes the normal forms below it, e.g., a 3NF schema is also in 2NF and 1NF. The normal form of a relation schema is the highest normal form it satisfies.
+We cover first, second, third, and Boyce-Codd normal forms in this class. Each higher normal form subsumes the normal forms below it, e.g., a 3NF schema is also in 2NF and 1NF. The normal form of a relation schema is the highest normal form it satisfies.
 
 ** First Normal Form (1NF)
 
@@ -358,7 +373,7 @@ Remember:
 - An attribute is *prime* if it is part of a candidate key,
 - otherwise it is *nonprime*.
 
-General definition of 2NF: A relation schema $R$ is in 2NF if every nonprime attribute $A$ in $R$ is not partially dependent on *any* key of $R$.
+General definition of 2NF: A relation schema $R$ is in 2NF if every nonprime attribute $A$ in $R$ is fully (not partially) dependent on *any* key of $R$.
 
 ** A Non-2NF Schema
 
@@ -394,8 +409,8 @@ LOTS2( _County_name_ , Tax_rate)
 
 A relation schema $R$ is in 3NF if, whenever a *nontrivial* functional dependency $X \rightarrow A$ holds in $R$, either
 
-(a) $X$ is a superkey of $R$, or
-(b) $A$ is a prime attribute of $R$.
+- (a) $X$ is a superkey of $R$, or
+- (b) $A$ is a prime attribute of $R$.
 
 LOTS1( _Property_id_ , County_name, Lot#, Area, Price)
 
@@ -516,9 +531,9 @@ Given TEACH(Student, Course, Instructor) and
 
 FD2 violates BCNF. There are three possible BCNF decompositions:
 
-1. R1(_Student_, _Instructor_) and R2(_Student_, _Course_)
-2. R1(_Instructor_, Course) and R2(_Student_, _Course_)
-3. R1(_Instructor_, Course) and R2(_Instructor_, _Student_)
+1. R1( _Student_ , _Instructor_) and R2( _Student_ , _Course_ )
+2. R1( _Instructor_ , Course) and R2( _Student_ , _Course_ )
+3. R1( _Instructor_ , Course) and R2( _Instructor_ , _Student_ )
 
 All three decompositions lose FD1. Which decompositions are good?
 

@@ -49,9 +49,9 @@ This algorithm is instructive, but tedious and expensive and mainly for conceptu
 
 ** Attribute Closure
 
-The set of attributes functionally determined by $X$ under $F$ is the *closure* of $X$ under $F$, denoted $X^+$.
+The set of attributes functionally determined by $X$ under $F$ is the *attribute closure* of $X$ under $F$, denoted $X^+$.
 
-**Algorithm 15.1** Determining $X^+$, the closure of $X$ under $F$
+*** **Algorithm 15.1** Determining $X^+$, the closure of $X$ under $F$
 
 **Input:** A set $F$ of FDs on relation schema $R$, and a set of attributes $X \subseteq R$
 
@@ -78,7 +78,15 @@ The set of attributes functionally determined by $X$ under $F$ is the *closure* 
 
 ** Superkey Test
 
-Given $R(A, B, C, G, H, I)$ and $F = \{A \rightarrow B, A \rightarrow C, CG \rightarrow H, CG \rightarrow I, B \rightarrow H\}$,
+Given $R(A, B, C, G, H, I)$ and F = {
+#+BEGIN_VERSE
+A \rightarrow B,
+A \rightarrow C,
+CG \rightarrow H,
+CG \rightarrow I,
+B \rightarrow H
+#+END_VERSE
+}
 
 compute $\{AG\}^+$.
 
@@ -93,7 +101,7 @@ Since $\{AG\}^+$ now includes all attributes in $R$, the second iteration of the
 
 ** Finding A Candidate Key
 
-**Algorithm 15.2(a):** Finding a key $K$ for $R$ given a set $F$ of functional dependencies on $R$
+*** **Algorithm 15.2(a):** Finding a key $K$ for $R$ given a set $F$ of functional dependencies on $R$
 
 **Input**: A relation $R$ and FDs $F$ on $R$
 
@@ -119,8 +127,8 @@ To find the functional dependencies that hold on $R_1$ and $R_2$ we project the 
 
 A set of FDs $F$ is a minimal cover set if removing any FD changes $F^+$. To transform $F$ into a minimal cover set:
 
-- **while** there is an FD `F` in $F$ that is implied by other FDs in $F$:
-    - remove `F` from $F$
+- **while** there is an FD ~F~ in $F$ that is implied by other FDs in $F$:
+    - remove ~F~ from $F$
 - **repeat**
     - **for each** FD $Y \rightarrow B$ in $F$ with two or more attributes in $Y$:
         - let $Z$ be $Y$ minus one attribute in $Y$
@@ -178,7 +186,7 @@ If either of these relations is not in BCNF, repeat the process.
 
 ** BCNF Decomposition Algorithm
 
-**Algorithm 15.5:** Relational Decomposition into BCNF with Nonadditive Join Property
+*** **Algorithm 15.5:** Relational Decomposition into BCNF with Nonadditive Join Property
 
 **Input:** A universal relation $R$ and a set of FDs $F$ on $R$
 
@@ -247,10 +255,11 @@ must be in $F^+$. But they aren't.
 
 ** Visualizing Nonadditive Join
 
-Say some original relation state r(R) is:
+Say we have a relation state r(R) =
 
++---------+-------------------+------------+
 | student | course            | instructor |
-|---------|-------------------|------------|
++---------+-------------------+------------+
 | Narayan | Database          | Mark       |
 | Narayan | Operating Systems | Ammar      |
 | Smith   | Database          | Navathe    |
@@ -260,19 +269,21 @@ Say some original relation state r(R) is:
 | Wallace | Operating Systems | Ahamad     |
 | Wong    | Database          | Omiecinski |
 | Zelaya  | Database          | Navathe    |
++---------+-------------------+------------+
 
-** Decomposition 1
+** Bad Decomposition
 
-Then
-<table>
-<tr>
-<td>
+*** helloqt.py                                                :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.45
+    :END:
+
+
 r(R1) =
-</td>
-<td>
 
++---------+------------+
 | student | instructor |
-|---------|------------|
++---------+------------+
 | Narayan | Ammar      |
 | Narayan | Mark       |
 | Smith   | Ammar      |
@@ -282,17 +293,19 @@ r(R1) =
 | Wallace | Mark       |
 | Wong    | Omiecinski |
 | Zelaya  | Navathe    |
++---------+------------+
 
-</td>
-<td> </td>
 
-<td>
+*** Screenshot :BMCOL:
+    :PROPERTIES:
+    :BEAMER_col: 0.45
+    :END:
+
 r(R2) =
-</td>
-<td>
 
++---------+-------------------+
 | student | course            |
-|---------|-------------------|
++---------+-------------------+
 | Narayan | Database          |
 | Narayan | Operating Systems |
 | Smith   | Database          |
@@ -302,27 +315,26 @@ r(R2) =
 | Wallace | Operating Systems |
 | Wong    | Database          |
 | Zelaya  | Database          |
-
-</td>
-</tr>
-</table>
++---------+-------------------+
 
 We would join on student and end up with ...
 
 ** Join with Spurious Tuples
 
++---------+-------------------+------------+
 | student | course            | instructor |
-|---------|-------------------|------------|
++---------+-------------------+------------+
 | Narayan | Database          | Ammar      |
 | Narayan | Database          | Mark       |
 | Narayan | Operating Systems | Ammar      |
 | Narayan | Operating Systems | Mark       |
 | Smith   | Database          | Ammar      |
 | Smith   | Database          | Navathe    |
++---------+-------------------+------------+
 
-... 13 more tuples, which is way more tuples than the original relation due to spurious tuples, so the join is not non-additive.
+... and 13 more tuples, which is way more tuples than the original relation due to spurious tuples, so the join is not non-additive.
 
-The information that has been lost is the association between Instructor and Course. For example, note from the original table that Mark does not teach Operating Systems.
+Lost the association between Instructor and Course. E.g., Mark does not teach Operating Systems.
 
 ** Test of Decomposition # 2
 

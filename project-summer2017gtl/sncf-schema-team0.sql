@@ -1,4 +1,5 @@
 -- Sample schema for Summer 2017 GTL project
+-- Be sure to put use your own team number in place of team0.
 -- Please double check for correctness.
 
 drop database if exists sncf_team0;
@@ -83,8 +84,12 @@ create table stop (
   train_id int not null,
   time time not null,
 
-  foreign key (station_id) references station(station_id),
+  foreign key (station_id) references station(station_id)
+    on update cascade
+    on delete restrict,
   foreign key (train_id) references train(train_id)
+    on update cascade
+    on delete cascade
 );
 
 create table trip_train (
@@ -92,6 +97,10 @@ create table trip_train (
   embark_stop_id int not null,
   disembark_stop_id int not null,
 
-  foreign key (embark_stop_id) references stop(stop_id),
+  foreign key (embark_stop_id) references stop(stop_id)
+    on update cascade
+    on delete restrict,
   foreign key (disembark_stop_id) references stop(stop_id)
+    on update cascade
+    on delete restrict
 );

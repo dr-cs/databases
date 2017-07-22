@@ -535,15 +535,4 @@ FD2 violates BCNF. There are three possible BCNF decompositions:
 2. R1( _Instructor_ , Course) and R2( _Student_ , _Course_ )
 3. R1( _Instructor_ , Course) and R2( _Instructor_ , _Student_ )
 
-All three decompositions lose FD1. Which decompositions are good?
-
-** Desirable Properties of Decompositions
-
-A decomposition of $R$ into $R_1$ and $R_2$ must preserve attributes, that is, $R = R_1 \cup R_2$. We'd also like:
-
-1. Dependency preservation, and
-2. Non-additive (lossless) joins.
-
-Dependencies can be preserved in all 3NF decompositions, but not in all BCNF decompositions. **In all decompositions we must have non-additive join property.**
-
-In the next lecture we'll learn more theory which enables us to test these conditions.
+All three decompositions preserve attributes and lose FD1, which is acceptable as along as the decomposition has the non-additive join property. Which of these decompositions are good? In the next lecture we'll learn how to answer that question.

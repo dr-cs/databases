@@ -27,6 +27,8 @@ create table address (
 create table customer (
   customer_id int primary key auto_increment,
   user_id int not null,
+  first_name varchar(32),
+  last_name varchar(64),
   address_id int not null,
   birthdate date,
   credit_card_no char(17) not null,

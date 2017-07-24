@@ -16,6 +16,26 @@ You are a database developer at [SNCF](http://www.sncf.com/), the French nationa
 - [EER Model](sncf-eer.png)
 - [Schema script](sncf-schema-team0.sql)
 
+## Phase 3 Requirements
+
+In addition to any files needed to build and run your application for the heavyweight project, turn in three SQL scripts as attachments to the T-Square assignment:
+
+- sncf-teamN-schema.sql
+  - Creates the schema for your SNCF application that is used in Phase 3.
+  - May be your own or the [sample schema script](sncf-schema-team0.sql) with your team number.
+- sncf-teamN-data.sql
+  - Insert statements that populate your database with some admin users and at least 10 stations and 10 trains with distances.
+- sncf-teamN-queries.sql
+  - SQL queries that answer the following questions or create the following records, one query each:
+    - List the emails and names of all the admin users.
+    - List the emails and names of all the customers.
+    - List the direct trips (single trains) from Metz to Aix.
+    - List the one-change trips (two trains) from Metz to Aix. Layovers should not be less than 10 minutes.
+    - Book a trip from Metz to Aix on 8 August 2017 for two passengers (including the customer booking the trip).
+    - Show the passenger manifest (passenger first names and last names) for the leg Metz to Strasbourg for a the train that originates in Metz and terminates in Aix.
+
+Make sure all of your SQL scripts have an approporiate `use database` statement at the top and write the queries in the order listed above. While the details of your data are up to you (your stations, trains, etc.), your data must provide non-trivial answers to the queries above.
+
 ## User Interface (UI) Mock-up
 
 Following is a list of mockups of the screens that make up the database application (the user documents, using terminology from our [conceptual design process](../slides/conceptual-design-process.pdf)), with UI flow arrows and textual descriptions. You can derive an EER diagram, semantic constraints, information flow diagram, relational model, SQL statements, and the application itself from these mock-ups and descriptions. Please note that these are low-fidelity mock-ups. Your UI will likely (and probably should) look different.

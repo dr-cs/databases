@@ -11,9 +11,9 @@ use sncf_team0;
 create table user (
   user_id int primary key auto_increment,
   email char(32) unique not null,
-  password char(128) not null
+  password char(128) not null,
   first_name varchar(32),
-  last_name varchar(64),
+  last_name varchar(64)
 );
 
 create table address (

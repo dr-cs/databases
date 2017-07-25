@@ -12,6 +12,8 @@ create table user (
   user_id int primary key auto_increment,
   email char(32) unique not null,
   password char(128) not null
+  first_name varchar(32),
+  last_name varchar(64),
 );
 
 create table address (
@@ -27,8 +29,6 @@ create table address (
 create table customer (
   customer_id int primary key auto_increment,
   user_id int not null,
-  first_name varchar(32),
-  last_name varchar(64),
   address_id int not null,
   birthdate date,
   credit_card_no char(17) not null,
@@ -84,7 +84,9 @@ create table stop (
   stop_id int primary key auto_increment,
   station_id int not null,
   train_id int not null,
-  time time not null,
+  arrival_time time not null,
+  departure_time time not null,
+  distance int, -- distance from origin
 
   foreign key (station_id) references station(station_id)
     on update cascade

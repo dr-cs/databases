@@ -22,6 +22,28 @@ If you run Linux, you already know how to install MySQL. :-)
     $ brew install mysql
     ```
 
+#### Occasional Problem with Homebrew Version of macOS
+
+Every semester a few students do something that causes `mysql.server start` to fail with an error message that looks something like:
+
+```sh
+ERROR! The server quit without updating PID file (/usr/local/var/mysql/username.local.pid).
+```
+
+Here's a brute force fix that seems to work:
+
+1. Uninstall mysql.
+2. Delete the `/usr/local/var/mysql` directory.
+3. Install mysql.
+
+Here's how a shell session executing the steps above might look:
+
+```sh
+$ brew uninstall mysql
+$ sudo rm -rf /usr/local/var/mysql
+$ brew install mysql
+```
+
 ### Windows
 
 1. Download and run the Windows installer from [dev.mysql.com](https://dev.mysql.com/downloads/installer/)
@@ -123,6 +145,27 @@ After setting a root password it's a good idea to set up MySQL user accounts for
 
 All SQL commands and queries must be terminated with a semicolon. Some MySQL don't need to be terminated with a semicolon but function with a semicolon as well, so get in the habit of using semicolons.
 
+### Running SQL Scripts
+
+Download the following files for practice:
+
+- [pubs-schema.sql](resources/pubs-schema.sql)
+- [pubs-data.sql](resources/pubs-data.sql)
+
+Method 1: redirect input when running mysql client from OS command line
+
+```sql
+$ mysql -u root < pubs-schema.sql
+```
+
+Method 2: use the source when already in a mysql shell in the directory containing your SQL script
+
+```sql
+mysql> source pubs-data.sql
+```
+
+Note: to follow along with the rest of this guide you'll need to run both SQL files.
+
 ### `show databases`
 
 The MySQL server can store many databases. To list the databases available in your MySQL server, use `show databases`.
@@ -149,5 +192,26 @@ mysql> show databases;
 
 To issue SQL commands and queries you'll need to `use` a database, and you can only use one database at a time.
 
+```sql
+mysql> use pubs;
+Database changed
+mysql>
+```
+
 
 ### `show tables`
+
+```sql
+mysql> show tables;
++----------------+
+| Tables_in_pubs |
++----------------+
+| author         |
+| author_pub     |
+| book           |
+| pub            |
++----------------+
+4 rows in set (0.00 sec)
+
+mysql>
+```

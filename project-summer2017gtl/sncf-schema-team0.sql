@@ -84,8 +84,8 @@ create table stop (
   stop_id int primary key auto_increment,
   station_id int not null,
   train_id int not null,
-  arrival_time time not null,
-  departure_time time not null,
+  arrival_time time, -- each train will have a null arrival_time for its origination stop
+  departure_time time, -- each train will have a null departure_time for its terminus stop
   distance int, -- distance from origin
 
   foreign key (station_id) references station(station_id)

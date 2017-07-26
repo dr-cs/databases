@@ -16,6 +16,8 @@ You are a database developer at [SNCF](http://www.sncf.com/), the French nationa
 - [EER Model](sncf-eer.png)
 - [Schema script](sncf-schema-team0.sql)
 
+Here's that [mysql_browser.py example](https://github.com/cs2316/cs2316.github.io/blob/master/code/gui/mysql_browser.py) I showed in class.
+
 ## Phase 3 Requirements
 
 In addition to any files needed to build and run your application for the heavyweight project, turn in three SQL scripts as attachments to the T-Square assignment:
@@ -119,7 +121,7 @@ Profile information, list of all future trips currently booked, and list of prev
 </tr>
 </table>
 
-### Search Trips
+### Search Itineraries
 
 <table>
 <tr>
@@ -127,7 +129,7 @@ Profile information, list of all future trips currently booked, and list of prev
 <img src="search-trips.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Search trips is where you search for and select the out-bound and (optionally) return portion of a trip. A trip may be direct or may include one change of train.
+Search itineraries is where you search for and select the out-bound and (optionally) return portion of an itinerary. An itinerary may be direct or may include one change of train.
 </td>
 </tr>
 </table>
@@ -140,7 +142,7 @@ Search trips is where you search for and select the out-bound and (optionally) r
 <img src="search-results.png" alt="" width="100%" />
 </td>
 <td width="50%" valign="top">
-Customer selects out-bound trip and optionally the return trip, each of which may include one change of train.
+Customer selects out-bound itinerary and optionally the return itinerary, each of which may include one change of train. Customer selects an itinerary to book as a trip.
 </td>
 </tr>
 </table>

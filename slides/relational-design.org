@@ -363,7 +363,6 @@ Many ways to fix (see book). Best way is to decompose into two schemas:
 | 1              | Houston          |
 |----------------+------------------|
 
-
 ** General Definition of 2NF and 3NF
 
 Definitions in previous lecture based on primary key. General definitions based on all candidate keys.
@@ -403,7 +402,6 @@ LOTS1( _Property_id_ , County_name, Lot#, Area, Price)
 LOTS2( _County_name_ , Tax_rate)
 
 - FD3: County_name $\rightarrow$ Tax_rate
-
 
 ** General Definition of 3NF
 
@@ -492,7 +490,6 @@ and FDs
 - $C \rightarrow B$
 
 $R$ is in 3NF but not BCNF due to the FD $C \rightarrow B$.
-
 
 ** BCNF Example 1
 

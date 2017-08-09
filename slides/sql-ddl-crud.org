@@ -142,7 +142,7 @@ Primary key:
 
 A primary key is implicitly ~UNIQUE~
 
-** Foreign Key Constratins
+** Foreign Key Constraints
 
 #+BEGIN_SRC sql
   book_id INT NOT NULL REFERENCES book(book_id)

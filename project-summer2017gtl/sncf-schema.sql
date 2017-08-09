@@ -11,9 +11,7 @@ use sncf_team0;
 create table user (
   user_id int primary key auto_increment,
   email char(32) unique not null,
-  password char(128) not null,
-  first_name varchar(32),
-  last_name varchar(64)
+  password char(128) not null
 );
 
 create table address (
@@ -82,11 +80,9 @@ create table train (
 
 create table stop (
   stop_id int primary key auto_increment,
-  train_id int not null,
   station_id int not null,
-  arrival_time time, -- each train will have a null arrival_time for its origination stop
-  departure_time time, -- each train will have a null departure_time for its terminus stop
-  distance int, -- distance from origin
+  train_id int not null,
+  time time not null,
 
   foreign key (station_id) references station(station_id)
     on update cascade
@@ -96,13 +92,10 @@ create table stop (
     on delete cascade
 );
 
--- Design 1
 create table trip_train (
   trip_id int primary key auto_increment,
-  embark1_stop_id int not null,
-  disembark1_stop_id int not null,
-  embark2_stop_id int
-  disembark2_stop_id int,
+  embark_stop_id int not null,
+  disembark_stop_id int not null,
 
   foreign key (embark_stop_id) references stop(stop_id)
     on update cascade
@@ -110,14 +103,4 @@ create table trip_train (
   foreign key (disembark_stop_id) references stop(stop_id)
     on update cascade
     on delete restrict
-);
-
--- Design 2
-create table trip_stop (
-  trip_id int,
-  stop_id int,
-
-  primary key (trip_id, stop_id),
-  foreign key (trip_id) references trip(trip_id),
-  foreign key (stop_id) references stop(stop_id)
 );
